@@ -5,7 +5,7 @@
 
 ## Project Team
 - **Gonçalo Lopes** (NMec: 107572) - QA Engineer
-- **Rodrigo Graça** (NMec: 107634) - DevOps master
+- **Rodrigo Graça** (NMec: 107634) - DevOps Master
 - **Tiago Cruz** (NMec: 108615) - Team Coordinator
 
 ## Project Bookmarks
@@ -18,12 +18,10 @@
 - [Shared OneDrive Workspace](https://uapt33090-my.sharepoint.com/:f:/g/personal/tiagofcruz78_ua_pt/EnM4OJ3Awo1MlxC3y3Ngl4gBxEy2cs4P3P8LqFD5uM0VMQ?e=RpWfc4) - For all project-related documents and files.
 
 ### Documentation and Reports
-- [API Documentation](https://your-api-documentation-link.com) - Comprehensive guide and reference to the project's APIs (to be implemented).
-- [Static Analysis Dashboard](https://your-sonarqube-dashboard-link.com) - Quality dashboard for code analysis results (to be implemented).
+- [API Documentation](https://your-api-documentation-link.com) - Comprehensive guide and reference to the project's APIs (**Coming Soon**).
+- [Static Analysis Dashboard](https://your-sonarqube-dashboard-link.com) - Quality dashboard for code analysis results (**To Be Implemented**).
 
 ### Continuous Integration and Deployment
-- [CI/CD Environment Dashboard](https://your-ci-cd-dashboard-link.com) - View the latest builds and deployment statuses (to be implemented).
+- [CI/CD Environment Dashboard](https://your-ci-cd-dashboard-link.com) - View the latest builds and deployment statuses (**Planned Feature**).
 
 Please refer to these links for detailed information and resources related to the **newPhi** project. For any additional inquiries or support, please contact the project team members.
-
-
