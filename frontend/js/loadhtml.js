@@ -4,5 +4,5 @@ $(function(){
     $('#services').load('/frontend/html/services.html');
     $('#advice').load('/frontend/html/advice.html');
     $('#agenda').load('/frontend/html/agenda.html');
-    $('#contact').load('/frontend/html/contact.html');
+    $('#oldagenda').load('/frontend/html/oldagenda.html');
 });
