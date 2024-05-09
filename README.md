@@ -3,10 +3,14 @@
 ## Project Abstract
 **newPhi** is an integrated IT solution designed to streamline patient appointments and admissions for the New Private Health Initiative (newPhi). This project, developed as part of the Total Quality Software course, focuses on enhancing the efficiency and accessibility of healthcare services through digital solutions that manage pre-appointment scheduling, reception services, and post-encounter processes.
 
-## Project Team
-- **Gonçalo Lopes** (NMec: 107572) - QA Engineer
-- **Rodrigo Graça** (NMec: 107634) - DevOps Master
-- **Tiago Cruz** (NMec: 108615) - Team Coordinator
+
+
+| Name | NMec | Email | Role |
+|------|------|------|------|
+| Gonçalo Lopes | 107572 | goncalorcml@ua.pt | QA Engineer |
+| Rodrigo Graça | 107634 | rodrigomgraca@ua.pt | DevOps Master |
+| Tiago Cruz | 108615 | tiagofcruz78@ua.pt | Team Coordinator |
+
 
 ## Project Bookmarks
 
