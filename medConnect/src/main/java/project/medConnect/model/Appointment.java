@@ -35,6 +35,18 @@ public class Appointment {
     @NotNull(message = "Status is required")
     private String status;
 
+ 
+
+    public Appointment(Long appointmentId, Patient patient, Staff staff, Specialty specialty, Date appointmentTime, int duration, String status) {
+        this.appointmentId = appointmentId;
+        this.patient = patient;
+        this.staff = staff;
+        this.specialty = specialty;
+        this.appointmentTime = appointmentTime;
+        this.duration = duration;
+        this.status = status;
+    }
+
     public Long getAppointmentId() {
         return appointmentId;
     }

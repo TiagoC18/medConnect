@@ -10,6 +10,11 @@ public class Specialty {
 
     private String name;
 
+    public Specialty(Long specialtyId, String name) {
+        this.specialtyId = specialtyId;
+        this.name = name;
+    }
+
     public Long getSpecialtyId() {
         return specialtyId;
     }

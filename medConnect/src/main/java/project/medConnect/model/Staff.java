@@ -14,6 +14,15 @@ public class Staff {
     private String email;
     private String phoneNumber;
 
+    public Staff(Long staffId, String firstName, String lastName, String position, String email, String phoneNumber) {
+        this.staffId = staffId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.position = position;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
     // Getters and Setters
 
     public Long getStaffId() {

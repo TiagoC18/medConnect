@@ -18,6 +18,17 @@ public class Patient {
     private String email;
     private String address;
 
+    public Patient(Long patientId, String firstName, String lastName, Date dateOfBirth, String gender, String phoneNumber, String email, String address) {
+        this.patientId = patientId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
+    }
+
     public Long getPatientId() {
         return patientId;
     }
