@@ -1,6 +1,7 @@
 package project.medConnect.service;
 
 import project.medConnect.model.Appointment;
+import project.medConnect.model.Patient;
 import project.medConnect.model.Specialty;
 import project.medConnect.repository.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,10 @@ public class AppointmentService {
 
     public Appointment bookAppointment(@Valid Appointment appointment) {
         return appointmentRepository.save(appointment);
+    }
+
+    public List<Appointment> findPastAppointments(Patient patient) {
+        Date now = new Date();
+        return appointmentRepository.findByPatientAndAppointmentTimeBefore(patient, now);
     }
 }

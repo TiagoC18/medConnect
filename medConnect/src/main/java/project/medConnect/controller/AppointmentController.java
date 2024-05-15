@@ -1,7 +1,9 @@
 package project.medConnect.controller;
 
 import project.medConnect.model.Appointment;
+import project.medConnect.model.Patient;
 import project.medConnect.model.Specialty;
+import project.medConnect.repository.PatientRepository;
 import project.medConnect.repository.SpecialtyRepository;
 import project.medConnect.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class AppointmentController {
 
     @Autowired
     private SpecialtyRepository specialtyRepository;
+
+    @Autowired
+    private PatientRepository patientRepository;
 
     @GetMapping("/available")
     public ResponseEntity<List<Appointment>> getAvailableAppointments(
@@ -53,5 +58,17 @@ public class AppointmentController {
         StringBuilder errors = new StringBuilder();
         ex.getConstraintViolations().forEach(violation -> errors.append(violation.getMessage()).append(" "));
         return new ResponseEntity<>(errors.toString(), HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/past/{patientId}")
+    public ResponseEntity<?> getPastAppointments(@PathVariable Long patientId) {
+        try {
+            Patient patient = patientRepository.findById(patientId)
+                    .orElseThrow(() -> new RuntimeException("Patient not found"));
+            List<Appointment> pastAppointments = appointmentService.findPastAppointments(patient);
+            return new ResponseEntity<>(pastAppointments, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 }
