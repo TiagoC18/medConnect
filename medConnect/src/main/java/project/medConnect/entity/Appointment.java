@@ -1,4 +1,4 @@
-package project.medConnect.model;
+package project.medConnect.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
@@ -16,34 +16,29 @@ public class Appointment {
     @NotNull(message = "Patient is required")
     private Patient patient;
 
-    @ManyToOne
-    @JoinColumn(name = "staff_id")
-    @NotNull(message = "Staff is required")
-    private Staff staff;
+    @NotNull(message = "Specialty is required")
+    private String specialty;
 
     @ManyToOne
-    @JoinColumn(name = "specialty_id")
-    @NotNull(message = "Specialty is required")
-    private Specialty specialty;
+    @JoinColumn(name = "medic_id")
+    @NotNull(message = "Medic is required")
+    private Medic medic;
 
     @NotNull(message = "Appointment time is required")
     @Future(message = "Appointment time must be in the future")
     private Date appointmentTime;
-
-    private int duration;
 
     @NotNull(message = "Status is required")
     private String status;
 
  
 
-    public Appointment(Long appointmentId, Patient patient, Staff staff, Specialty specialty, Date appointmentTime, int duration, String status) {
+    public Appointment(Long appointmentId, Patient patient, String specialty, Medic medic, Date appointmentTime, String status) {
         this.appointmentId = appointmentId;
         this.patient = patient;
-        this.staff = staff;
         this.specialty = specialty;
+        this.medic = medic;
         this.appointmentTime = appointmentTime;
-        this.duration = duration;
         this.status = status;
     }
 
@@ -63,20 +58,20 @@ public class Appointment {
         this.patient = patient;
     }
 
-    public Staff getStaff() {
-        return staff;
-    }
-
-    public void setStaff(Staff staff) {
-        this.staff = staff;
-    }
-
-    public Specialty getSpecialty() {
+    public String getSpecialty() {
         return specialty;
     }
 
-    public void setSpecialty(Specialty specialty) {
+    public void setSpecialty(String specialty) {
         this.specialty = specialty;
+    }
+
+    public Medic getMedic() {
+        return medic;
+    }
+
+    public void setMedic(Medic medic) {
+        this.medic = medic;
     }
 
     public Date getAppointmentTime() {
@@ -85,14 +80,6 @@ public class Appointment {
 
     public void setAppointmentTime(Date appointmentTime) {
         this.appointmentTime = appointmentTime;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
     }
 
     public String getStatus() {

@@ -1,10 +1,11 @@
 package project.medConnect.repository;
 
 
-import project.medConnect.model.Specialty;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import project.medConnect.entity.Medic;
+
 @Repository
-public interface SpecialtyRepository extends JpaRepository<Specialty, Long> {
+public interface MedicRepository extends JpaRepository<Medic, Long> {
 }

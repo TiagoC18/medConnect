@@ -1,6 +1,7 @@
-package project.medConnect.model;
+package project.medConnect.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 
@@ -10,15 +11,28 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long patientId;
 
+    @NotNull(message = "First name is required")
     private String firstName;
-    private String lastName;
-    private Date dateOfBirth;
-    private String gender;
-    private String phoneNumber;
-    private String email;
-    private String address;
 
-    public Patient(Long patientId, String firstName, String lastName, Date dateOfBirth, String gender, String phoneNumber, String email, String address) {
+    @NotNull(message = "Last name is required")
+    private String lastName;
+
+    @NotNull(message = "Date of birth is required")
+    private Date dateOfBirth;
+
+    @NotNull(message = "Gender is required")
+    private String gender;
+
+    @NotNull(message = "CC number is required")
+    private Long ccNumber;
+
+    @NotNull(message = "Phone number is required")
+    private Long phoneNumber;
+
+    @NotNull(message = "Email is required")
+    private String email;
+
+    public Patient(Long patientId, String firstName, String lastName, Date dateOfBirth, String gender, Long ccNumber, Long phoneNumber, String email) {
         this.patientId = patientId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -26,7 +40,6 @@ public class Patient {
         this.gender = gender;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.address = address;
     }
 
     public Long getPatientId() {
@@ -69,11 +82,19 @@ public class Patient {
         this.gender=gender;
     }
 
-    public String getPhoneNumber() {
+    public Long getCcNumber() {
+        return ccNumber;
+    }
+
+    public void setCcNumber(Long ccNumber){
+        this.ccNumber=ccNumber;
+    }
+
+    public Long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber){
+    public void setPhoneNumber(Long phoneNumber){
         this.phoneNumber=phoneNumber;
     }
 
@@ -83,13 +104,5 @@ public class Patient {
 
     public void setEmail(String email){
         this.email=email;
-    }
-
-    public String getAddress(){
-        return address;
-    }
-
-    public void setAddress(String address){
-        this.address=address;
     }
 }
