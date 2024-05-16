@@ -20,6 +20,11 @@ public class AppointmentService {
         return appointments;
     }
 
+    public Appointment addAppointment(Appointment appointment) {
+        Appointment newAppointment = appointmentRepository.save(appointment);
+        return newAppointment;
+    }
+
     public List<Appointment> getAppointmentsBySpecialtyAndMedic(String specialty, Medic medic, Date appointmentTime){
         List<Appointment> availableAppoints = appointmentRepository.findAvailableAppointmentsForSpecialtyAndMedic(specialty, medic, appointmentTime);
         return availableAppoints;

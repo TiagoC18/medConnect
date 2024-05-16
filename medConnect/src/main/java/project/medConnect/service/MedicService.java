@@ -30,4 +30,9 @@ public class MedicService {
         }
     }
 
+    public List<Medic> getMedicBySpecialty(String specialty) {
+        List<Medic> medics = medicRepository.findMedicBySpecialty(specialty);
+        return medics;
+    }
+
 }

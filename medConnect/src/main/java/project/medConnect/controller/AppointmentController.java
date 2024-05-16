@@ -21,6 +21,11 @@ public class AppointmentController {
         return appointmentService.getAppointments();
     }
 
+    @PostMapping("")
+    public Appointment addAppointment(@RequestBody Appointment appointment) {
+        return appointmentService.addAppointment(appointment);
+    }
+
     @GetMapping("/available")
     public List<Appointment> getAppointmentsBySpecialtyAndMedic(@PathVariable String specialty, @PathVariable Medic medic, @RequestParam Date appointmentTime) {
         return appointmentService.getAppointmentsBySpecialtyAndMedic(specialty, medic, appointmentTime);

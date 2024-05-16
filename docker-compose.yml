@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  sql:
+    image: mysql
+    container_name: database
+    environment:
+      MYSQL_ROOT_PASSWORD: medConnect
+      MYSQL_DATABASE: medConnect
+      MYSQL_USER: meduser
+      MYSQL_PASSWORD: medConnect
+    ports:
+      - "9906:3306"
+    restart: unless-stopped
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:

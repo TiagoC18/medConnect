@@ -41,4 +41,16 @@ public class MedicController {
             return new ResponseEntity<>(medic, HttpStatus.OK);
         }
     }
+
+    @GetMapping("/{specialty}")
+    public ResponseEntity<Object> getMedicBySpecialty(@PathVariable String specialty) {
+
+        List<Medic> medics = medicService.getMedicBySpecialty(specialty);
+
+        if (medics.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(medics, HttpStatus.OK);
+        }
+    }
 }

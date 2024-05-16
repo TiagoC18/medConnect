@@ -24,20 +24,24 @@ public class Patient {
     private String gender;
 
     @NotNull(message = "CC number is required")
-    private Long ccNumber;
+    private String ccNumber;
 
     @NotNull(message = "Phone number is required")
-    private Long phoneNumber;
+    private String phoneNumber;
 
     @NotNull(message = "Email is required")
     private String email;
 
-    public Patient(Long patientId, String firstName, String lastName, Date dateOfBirth, String gender, Long ccNumber, Long phoneNumber, String email) {
+    public Patient() {
+    }
+
+    public Patient(Long patientId, String firstName, String lastName, Date dateOfBirth, String gender, String ccNumber, String phoneNumber, String email) {
         this.patientId = patientId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
+        this.ccNumber = ccNumber;
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
@@ -82,19 +86,19 @@ public class Patient {
         this.gender=gender;
     }
 
-    public Long getCcNumber() {
+    public String getCcNumber() {
         return ccNumber;
     }
 
-    public void setCcNumber(Long ccNumber){
+    public void setCcNumber(String ccNumber){
         this.ccNumber=ccNumber;
     }
 
-    public Long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Long phoneNumber){
+    public void setPhoneNumber(String phoneNumber){
         this.phoneNumber=phoneNumber;
     }
 

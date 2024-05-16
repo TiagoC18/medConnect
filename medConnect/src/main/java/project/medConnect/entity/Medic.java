@@ -27,6 +27,9 @@ public class Medic {
     @NotNull(message = "Service Time is required")
     private String serviceTime;
 
+    public Medic() {
+    }
+
     public Medic(Long medicId, String firstName, String lastName, String email, String phoneNumber, String specialty, String serviceTime) {
         this.medicId = medicId;
         this.firstName = firstName;

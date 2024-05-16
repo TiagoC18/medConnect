@@ -31,7 +31,8 @@ public class Appointment {
     @NotNull(message = "Status is required")
     private String status;
 
- 
+    public Appointment() {
+    }
 
     public Appointment(Long appointmentId, Patient patient, String specialty, Medic medic, Date appointmentTime, String status) {
         this.appointmentId = appointmentId;
