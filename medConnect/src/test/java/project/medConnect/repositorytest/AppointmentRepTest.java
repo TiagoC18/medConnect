@@ -155,5 +155,57 @@ public class AppointmentRepTest {
         assertEquals(appointment1.getAppointmentTime(), foundAppointment.getAppointmentTime());
         assertEquals(appointment1.getStatus(), foundAppointment.getStatus());
     }    
+    
 
+    @Test
+    @DisplayName("Find Available Appointments For Specialty And Medic")
+    public void testFindAvailableAppointmentsForSpecialtyAndMedic() {
+        Medic medic = new Medic();
+        medic.setFirstName("John");
+        medic.setLastName("Doe");
+        medic.setEmail("johndoe@ua.pt");
+        medic.setPhoneNumber("912345678");
+        medic.setSpecialty("Cardiology");
+        medic.setServiceTime("9:00-17:00");
+
+        Patient patient = new Patient();
+        patient.setFirstName("David");
+        patient.setLastName("Silva");
+        patient.setDateOfBirth(new Date(1999, 7, 10, 0, 0));
+        patient.setGender("Male");
+        patient.setPhoneNumber("123456789");
+        patient.setEmail("davidsilva@ua.pt");
+
+        Appointment appointment1 = new Appointment();
+        appointment1.setSpecialty("Cardiology");
+        appointment1.setMedic(medic);
+        appointment1.setPatient(patient);
+        appointment1.setAppointmentTime(new Date(2021, 12, 12, 12, 0));
+        appointment1.setStatus("Scheduled");
+
+        Appointment appointment2 = new Appointment();
+        appointment2.setSpecialty("Dermatology");
+        appointment2.setMedic(medic);
+        appointment2.setPatient(patient);
+        appointment2.setAppointmentTime(new Date(2021, 12, 11, 12, 0));
+        appointment2.setStatus("Scheduled");
+
+        entityManager.persist(medic);
+        entityManager.persist(patient);
+        entityManager.persist(appointment1);
+        entityManager.persist(appointment2);
+        entityManager.flush();
+
+        List<Appointment> appointments = appointmentRepository.findAvailableAppointmentsForSpecialtyAndMedic("Cardiology", medic, new Date(2021, 12, 10, 12, 0));
+        assertNotNull(appointments);
+
+        assertEquals(1, appointments.size());
+        assertEquals("Cardiology", appointments.get(0).getSpecialty());
+        assertEquals(medic, appointments.get(0).getMedic());
+        assertEquals(patient, appointments.get(0).getPatient());
+        assertEquals(new Date(2021, 12, 10, 12, 0), appointments.get(0).getAppointmentTime());
+        assertEquals("Scheduled", appointments.get(0).getStatus());
+    }
 }
+
+

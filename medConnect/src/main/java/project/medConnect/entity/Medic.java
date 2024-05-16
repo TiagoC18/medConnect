@@ -30,8 +30,7 @@ public class Medic {
     public Medic() {
     }
 
-    public Medic(Long medicId, String firstName, String lastName, String email, String phoneNumber, String specialty, String serviceTime) {
-        this.medicId = medicId;
+    public Medic(String firstName, String lastName, String email, String phoneNumber, String specialty, String serviceTime) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

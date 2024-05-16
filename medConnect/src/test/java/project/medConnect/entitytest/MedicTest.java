@@ -10,23 +10,12 @@ public class MedicTest {
 
     @BeforeEach
     public void setUp() {
-        medic = new Medic(1L, "John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", "9:00-17:00");
+        medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", "9:00-17:00");
     }
 
     @AfterEach
     public void tearDown() {
         medic = null;
-    }
-
-    @Test
-    public void testGetMedicId() {
-        assertEquals(1L, medic.getMedicId());
-    }
-
-    @Test
-    public void testSetMedicId() {
-        medic.setMedicId(2L);
-        assertEquals(2L, medic.getMedicId());
     }
 
     @Test

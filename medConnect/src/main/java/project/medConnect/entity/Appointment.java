@@ -34,8 +34,7 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(Long appointmentId, Patient patient, String specialty, Medic medic, Date appointmentTime, String status) {
-        this.appointmentId = appointmentId;
+    public Appointment(Patient patient, String specialty, Medic medic, Date appointmentTime, String status) {
         this.patient = patient;
         this.specialty = specialty;
         this.medic = medic;

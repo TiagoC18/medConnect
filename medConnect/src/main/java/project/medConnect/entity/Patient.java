@@ -35,8 +35,7 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(Long patientId, String firstName, String lastName, Date dateOfBirth, String gender, String ccNumber, String phoneNumber, String email) {
-        this.patientId = patientId;
+    public Patient(String firstName, String lastName, Date dateOfBirth, String gender, String ccNumber, String phoneNumber, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;

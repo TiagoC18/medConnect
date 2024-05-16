@@ -14,25 +14,14 @@ public class PatientTest {
 
     @BeforeEach
     public void setUp() {
-        patient = new Patient(1L, "David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt");
+        patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt");
     }
 
     @AfterEach
     public void tearDown() {
         patient = null;
     }
-
-    @Test
-    public void testGetPatientId() {
-        assertEquals(1L, patient.getPatientId());
-    }
-
-    @Test
-    public void testSetPatientId() {
-        patient.setPatientId(2L);
-        assertEquals(2L, patient.getPatientId());
-    }
-
+    
     @Test
     public void testGetFirstName() {
         assertEquals("David", patient.getFirstName());

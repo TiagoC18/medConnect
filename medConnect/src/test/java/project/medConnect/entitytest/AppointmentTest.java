@@ -18,10 +18,10 @@ public class AppointmentTest {
 
     @BeforeEach
     public void setUp() {
-        medic = new Medic(1L, "John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", "9:00-17:00");
-        patient = new Patient(1L, "David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt");
+        medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", "9:00-17:00");
+        patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt");
     
-        appointment = new Appointment(1L, patient, "Specialty", medic, new Date(2024, 6, 8), "Scheduled");
+        appointment = new Appointment(patient, "Specialty", medic, new Date(2024, 6, 8), "Scheduled");
     }
 
     @AfterEach
@@ -32,24 +32,13 @@ public class AppointmentTest {
     }
 
     @Test
-    public void testGetAppointmentId() {
-        assertEquals(1L, appointment.getAppointmentId());
-    }
-
-    @Test
-    public void testSetAppointmentId() {
-        appointment.setAppointmentId(2L);
-        assertEquals(2L, appointment.getAppointmentId());
-    }
-
-    @Test
     public void testGetPatient() {
         assertEquals(patient, appointment.getPatient());
     }
 
     @Test
     public void testSetPatient() {
-        Patient newPatient = new Patient(1L, "David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt");
+        Patient newPatient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt");
         appointment.setPatient(newPatient);
         assertEquals(newPatient, appointment.getPatient());
     }
@@ -72,7 +61,7 @@ public class AppointmentTest {
 
     @Test
     public void testSetMedic() {
-        Medic newMedic = new Medic(1L, "John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", "9:00-17:00");
+        Medic newMedic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", "9:00-17:00");
         appointment.setMedic(newMedic);
         assertEquals(newMedic, appointment.getMedic());
     }
