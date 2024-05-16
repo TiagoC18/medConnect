@@ -3,6 +3,7 @@ package project.medConnect.entitytest;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Date;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.*;
 
@@ -18,10 +19,10 @@ public class AppointmentTest {
 
     @BeforeEach
     public void setUp() {
-        medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", "9:00-17:00");
+        medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt");
     
-        appointment = new Appointment(patient, "Specialty", medic, new Date(2024, 6, 8), "Scheduled");
+        appointment = new Appointment(patient, "Specialty", medic, new Date(2024, 6, 8), "10h", "Scheduled");
     }
 
     @AfterEach
@@ -61,20 +62,31 @@ public class AppointmentTest {
 
     @Test
     public void testSetMedic() {
-        Medic newMedic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", "9:00-17:00");
+        Medic newMedic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         appointment.setMedic(newMedic);
         assertEquals(newMedic, appointment.getMedic());
     }
 
     @Test
+    public void testGetAppointmentDay() {
+        assertEquals(new Date(2024, 6, 8), appointment.getAppointmentDay());
+    }
+
+    @Test
+    public void testSetAppointmentDay() {
+        appointment.setAppointmentDay( new Date(2024, 6, 17) );
+        assertEquals( new Date(2024, 6, 17) , appointment.getAppointmentDay());
+    }
+
+    @Test
     public void testGetAppointmentTime() {
-        assertEquals(new Date(2024, 6, 8), appointment.getAppointmentTime());
+        assertEquals("10h", appointment.getAppointmentTime());
     }
 
     @Test
     public void testSetAppointmentTime() {
-        appointment.setAppointmentTime( new Date(2024, 6, 17) );
-        assertEquals( new Date(2024, 6, 17) , appointment.getAppointmentTime());
+        appointment.setAppointmentTime("11h");
+        assertEquals("11h", appointment.getAppointmentTime());
     }
 
     @Test

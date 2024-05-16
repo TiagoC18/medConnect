@@ -1,9 +1,10 @@
 package project.medConnect.entity;
 
+import java.util.Date;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
-import java.util.Date;
 
 @Entity
 public class Appointment {
@@ -24,9 +25,12 @@ public class Appointment {
     @NotNull(message = "Medic is required")
     private Medic medic;
 
+    @NotNull(message = "Appointment day is required")
+    @Future(message = "Appointment day must be in the future")
+    private Date appointmentDay;
+
     @NotNull(message = "Appointment time is required")
-    @Future(message = "Appointment time must be in the future")
-    private Date appointmentTime;
+    private String appointmentTime;
 
     @NotNull(message = "Status is required")
     private String status;
@@ -34,10 +38,11 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(Patient patient, String specialty, Medic medic, Date appointmentTime, String status) {
+    public Appointment(Patient patient, String specialty, Medic medic, Date appointmentDate, String appointmentTime, String status) {
         this.patient = patient;
         this.specialty = specialty;
         this.medic = medic;
+        this.appointmentDay = appointmentDate;
         this.appointmentTime = appointmentTime;
         this.status = status;
     }
@@ -74,11 +79,19 @@ public class Appointment {
         this.medic = medic;
     }
 
-    public Date getAppointmentTime() {
+    public Date getAppointmentDay() {
+        return appointmentDay;
+    }
+
+    public void setAppointmentDay(Date appointmentDay) {
+        this.appointmentDay = appointmentDay;
+    }
+
+    public String getAppointmentTime() {
         return appointmentTime;
     }
 
-    public void setAppointmentTime(Date appointmentTime) {
+    public void setAppointmentTime(String appointmentTime) {
         this.appointmentTime = appointmentTime;
     }
 

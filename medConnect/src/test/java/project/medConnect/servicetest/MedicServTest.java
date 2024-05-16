@@ -35,9 +35,9 @@ public class MedicServTest {
     @Test
     @DisplayName("Test Find All Medics")
     public void testFindAllMedics() {
-        Medic medic1 = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", "9:00-17:00");
-        Medic medic2 = new Medic( "Jane", "Smith", "janesmith@ua.pt", "912345678", "Dermatology", "10:00-18:00");
-        Medic medic3 = new Medic("David", "Silva", "davidsilva@ua.pt", "912345678", "Cardiology", "8:00-16:00");
+        Medic medic1 = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+        Medic medic2 = new Medic( "Jane", "Smith", "janesmith@ua.pt", "912345678", "Dermatology", Arrays.asList("10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h", "18h"));
+        Medic medic3 = new Medic("David", "Silva", "davidsilva@ua.pt", "912345678", "Dermatology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
 
         Mockito.when(medicRepository.findAll()).thenReturn(Arrays.asList(medic1, medic2, medic3));
 
@@ -50,7 +50,7 @@ public class MedicServTest {
     @Test
     @DisplayName("Test Find Medic By Id")
     public void testFindMedicById() {
-        Medic medic1 = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", "9:00-17:00");
+        Medic medic1 = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         medic1.setMedicId(1L);
 
         Mockito.when(medicRepository.findById(1L)).thenReturn(java.util.Optional.of(medic1));

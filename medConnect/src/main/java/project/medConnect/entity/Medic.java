@@ -1,5 +1,7 @@
 package project.medConnect.entity;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -25,12 +27,12 @@ public class Medic {
     private String specialty;
 
     @NotNull(message = "Service Time is required")
-    private String serviceTime;
+    private List<String> serviceTime;
 
     public Medic() {
     }
 
-    public Medic(String firstName, String lastName, String email, String phoneNumber, String specialty, String serviceTime) {
+    public Medic(String firstName, String lastName, String email, String phoneNumber, String specialty, List<String> serviceTime) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -87,11 +89,11 @@ public class Medic {
         this.specialty = specialty;
     }
 
-    public String getServiceTime() {
+    public List<String> getServiceTime() {
         return serviceTime;
     }
 
-    public void setServiceTime(String serviceTime) {
+    public void setServiceTime(List<String> serviceTime) {
         this.serviceTime = serviceTime;
     }    
 }

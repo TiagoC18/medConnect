@@ -1,12 +1,10 @@
 package project.medConnect.controller;
 
 import project.medConnect.entity.Appointment;
-import project.medConnect.entity.Medic;
 import project.medConnect.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -25,10 +23,4 @@ public class AppointmentController {
     public Appointment addAppointment(@RequestBody Appointment appointment) {
         return appointmentService.addAppointment(appointment);
     }
-
-    @GetMapping("/available")
-    public List<Appointment> getAppointmentsBySpecialtyAndMedic(@PathVariable String specialty, @PathVariable Medic medic, @RequestParam Date appointmentTime) {
-        return appointmentService.getAppointmentsBySpecialtyAndMedic(specialty, medic, appointmentTime);
-    }
-
 }

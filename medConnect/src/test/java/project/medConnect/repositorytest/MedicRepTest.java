@@ -3,6 +3,7 @@ package project.medConnect.repositorytest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -32,7 +33,7 @@ public class MedicRepTest {
         medic1.setEmail("johndoe@ua.pt");
         medic1.setPhoneNumber("912345678");
         medic1.setSpecialty("Cardiology");
-        medic1.setServiceTime("9:00-17:00");
+        medic1.setServiceTime(Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
 
         Medic medic2 = new Medic();
         medic2.setFirstName("Jane");
@@ -40,7 +41,7 @@ public class MedicRepTest {
         medic2.setEmail("janesmith@ua.pt");
         medic2.setPhoneNumber("912345678");
         medic2.setSpecialty("Dermatology");
-        medic2.setServiceTime("10:00-18:00");
+        medic2.setServiceTime(Arrays.asList("10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h", "18h"));
 
         entityManager.persist(medic1);
         entityManager.persist(medic2);
@@ -61,7 +62,7 @@ public class MedicRepTest {
         medic.setEmail("johndoe@ua.pt");
         medic.setPhoneNumber("912345678");
         medic.setSpecialty("Cardiology");
-        medic.setServiceTime("9:00-17:00");
+        medic.setServiceTime(Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
 
         entityManager.persist(medic);
         entityManager.flush();
@@ -87,7 +88,7 @@ public class MedicRepTest {
         medic1.setEmail("johndoe@ua.pt");
         medic1.setPhoneNumber("912345678");
         medic1.setSpecialty("Cardiology");
-        medic1.setServiceTime("9:00-17:00");
+        medic1.setServiceTime(Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
 
         Medic medic2 = new Medic();
         medic2.setFirstName("Jane");
@@ -95,7 +96,7 @@ public class MedicRepTest {
         medic2.setEmail("janesmith@ua.pt");
         medic2.setPhoneNumber("912345678");
         medic2.setSpecialty("Dermatology");
-        medic2.setServiceTime("10:00-18:00");
+        medic2.setServiceTime(Arrays.asList("10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h", "18h"));
 
         entityManager.persist(medic1);
         entityManager.persist(medic2);

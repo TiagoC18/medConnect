@@ -1,6 +1,9 @@
 package project.medConnect.entitytest;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.Arrays;
+
 import org.junit.jupiter.api.*;
 
 import project.medConnect.entity.Medic;
@@ -10,7 +13,7 @@ public class MedicTest {
 
     @BeforeEach
     public void setUp() {
-        medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", "9:00-17:00");
+        medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
     }
 
     @AfterEach
@@ -75,13 +78,13 @@ public class MedicTest {
 
     @Test
     public void testGetServiceTime() {
-        assertEquals("9:00-17:00", medic.getServiceTime());
+        assertEquals(Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"), medic.getServiceTime());
     }
 
     @Test
     public void testSetServiceTime() {
-        medic.setServiceTime("10:00-18:00");
-        assertEquals("10:00-18:00", medic.getServiceTime());
+        medic.setServiceTime(Arrays.asList("10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h", "18h"));
+        assertEquals(Arrays.asList("10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h", "18h"), medic.getServiceTime());
     }
 
 }
