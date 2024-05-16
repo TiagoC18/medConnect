@@ -87,11 +87,21 @@ public class MedicControllerTest {
     @Test
     @DisplayName("Get medic by specialty")
     public void testGetMedicBySpecialty() throws Exception {
+
         Medic medic1 = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
-        Medic medic2 = new Medic("Jane", "Smith", "janesmith@ua.pt", "912645678", "Cardiology", Arrays.asList("10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h", "18h"));
-
-
+        Medic medic2 = new Medic("Jane", "Smith", "janesmith@ua.pt", "912348678", "Cardiology", Arrays.asList("10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h", "18h"));
         when(medicService.getMedicBySpecialty("Cardiology")).thenReturn(Arrays.asList(medic1, medic2));
+
+        mvc.perform(get("/api/medic/specialty/Cardiology")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].firstName", is("John")))
+                .andExpect(jsonPath("$[0].specialty", is("Cardiology")));
+
+        verify(medicService, times(1)).getMedicBySpecialty("Cardiology");
+    }
+
 
 
     
