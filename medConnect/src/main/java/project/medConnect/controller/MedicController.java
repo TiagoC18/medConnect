@@ -42,7 +42,7 @@ public class MedicController {
         }
     }
 
-    @GetMapping("/{specialty}")
+    @GetMapping("/specialty/{specialty}")
     public ResponseEntity<Object> getMedicBySpecialty(@PathVariable String specialty) {
 
         List<Medic> medics = medicService.getMedicBySpecialty(specialty);
