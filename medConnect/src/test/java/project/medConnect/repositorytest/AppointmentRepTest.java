@@ -42,7 +42,7 @@ public class AppointmentRepTest {
         Patient patient = new Patient();
         patient.setFirstName("David");
         patient.setLastName("Silva");
-        patient.setDateOfBirth(new Date(1999, 7, 10, 0, 0));
+        patient.setDateOfBirth(new Date(1999, 7, 10));
         patient.setGender("Male");
         patient.setPhoneNumber("123456789");
         patient.setEmail("davidsilva@ua.pt");
@@ -51,7 +51,7 @@ public class AppointmentRepTest {
         appointment1.setSpecialty("Cardiology");
         appointment1.setMedic(medic);
         appointment1.setPatient(patient);
-        appointment1.setAppointmentDay(new Date(2021, 12, 12, 12, 0));
+        appointment1.setAppointmentDay(new Date(2021, 12, 12));
         appointment1.setAppointmentTime("10h");
         appointment1.setStatus("Scheduled");
 
@@ -59,7 +59,7 @@ public class AppointmentRepTest {
         appointment2.setSpecialty("Dermatology");
         appointment2.setMedic(medic);
         appointment2.setPatient(patient);
-        appointment2.setAppointmentDay(new Date(2021, 12, 12, 12, 0));
+        appointment2.setAppointmentDay(new Date(2021, 12, 12));
         appointment2.setAppointmentTime("10h");
         appointment2.setStatus("Scheduled");
 
@@ -89,7 +89,7 @@ public class AppointmentRepTest {
         Patient patient = new Patient();
         patient.setFirstName("David");
         patient.setLastName("Silva");
-        patient.setDateOfBirth(new Date(1999, 7, 10, 0, 0));
+        patient.setDateOfBirth(new Date(1999, 7, 10));
         patient.setGender("Male");
         patient.setPhoneNumber("123456789");
         patient.setEmail("davidsilva@ua.pt");
@@ -98,7 +98,7 @@ public class AppointmentRepTest {
         appointment.setSpecialty("Cardiology");
         appointment.setMedic(medic);
         appointment.setPatient(patient);
-        appointment.setAppointmentDay(new Date(2021, 12, 12, 12, 0));
+        appointment.setAppointmentDay(new Date(2021, 12, 12));
         appointment.setAppointmentTime("10h");
         appointment.setStatus("Scheduled");
 
@@ -125,7 +125,7 @@ public class AppointmentRepTest {
         Patient patient = new Patient();
         patient.setFirstName("David");
         patient.setLastName("Silva");
-        patient.setDateOfBirth(new Date(1999, 7, 10, 0, 0));
+        patient.setDateOfBirth(new Date(1999, 7, 10));
         patient.setGender("Male");
         patient.setPhoneNumber("123456789");
         patient.setEmail("davidsilva@ua.pt");
@@ -134,7 +134,7 @@ public class AppointmentRepTest {
         appointment1.setSpecialty("Cardiology");
         appointment1.setMedic(medic);
         appointment1.setPatient(patient);
-        appointment1.setAppointmentDay(new Date(2021, 12, 12, 12, 0));
+        appointment1.setAppointmentDay(new Date(2021, 12, 12));
         appointment1.setAppointmentTime("10h");
         appointment1.setStatus("Scheduled");
 
@@ -142,7 +142,7 @@ public class AppointmentRepTest {
         appointment2.setSpecialty("Dermatology");
         appointment2.setMedic(medic);
         appointment2.setPatient(patient);
-        appointment2.setAppointmentDay(new Date(2021, 12, 12, 12, 0));
+        appointment2.setAppointmentDay(new Date(2021, 12, 12));
         appointment2.setAppointmentTime("10h");
         appointment2.setStatus("Scheduled");
 
@@ -161,51 +161,49 @@ public class AppointmentRepTest {
         assertEquals(appointment1.getStatus(), foundAppointment.getStatus());
     }    
 
+    @Test
+    @DisplayName("Booked Appointments")
+    public void testFindBookedAppointments() {
+        Medic medic = new Medic();
+        medic.setFirstName("John");
+        medic.setLastName("Doe");
+        medic.setEmail("johndoe@ua.pt");
+        medic.setPhoneNumber("912345678");
+        medic.setSpecialty("Cardiology");
+        medic.setServiceTime(Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
 
-    // @Test
-    // @DisplayName("Find Available Hours")
-    // public void testFindAvailableHours() {
-    //     Medic medic = new Medic();
-    //     medic.setFirstName("John");
-    //     medic.setLastName("Doe");
-    //     medic.setEmail("johndoe@ua.pt");
-    //     medic.setPhoneNumber("912345678");
-    //     medic.setSpecialty("Cardiology");
-    //     medic.setServiceTime(Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+        Patient patient = new Patient();
+        patient.setFirstName("David");
+        patient.setLastName("Silva");
+        patient.setDateOfBirth(new Date(1999, 7, 10));
+        patient.setGender("Male");
+        patient.setPhoneNumber("123456789");
+        patient.setEmail("davidsilva@ua.pt");
 
-    //     Patient patient = new Patient();
-    //     patient.setFirstName("David");
-    //     patient.setLastName("Silva");
-    //     patient.setDateOfBirth(new Date(1999, 7, 10, 0, 0));
-    //     patient.setGender("Male");
-    //     patient.setPhoneNumber("123456789");
-    //     patient.setEmail("davidsilva@ua.pt");
+        Appointment appointment1 = new Appointment();
+        appointment1.setSpecialty("Cardiology");
+        appointment1.setMedic(medic);
+        appointment1.setPatient(patient);
+        appointment1.setAppointmentDay(new Date(2021, 12, 12));
+        appointment1.setAppointmentTime("10h");
+        appointment1.setStatus("Scheduled");
 
-    //     Appointment appointment1 = new Appointment();
-    //     appointment1.setSpecialty("Cardiology");
-    //     appointment1.setMedic(medic);
-    //     appointment1.setPatient(patient);
-    //     appointment1.setAppointmentDay(new Date(2021, 12, 12, 12, 0));
-    //     appointment1.setAppointmentTime("10h");
-    //     appointment1.setStatus("Scheduled");
+        Appointment appointment2 = new Appointment();
+        appointment2.setSpecialty("Dermatology");
+        appointment2.setMedic(medic);
+        appointment2.setPatient(patient);
+        appointment2.setAppointmentDay(new Date(2021, 12, 12));
+        appointment2.setAppointmentTime("11h");
+        appointment2.setStatus("Scheduled");
 
-    //     Appointment appointment2 = new Appointment();
-    //     appointment2.setSpecialty("Dermatology");
-    //     appointment2.setMedic(medic);
-    //     appointment2.setPatient(patient);
-    //     appointment2.setAppointmentDay(new Date(2021, 12, 12, 12, 0));
-    //     appointment2.setAppointmentTime("11h");
-    //     appointment2.setStatus("Scheduled");
+        entityManager.persist(medic);
+        entityManager.persist(patient);
+        entityManager.persist(appointment1);
+        entityManager.persist(appointment2);
+        entityManager.flush();
 
-    //     entityManager.persist(medic);
-    //     entityManager.persist(patient);
-    //     entityManager.persist(appointment1);
-    //     entityManager.persist(appointment2);
-
-    //     List<String> availableHours = appointmentRepository.findAvailableHours("Cardiology", new Date(2021, 12, 12, 12, 0));
-    //     assertNotNull(availableHours);
-    //     assertEquals(7, availableHours.size());
-    // }
-}
-
-
+        List<String> bookedAppointments = appointmentRepository.findBookedAppointments("Cardiology", medic, new Date(2021, 12, 12));
+        assertNotNull(bookedAppointments);
+        assertEquals(2, bookedAppointments.size());
+    }
+}    

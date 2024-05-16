@@ -14,15 +14,8 @@ import project.medConnect.entity.Medic;
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
 
-    // @Query("SELECT DISTINCT st FROM Medic m " +
-    //         "CROSS JOIN UNNEST(m.serviceTime) st " +
-    //         "WHERE m.specialty = :specialty " +
-    //         "AND st NOT IN " +
-    //         "(SELECT a.appointmentTime FROM Appointment a " +
-    //         "WHERE a.appointmentDay = :appointmentDay " +
-    //         "AND a.specialty = :specialty " +
-    //         "AND a.medic = m)")
-    // List<String> findAvailableHours(@Param("specialty") String specialty,
-    //                                 @Param("appointmentDay") Date appointmentDay);
-
+    @Query("SELECT a.appointmentTime FROM Appointment a WHERE a.medic.specialty = :specialty AND a.medic = :medic AND a.appointmentDay = :day")
+    List<String> findBookedAppointments(@Param("specialty") String specialty, 
+                                    @Param("medic") Medic medic, 
+                                    @Param("day") Date day);
 }

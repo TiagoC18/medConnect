@@ -42,7 +42,7 @@ public class MedicController {
         }
     }
 
-    @GetMapping("/{specialty}")
+    @GetMapping("/specialty/{specialty}")
     public ResponseEntity<Object> getMedicBySpecialty(@PathVariable String specialty) {
 
         List<Medic> medics = medicService.getMedicBySpecialty(specialty);
@@ -51,6 +51,18 @@ public class MedicController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(medics, HttpStatus.OK);
+        }
+    }
+    
+    @GetMapping("/{medicId}/serviceTime")
+    public ResponseEntity<Object> getServiceTime(@PathVariable Long medicId) {
+
+        Medic medic = medicService.getMedicById(medicId);
+
+        if (medic == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(medic.getServiceTime(), HttpStatus.OK);
         }
     }
 }
