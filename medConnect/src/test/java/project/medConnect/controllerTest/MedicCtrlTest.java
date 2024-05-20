@@ -1,41 +1,34 @@
 package project.medConnect.controllerTest;
 
-
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.Arrays;
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.hasSize;
+
+import java.util.Arrays;
 
 import project.medConnect.controller.MedicController;
 import project.medConnect.entity.Medic;
 import project.medConnect.service.MedicService;
 
-import static org.hamcrest.Matchers.hasSize;
 @WebMvcTest(MedicController.class)
-public class MedicControllerTest {
+public class MedicCtrlTest {
 
     @Autowired
     private MockMvc mvc;
@@ -103,6 +96,43 @@ public class MedicControllerTest {
     }
 
 
+    @Test
+    @DisplayName("Get serviceTime of Medic")
+    public void testGetServiceTime() throws Exception {
+        Medic medic1 = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
 
-    
+        when(medicService.getServiceTime(1L)).thenReturn(medic1);
+
+        mvc.perform(get("/api/medic/1/serviceTime")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(9)))
+                .andExpect(jsonPath("$[0]", is("9h")))
+                .andExpect(jsonPath("$[1]", is("10h")))
+                .andExpect(jsonPath("$[2]", is("11h")))
+                .andExpect(jsonPath("$[3]", is("12h")))
+                .andExpect(jsonPath("$[4]", is("13h")))
+                .andExpect(jsonPath("$[5]", is("14h")))
+                .andExpect(jsonPath("$[6]", is("15h")))
+                .andExpect(jsonPath("$[7]", is("16h")))
+                .andExpect(jsonPath("$[8]", is("17h")));
+
+        verify(medicService, times(1)).getServiceTime(1L);
+    }
+
+    @Test
+    @DisplayName("Find Medic by Name")
+    public void testFindMedicByName() throws Exception {
+        Medic medic1 = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+
+        when(medicService.findMedicByName("John", "Doe")).thenReturn(medic1);
+
+        mvc.perform(get("/api/medic/name/John/Doe")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.firstName", is("John")))
+                .andExpect(jsonPath("$.lastName", is("Doe")));
+
+        verify(medicService, times(1)).findMedicByName("John", "Doe");
+    }
 }

@@ -107,5 +107,40 @@ public class MedicRepTest {
         assertNotNull(medics);
         assertEquals(1, medics.size());
     }
+
+    @Test
+    @DisplayName("Find Medic by Name")
+    public void testFindMedicByName() {
+        Medic medic1 = new Medic();
+        medic1.setFirstName("John");
+        medic1.setLastName("Doe");
+        medic1.setEmail("johndoe@ua.pt");
+        medic1.setPhoneNumber("912345678");
+        medic1.setSpecialty("Cardiology");
+        medic1.setServiceTime(Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+
+        Medic medic2 = new Medic();
+        medic2.setFirstName("Jane");
+        medic2.setLastName("Smith");
+        medic2.setEmail("janesmith@ua.pt");
+        medic2.setPhoneNumber("912345678");
+        medic2.setSpecialty("Dermatology");
+        medic2.setServiceTime(Arrays.asList("10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h", "18h"));
+
+        entityManager.persist(medic1);
+        entityManager.persist(medic2);
+        entityManager.flush();
+
+        Medic foundMedic = medicRepository.findMedicByName("John", "Doe");
+
+        assertNotNull(foundMedic);
+        assertEquals(medic1.getMedicId(), foundMedic.getMedicId());
+        assertEquals(medic1.getFirstName(), foundMedic.getFirstName());
+        assertEquals(medic1.getLastName(), foundMedic.getLastName());
+        assertEquals(medic1.getEmail(), foundMedic.getEmail());
+        assertEquals(medic1.getPhoneNumber(), foundMedic.getPhoneNumber());
+        assertEquals(medic1.getSpecialty(), foundMedic.getSpecialty());
+        assertEquals(medic1.getServiceTime(), foundMedic.getServiceTime());
+    }
 }
 

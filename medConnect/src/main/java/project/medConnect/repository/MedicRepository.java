@@ -13,4 +13,9 @@ public interface MedicRepository extends JpaRepository<Medic, Long> {
 
     @Query("SELECT m FROM Medic m WHERE m.specialty = :specialty")
     List<Medic> findMedicBySpecialty(String specialty);
+
+    @Query("SELECT m FROM Medic m WHERE m.firstName = :firstName AND m.lastName = :lastName")
+    Medic findMedicByName(String firstName, String lastName);
+    
+
 }

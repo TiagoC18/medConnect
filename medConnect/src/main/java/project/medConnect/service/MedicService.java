@@ -35,4 +35,17 @@ public class MedicService {
         return medics;
     }
 
+    public Medic getServiceTime(Long medicId) {
+        Optional<Medic> medic = medicRepository.findById(medicId);
+        if (medic.isPresent()) {
+            return medic.get();
+        } else {
+            throw new NoSuchElementException("Medic with id " + medicId + " not found");
+        }
+    }
+
+    public Medic findMedicByName(String firstName, String lastName) {
+        Medic medic = medicRepository.findMedicByName(firstName, lastName);
+        return medic;
+    }
 }

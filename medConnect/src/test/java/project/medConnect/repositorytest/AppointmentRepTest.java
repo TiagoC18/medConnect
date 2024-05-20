@@ -51,7 +51,7 @@ public class AppointmentRepTest {
         appointment1.setSpecialty("Cardiology");
         appointment1.setMedic(medic);
         appointment1.setPatient(patient);
-        appointment1.setAppointmentDay(new Date(2021, 12, 12));
+        appointment1.setAppointmentDay("2024-06-08");
         appointment1.setAppointmentTime("10h");
         appointment1.setStatus("Scheduled");
 
@@ -59,7 +59,7 @@ public class AppointmentRepTest {
         appointment2.setSpecialty("Dermatology");
         appointment2.setMedic(medic);
         appointment2.setPatient(patient);
-        appointment2.setAppointmentDay(new Date(2021, 12, 12));
+        appointment2.setAppointmentDay("2024-06-08");
         appointment2.setAppointmentTime("10h");
         appointment2.setStatus("Scheduled");
 
@@ -98,7 +98,7 @@ public class AppointmentRepTest {
         appointment.setSpecialty("Cardiology");
         appointment.setMedic(medic);
         appointment.setPatient(patient);
-        appointment.setAppointmentDay(new Date(2021, 12, 12));
+        appointment.setAppointmentDay("2024-06-08");
         appointment.setAppointmentTime("10h");
         appointment.setStatus("Scheduled");
 
@@ -134,7 +134,7 @@ public class AppointmentRepTest {
         appointment1.setSpecialty("Cardiology");
         appointment1.setMedic(medic);
         appointment1.setPatient(patient);
-        appointment1.setAppointmentDay(new Date(2021, 12, 12));
+        appointment1.setAppointmentDay("2024-06-08");
         appointment1.setAppointmentTime("10h");
         appointment1.setStatus("Scheduled");
 
@@ -142,7 +142,7 @@ public class AppointmentRepTest {
         appointment2.setSpecialty("Dermatology");
         appointment2.setMedic(medic);
         appointment2.setPatient(patient);
-        appointment2.setAppointmentDay(new Date(2021, 12, 12));
+        appointment2.setAppointmentDay("2024-06-08");
         appointment2.setAppointmentTime("10h");
         appointment2.setStatus("Scheduled");
 
@@ -184,7 +184,7 @@ public class AppointmentRepTest {
         appointment1.setSpecialty("Cardiology");
         appointment1.setMedic(medic);
         appointment1.setPatient(patient);
-        appointment1.setAppointmentDay(new Date(2021, 12, 12));
+        appointment1.setAppointmentDay("2024-06-08");
         appointment1.setAppointmentTime("10h");
         appointment1.setStatus("Scheduled");
 
@@ -192,7 +192,7 @@ public class AppointmentRepTest {
         appointment2.setSpecialty("Dermatology");
         appointment2.setMedic(medic);
         appointment2.setPatient(patient);
-        appointment2.setAppointmentDay(new Date(2021, 12, 12));
+        appointment2.setAppointmentDay("2024-06-08");
         appointment2.setAppointmentTime("11h");
         appointment2.setStatus("Scheduled");
 
@@ -202,7 +202,7 @@ public class AppointmentRepTest {
         entityManager.persist(appointment2);
         entityManager.flush();
 
-        List<String> bookedAppointments = appointmentRepository.findBookedAppointments("Cardiology", medic, new Date(2021, 12, 12));
+        List<String> bookedAppointments = appointmentRepository.findBookedAppointments("Cardiology", medic, "2024-06-08");
         assertNotNull(bookedAppointments);
         assertEquals(2, bookedAppointments.size());
     }
