@@ -27,7 +27,7 @@ public class Appointment {
 
     @NotNull(message = "Appointment day is required")
     @Future(message = "Appointment day must be in the future")
-    private Date appointmentDay;
+    private String appointmentDay;
 
     @NotNull(message = "Appointment time is required")
     private String appointmentTime;
@@ -38,7 +38,7 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(Patient patient, String specialty, Medic medic, Date appointmentDate, String appointmentTime, String status) {
+    public Appointment(Patient patient, String specialty, Medic medic, String appointmentDate, String appointmentTime, String status) {
         this.patient = patient;
         this.specialty = specialty;
         this.medic = medic;
@@ -79,11 +79,11 @@ public class Appointment {
         this.medic = medic;
     }
 
-    public Date getAppointmentDay() {
+    public String getAppointmentDay() {
         return appointmentDay;
     }
 
-    public void setAppointmentDay(Date appointmentDay) {
+    public void setAppointmentDay(String appointmentDay) {
         this.appointmentDay = appointmentDay;
     }
 

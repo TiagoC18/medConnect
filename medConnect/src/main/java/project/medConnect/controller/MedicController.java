@@ -57,12 +57,24 @@ public class MedicController {
     @GetMapping("/{medicId}/serviceTime")
     public ResponseEntity<Object> getServiceTime(@PathVariable Long medicId) {
 
-        Medic medic = medicService.getMedicById(medicId);
+        Medic medic = medicService.getServiceTime(medicId);
 
         if (medic == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<>(medic.getServiceTime(), HttpStatus.OK);
+        }
+    }
+
+    @GetMapping("/name/{firstName}/{lastName}")
+    public ResponseEntity<Object> findMedicByName(@PathVariable String firstName, @PathVariable String lastName) {
+
+        Medic medic = medicService.findMedicByName(firstName, lastName);
+
+        if (medic == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(medic, HttpStatus.OK);
         }
     }
 }

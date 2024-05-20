@@ -60,5 +60,44 @@ public class MedicServTest {
         assertThat(medic).isEqualTo(medic1);
         Mockito.verify(medicRepository, Mockito.times(1)).findById(1L);
     }
+
+    @Test
+    @DisplayName("Test Find Medic By Specialty")
+    public void testFindMedicBySpecialty() {
+        Medic medic1 = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+        
+        Mockito.when(medicRepository.findMedicBySpecialty("Cardiology")).thenReturn(Arrays.asList(medic1));
+
+        List<Medic> medics = medicService.getMedicBySpecialty("Cardiology");
+
+        assertThat(medics.size()).isEqualTo(1);
+        Mockito.verify(medicRepository, Mockito.times(1)).findMedicBySpecialty("Cardiology");
+    }
+
+    @Test
+    @DisplayName("Test Find Service Time")
+    public void testFindServiceTime() {
+        Medic medic1 = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+        
+        Mockito.when(medicRepository.findById(1L)).thenReturn(java.util.Optional.of(medic1));
+
+        Medic medic = medicService.getServiceTime(1L);
+
+        assertThat(medic).isEqualTo(medic1);
+        Mockito.verify(medicRepository, Mockito.times(1)).findById(1L);
+    }
+
+    @Test
+    @DisplayName("Test Find Medic By Name")
+    public void testFindMedicByName() {
+        Medic medic1 = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+        
+        Mockito.when(medicRepository.findMedicByName("John", "Doe")).thenReturn(medic1);
+
+        Medic medic = medicService.findMedicByName("John", "Doe");
+
+        assertThat(medic).isEqualTo(medic1);
+        Mockito.verify(medicRepository, Mockito.times(1)).findMedicByName("John", "Doe");
+    }
     
 }

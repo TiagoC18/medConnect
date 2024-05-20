@@ -22,7 +22,7 @@ public class AppointmentTest {
         medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt");
     
-        appointment = new Appointment(patient, "Specialty", medic, new Date(2024, 6, 8), "10h", "Scheduled");
+        appointment = new Appointment(patient, "Specialty", medic, "2024-06-08", "10h", "Scheduled");
     }
 
     @AfterEach
@@ -69,13 +69,13 @@ public class AppointmentTest {
 
     @Test
     public void testGetAppointmentDay() {
-        assertEquals(new Date(2024, 6, 8), appointment.getAppointmentDay());
+        assertEquals("2024-06-08", appointment.getAppointmentDay());
     }
 
     @Test
     public void testSetAppointmentDay() {
-        appointment.setAppointmentDay( new Date(2024, 6, 17) );
-        assertEquals( new Date(2024, 6, 17) , appointment.getAppointmentDay());
+        appointment.setAppointmentDay("2024-06-08" );
+        assertEquals( "2024-06-08", appointment.getAppointmentDay());
     }
 
     @Test
