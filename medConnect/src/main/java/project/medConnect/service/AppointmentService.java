@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AppointmentService {
@@ -22,24 +23,25 @@ public class AppointmentService {
     private PatientRepository patientRepository;
 
     public List<Appointment> getAppointments() {
-        List<Appointment> appointments = appointmentRepository.findAll();
-        return appointments;
+        return appointmentRepository.findAll();
     }
 
     public Appointment addAppointment(Appointment appointment) {
-        Appointment newAppointment = appointmentRepository.save(appointment);
-        return newAppointment;
+        return appointmentRepository.save(appointment);
     }
 
     public List<String> getBookedAppointments(String specialty, Medic medic, String day) {
-        List<String> bookedAppointments = appointmentRepository.findBookedAppointments(specialty, medic, day);
-        return bookedAppointments;
+        return appointmentRepository.findBookedAppointments(specialty, medic, day);
     }
 
     public List<Appointment> getAppointmentsByPatient(Long patientId) {
-        Patient patient = patientRepository.findById(patientId).get();
-        List<Appointment> appointments = appointmentRepository.findAppointmentsByPatient(patient);
-        return appointments;
+        Optional<Patient> patientOpt = patientRepository.findById(patientId);
+        if (patientOpt.isPresent()) {
+            Patient patient = patientOpt.get();
+            return appointmentRepository.findAppointmentsByPatient(patient);
+        } else {
+            return List.of();
+        }
     }
-
 }
+
