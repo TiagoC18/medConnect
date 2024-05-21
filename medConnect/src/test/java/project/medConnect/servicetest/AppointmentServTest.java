@@ -93,4 +93,24 @@ public class AppointmentServTest {
         assertThat(bookedAppointments).contains("10h", "11h");
         Mockito.verify(appointmentRepository, Mockito.times(1)).findBookedAppointments("Cardiology", medic, "2024-06-08");
     }
+
+    @Test
+    @DisplayName("Get Appointments by Patient")
+    public void testGetAppointmentsByPatient() {
+        Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+        Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt");
+        patient.setPatientId(1L);
+
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled");
+
+        Mockito.when(appointmentRepository.findAppointmentsByPatient(eq(patient))).thenReturn(Arrays.asList(appointment1, appointment2));
+
+        List<Appointment> appointments = appointmentService.getAppointmentsByPatient(1L);
+
+        assertThat(appointments).isNotNull();
+        assertThat(appointments).hasSize(2);
+        assertThat(appointments).contains(appointment1, appointment2);
+        Mockito.verify(appointmentRepository, Mockito.times(1)).findAppointmentsByPatient(patient);
+    }
 }

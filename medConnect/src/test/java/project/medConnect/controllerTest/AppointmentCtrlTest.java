@@ -128,5 +128,25 @@ public class AppointmentCtrlTest {
 
         verify(appointmentService, times(1)).getBookedAppointments("Cardiology", medic, "2024-06-08");
     }
+
+    @Test
+    @DisplayName("Get appointments by patient")
+    void testGetAppointmentsByPatient() throws Exception {
+        Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+        Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt");
     
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled");
+
+        when(appointmentService.getAppointmentsByPatient(1L)).thenReturn(Arrays.asList(appointment1, appointment2));
+
+        mvc.perform(get("/api/appointment/patient/1")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].status", is("Scheduled")))
+                .andExpect(jsonPath("$[1].status", is("Cancelled")));
+
+        verify(appointmentService, times(1)).getAppointmentsByPatient(1L);
+    }    
 }

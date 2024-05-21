@@ -206,4 +206,50 @@ public class AppointmentRepTest {
         assertNotNull(bookedAppointments);
         assertEquals(2, bookedAppointments.size());
     }
+
+    @Test
+    @DisplayName("Find Appointments by Patient")
+    public void testFindAppointmentsByPatient() {
+        Medic medic = new Medic();
+        medic.setFirstName("John");
+        medic.setLastName("Doe");
+        medic.setEmail("johndoe@ua.pt");
+        medic.setPhoneNumber("912345678");
+        medic.setSpecialty("Cardiology");
+        medic.setServiceTime(Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+
+        Patient patient = new Patient();
+        patient.setFirstName("David");
+        patient.setLastName("Silva");
+        patient.setDateOfBirth(new Date(1999, 7, 10));
+        patient.setGender("Male");
+        patient.setPhoneNumber("123456789");
+        patient.setEmail("davidsilva@ua.pt");
+
+        Appointment appointment1 = new Appointment();
+        appointment1.setSpecialty("Cardiology");
+        appointment1.setMedic(medic);
+        appointment1.setPatient(patient);
+        appointment1.setAppointmentDay("2024-06-08");
+        appointment1.setAppointmentTime("10h");
+        appointment1.setStatus("Scheduled");
+
+        Appointment appointment2 = new Appointment();
+        appointment2.setSpecialty("Dermatology");
+        appointment2.setMedic(medic);
+        appointment2.setPatient(patient);
+        appointment2.setAppointmentDay("2024-06-08");
+        appointment2.setAppointmentTime("11h");
+        appointment2.setStatus("Scheduled");
+
+        entityManager.persist(medic);
+        entityManager.persist(patient);
+        entityManager.persist(appointment1);
+        entityManager.persist(appointment2);
+        entityManager.flush();
+
+        List<Appointment> appointments = appointmentRepository.findAppointmentsByPatient(patient);
+        assertNotNull(appointments);
+        assertEquals(2, appointments.size());
+    }
 }    
