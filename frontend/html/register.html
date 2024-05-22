@@ -1,0 +1,68 @@
+<div class="box">
+    <div class="_banner1">
+        <div class="content">
+            <div class="col2 mar1">
+                <p class="textStyle1">WELCOME</p>
+            </div>
+            <div class="col2 mar2">
+                <p class="textStyle2"><span class="textStyle3">Register</span><br><span>a new account</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="containerContent">
+        <div class="col1">
+            <div>
+                <h2>Register <span class="textStyle3">Form</span></h2>
+                <form id="registerForm">
+                    <div class="form-row">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" class="input-box" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" class="input-box" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="dateOfBirth">Date of Birth</label>
+                        <input type="date" id="dateOfBirth" name="dateOfBirth" class="input-box" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender" class="input-box" required>
+                            <option value="" disabled selected>Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <label for="ccNumber">CC Number</label>
+                        <input type="text" id="ccNumber" name="ccNumber" class="input-box" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="phoneNumber">Phone Number</label>
+                        <input type="text" id="phoneNumber" name="phoneNumber" class="input-box" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="input-box" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="new_password">Password</label>
+                        <input type="password" id="new_password" name="new_password" class="input-box" required>
+                    </div>
+                    <div class="form-row">
+                        <label for="confirm_password">Confirm Password</label>
+                        <input type="password" id="confirm_password" name="confirm_password" class="input-box" required>
+                    </div>
+                    <div class="form-row full-width">
+                        <button type="button" onclick="register()">Register</button>
+                    </div>
+                    <div class="form-row full-width">
+                        <a href="#!/pageLogin" class="login-link">Login on your account</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

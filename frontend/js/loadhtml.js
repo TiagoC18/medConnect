@@ -5,4 +5,6 @@ $(function(){
     $('#advice').load('/frontend/html/advice.html');
     $('#agenda').load('/frontend/html/agenda.html');
     $('#oldagenda').load('/frontend/html/oldagenda.html');
+    $('#login').load('/frontend/html/login.html');
+    $('#register').load('/frontend/html/register.html');
 });
