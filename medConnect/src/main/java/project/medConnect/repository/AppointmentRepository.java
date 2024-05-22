@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import project.medConnect.entity.Appointment;
 import project.medConnect.entity.Medic;
+import project.medConnect.entity.Patient;
 
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
@@ -18,4 +19,9 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     List<String> findBookedAppointments(@Param("specialty") String specialty, 
                                     @Param("medic") Medic medic, 
                                     @Param("day") String day);
+
+                                    
+    @Query("SELECT a FROM Appointment a WHERE a.patient = :patient")
+    List<Appointment> findAppointmentsByPatient(@Param("patient") Patient patient);
 }
+
