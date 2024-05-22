@@ -36,7 +36,7 @@ public class PatientServTest {
 
     @Test
     @DisplayName("Test Find All Patients")
-    public void testFindAllPatients() {
+    void testFindAllPatients() {
         Patient patient1 = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
         Patient patient2 = new Patient("John", "Doe", new Date(2003, 05, 15) , "Male", "123456789", "123456789", "johndoe@ua.pt", "john123");
         Patient patient3 = new Patient("Jane", "Smith", new Date(1995, 02, 20) ,"Female", "123456789", "123456789", "janesmith@ua.pt", "jane123");
@@ -51,7 +51,7 @@ public class PatientServTest {
 
     @Test
     @DisplayName("Test Find Patient By Id")
-    public void testFindPatientById() {
+    void testFindPatientById() {
         Patient patient1 = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
         patient1.setPatientId(1L);
 
@@ -65,7 +65,7 @@ public class PatientServTest {
 
     @Test
     @DisplayName("Test Find Patient By Email")
-    public void testFindPatientByEmail() {
+    void testFindPatientByEmail() {
         Patient patient1 = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
         patient1.setPatientId(1L);
 
@@ -80,7 +80,7 @@ public class PatientServTest {
 
     @Test
     @DisplayName("Test Check Password")
-    public void testCheckPassword() {
+    void testCheckPassword() {
 
         Mockito.when(patientRepository.checkPassword("davidsilva@ua.pt","password")).thenReturn(Boolean.TRUE);
 

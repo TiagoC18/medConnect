@@ -28,7 +28,7 @@ public class PatientRepTest {
 
     @Test
     @DisplayName("Find All Patients")
-    public void testFindAllPatients() {
+    void testFindAllPatients() {
         Patient patient1 = new Patient();
         patient1.setFirstName("John");
         patient1.setLastName("Doe");
@@ -61,7 +61,7 @@ public class PatientRepTest {
 
     @Test
     @DisplayName("Find Patient by Id")
-    public void testFindPatientById() {
+    void testFindPatientById() {
         Patient patient = new Patient();
         patient.setFirstName("John");
         patient.setLastName("Doe");
@@ -88,4 +88,56 @@ public class PatientRepTest {
         assertEquals(patient.getEmail(), foundPatient.getEmail());
         assertEquals(patient.getPassword(), foundPatient.getPassword());
     }    
+
+    @Test
+    @DisplayName("Find Patient by Email")
+    void testFindPatientByEmail() {
+        Patient patient = new Patient();
+        patient.setFirstName("John");
+        patient.setLastName("Doe");
+        patient.setDateOfBirth( new Date(1999, 12, 12));
+        patient.setGender("Male");
+        patient.setCcNumber("123456787");
+        patient.setPhoneNumber("912345678");
+        patient.setEmail("johndoe@ua.pt");
+        patient.setPassword("john123");
+
+        entityManager.persist(patient);
+        entityManager.flush();
+
+        Patient foundPatient = patientRepository.findPatientByEmail(patient.getEmail());
+
+        assertNotNull(foundPatient);
+        assertEquals(patient.getPatientId(), foundPatient.getPatientId());
+        assertEquals(patient.getFirstName(), foundPatient.getFirstName());
+        assertEquals(patient.getLastName(), foundPatient.getLastName());
+        assertEquals(patient.getDateOfBirth(), foundPatient.getDateOfBirth());
+        assertEquals(patient.getGender(), foundPatient.getGender());
+        assertEquals(patient.getCcNumber(), foundPatient.getCcNumber());
+        assertEquals(patient.getPhoneNumber(), foundPatient.getPhoneNumber());
+        assertEquals(patient.getEmail(), foundPatient.getEmail());
+        assertEquals(patient.getPassword(), foundPatient.getPassword());
+    }
+
+    @Test
+    @DisplayName("Check Password")
+    void testCheckPassword() {
+        Patient patient = new Patient();
+        patient.setFirstName("John");
+        patient.setLastName("Doe");
+        patient.setDateOfBirth( new Date(1999, 12, 12));
+        patient.setGender("Male");
+        patient.setCcNumber("123456787");
+        patient.setPhoneNumber("912345678");
+        patient.setEmail("johndoe@ua.pt");
+        patient.setPassword("john123");
+
+        entityManager.persist(patient);
+        entityManager.flush();
+
+        Boolean response = patientRepository.checkPassword(patient.getEmail(), patient.getPassword());
+
+        assertNotNull(response);
+        assertEquals(true, response);
+    }
 }

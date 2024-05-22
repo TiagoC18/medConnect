@@ -99,4 +99,15 @@ public class PatientTest {
         assertEquals("johndoe@ua.pt", patient.getEmail());
     }
 
+    @Test
+    public void testGetPassword() {
+        assertEquals("password", patient.getPassword());
+    }
+
+    @Test
+    public void testSetPassword() {
+        patient.setPassword("john123");
+        assertEquals("john123", patient.getPassword());
+    }
+
 }
