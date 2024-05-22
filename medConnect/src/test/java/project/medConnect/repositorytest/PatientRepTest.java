@@ -37,6 +37,7 @@ public class PatientRepTest {
         patient1.setCcNumber("123456787");
         patient1.setPhoneNumber("912345678");
         patient1.setEmail("johndoe@ua.pt");
+        patient1.setPassword("john123");
 
         Patient patient2 = new Patient();
         patient2.setFirstName("Jane");
@@ -46,6 +47,7 @@ public class PatientRepTest {
         patient2.setCcNumber("123456787");
         patient2.setPhoneNumber("912345678");
         patient2.setEmail("janesmith@ua.pt");
+        patient2.setPassword("jane123");
 
         entityManager.persist(patient1);
         entityManager.persist(patient2);
@@ -68,6 +70,7 @@ public class PatientRepTest {
         patient.setCcNumber("123456787");
         patient.setPhoneNumber("912345678");
         patient.setEmail("johndoe@ua.pt");
+        patient.setPassword("john123");
 
         entityManager.persist(patient);
         entityManager.flush();
@@ -83,5 +86,6 @@ public class PatientRepTest {
         assertEquals(patient.getCcNumber(), foundPatient.getCcNumber());
         assertEquals(patient.getPhoneNumber(), foundPatient.getPhoneNumber());
         assertEquals(patient.getEmail(), foundPatient.getEmail());
+        assertEquals(patient.getPassword(), foundPatient.getPassword());
     }    
 }

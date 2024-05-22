@@ -69,7 +69,7 @@ public class AppointmentCtrlTest {
     @DisplayName("Get all appointments")
     void testGetAllAppointments() throws Exception {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
-        Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt");
+        Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
     
         Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
         Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled");
@@ -91,7 +91,7 @@ public class AppointmentCtrlTest {
     @DisplayName("Add an appointment")
     void testAddAppointment() throws Exception {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
-        Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt");
+        Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "john123");
 
         Appointment appointment = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
 
@@ -133,7 +133,7 @@ public class AppointmentCtrlTest {
     @DisplayName("Get appointments by patient")
     void testGetAppointmentsByPatient() throws Exception {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
-        Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt");
+        Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
     
         Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
         Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled");

@@ -32,10 +32,13 @@ public class Patient {
     @NotNull(message = "Email is required")
     private String email;
 
+    @NotNull(message = "Password is required")
+    private String password;
+
     public Patient() {
     }
 
-    public Patient(String firstName, String lastName, Date dateOfBirth, String gender, String ccNumber, String phoneNumber, String email) {
+    public Patient(String firstName, String lastName, Date dateOfBirth, String gender, String ccNumber, String phoneNumber, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -43,6 +46,7 @@ public class Patient {
         this.ccNumber = ccNumber;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.password = password;
     }
 
     public Long getPatientId() {
@@ -107,5 +111,13 @@ public class Patient {
 
     public void setEmail(String email){
         this.email=email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password){
+        this.password=password;
     }
 }
