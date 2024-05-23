@@ -1,0 +1,12 @@
+.containerContent {
+	z-index: 1;
+	position: relative;
+	display: inline-block;
+	margin-top: 50px;
+}
+.col1 {width: 100%; position: relative; float: left;}
+.col2 {width: 280px; position: relative; float: left;}
+.col3 {width: 220px; position: relative; float: left;}
+.col4 {width: 340px; position: relative; float: left;}
+.col5 {width: 225px; position: relative; float: left;}
+.col6 {width: 370px; position: relative; float: left;}
