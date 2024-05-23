@@ -30,4 +30,17 @@ public class PatientService {
         }
     }
 
+    public Patient getPatientByEmail(String email) {
+        Patient patient = patientRepository.findPatientByEmail(email);
+        if (patient != null) {
+            return patient;
+        } else {
+            throw new NoSuchElementException("Patient with username " + email + " not found");
+        }
+    }
+
+    public boolean checkPassword(String email, String password) {
+        return patientRepository.checkPassword(email, password);
+    }
+
 }

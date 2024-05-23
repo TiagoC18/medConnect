@@ -14,7 +14,7 @@ public class PatientTest {
 
     @BeforeEach
     public void setUp() {
-        patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt");
+        patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
     }
 
     @AfterEach
@@ -97,6 +97,17 @@ public class PatientTest {
     public void testSetEmail() {
         patient.setEmail("johndoe@ua.pt");
         assertEquals("johndoe@ua.pt", patient.getEmail());
+    }
+
+    @Test
+    public void testGetPassword() {
+        assertEquals("password", patient.getPassword());
+    }
+
+    @Test
+    public void testSetPassword() {
+        patient.setPassword("john123");
+        assertEquals("john123", patient.getPassword());
     }
 
 }

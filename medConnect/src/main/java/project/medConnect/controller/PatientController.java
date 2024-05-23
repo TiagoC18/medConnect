@@ -41,4 +41,25 @@ public class PatientController {
             return new ResponseEntity<>(patient, HttpStatus.OK);
         }
     }
+
+    @GetMapping("/byEmail/{email}")
+    public ResponseEntity<Object> getPatientByEmail(@PathVariable String email) {
+        Patient patient = patientService.getPatientByEmail(email);
+
+        if (patient == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(patient, HttpStatus.OK);
+        }
+
+    }
+ 
+    @PostMapping("/checkPassword")
+    public ResponseEntity<Boolean> checkPassword(@RequestParam String email, @RequestParam String password) {
+        boolean result = patientService.checkPassword(email, password);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+
+
 }

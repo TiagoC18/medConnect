@@ -20,7 +20,7 @@ public class AppointmentTest {
     @BeforeEach
     public void setUp() {
         medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
-        patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt");
+        patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
     
         appointment = new Appointment(patient, "Specialty", medic, "2024-06-08", "10h", "Scheduled");
     }
@@ -39,7 +39,7 @@ public class AppointmentTest {
 
     @Test
     public void testSetPatient() {
-        Patient newPatient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt");
+        Patient newPatient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
         appointment.setPatient(newPatient);
         assertEquals(newPatient, appointment.getPatient());
     }
