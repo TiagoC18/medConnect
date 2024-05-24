@@ -1,4 +1,4 @@
-# newPhi
+# medConnect
 
 ## Project Abstract
 **MedConnect** is an integrated IT solution designed to streamline patient appointments and admissions for the New Private Health Initiative (newPhi). This project, developed as part of the Total Quality Software course, focuses on enhancing the efficiency and accessibility of healthcare services through digital solutions that manage pre-appointment scheduling, reception services, and post-encounter processes.
@@ -31,4 +31,4 @@
 ### Continuous Integration and Deployment
 - [CI/CD Environment Dashboard](https://your-ci-cd-dashboard-link.com) - View the latest builds and deployment statuses (**Planned Feature**).
 
-Please refer to these links for detailed information and resources related to the **newPhi** project. For any additional inquiries or support, please contact the project team members.
+Please refer to these links for detailed information and resources related to the **medConnect** project. For any additional inquiries or support, please contact the project team members.
