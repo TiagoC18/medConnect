@@ -1,3 +1,140 @@
+async function checkLogin() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    if (isLoggedIn) {
+        document.getElementById('menuAgenda').style.display = 'block';
+        document.getElementById('loginButton').style.display = 'none';
+        document.getElementById('logoutButton').style.display = 'block';
+    } else {
+        document.getElementById('menuAgenda').style.display = 'none';
+        document.getElementById('loginButton').style.display = 'block';
+        document.getElementById('logoutButton').style.display = 'none';
+    }
+}
+
+async function loadAppointments() {
+    const appointmentsContainer = document.getElementById('appointments-container');
+    if (!appointmentsContainer) return;  // Exit if not on the appointments page
+
+    appointmentsContainer.innerHTML = '';
+
+    const email = localStorage.getItem('email');
+    if (!email) {
+        alert('You need to be logged in to view your appointments.');
+        return;
+    }
+
+    try {
+        const patientResponse = await fetch(`/api/patient/byEmail/${email}`);
+        if (patientResponse.ok) {
+            const patient = await patientResponse.json();
+            const response = await fetch(`/api/appointment/patient/${patient.patientId}`);
+            if (response.ok) {
+                const appointments = await response.json();
+
+                appointments.forEach(appointment => {
+                    const appointmentDiv = document.createElement('div');
+                    appointmentDiv.className = 'col1 padBot2';
+
+                    const date = new Date(appointment.date);
+                    const dateDiv = document.createElement('div');
+                    dateDiv.className = '_date';
+                    dateDiv.innerHTML = `<span>${date.getDate()}<br>${date.toLocaleString('default', { month: 'short' })}</span>`;
+                    appointmentDiv.appendChild(dateDiv);
+
+                    const detailsDiv = document.createElement('div');
+                    detailsDiv.className = 'col3 marTop1';
+                    detailsDiv.innerHTML = `<h3 class="padNull"><a href="#!/pageMore" class="_link3">${appointment.specialty}</a></h3>
+                                            <p class="padNull">${appointment.medic.firstName} ${appointment.medic.lastName}</p>`;
+                    appointmentDiv.appendChild(detailsDiv);
+
+                    const timeP = document.createElement('p');
+                    timeP.className = 'textStyle4';
+                    timeP.innerHTML = `<a href="#!/pageMore" class="_link4">${appointment.date} às ${appointment.time}</a>`;
+                    appointmentDiv.appendChild(timeP);
+
+                    appointmentsContainer.appendChild(appointmentDiv);
+                });
+            } else {
+                alert('Failed to load appointments.');
+            }
+        } else {
+            alert('Failed to load patient information.');
+        }
+    } catch (error) {
+        console.error('Error loading appointments:', error);
+        alert('An error occurred while loading appointments. Please try again.');
+    }
+}
+
+async function loadPastAppointments() {
+    const pastAppointmentsContainer = document.getElementById('past-appointments-container');
+    if (!pastAppointmentsContainer) return;  // Exit if not on the past appointments page
+
+    pastAppointmentsContainer.innerHTML = '';
+
+    const email = localStorage.getItem('email');
+    if (!email) {
+        alert('You need to be logged in to view your past appointments.');
+        return;
+    }
+
+    try {
+        const patientResponse = await fetch(`/api/patient/byEmail/${email}`);
+        if (patientResponse.ok) {
+            const patient = await patientResponse.json();
+            const response = await fetch(`/api/appointment/patient/${patient.patientId}`);
+            if (response.ok) {
+                const appointments = await response.json();
+                const pastAppointments = appointments.filter(appointment => new Date(appointment.date) < new Date());
+
+                pastAppointments.forEach(appointment => {
+                    const appointmentDiv = document.createElement('div');
+                    appointmentDiv.className = 'col1 padBot2';
+
+                    const date = new Date(appointment.date);
+                    const dateDiv = document.createElement('div');
+                    dateDiv.className = '_date';
+                    dateDiv.innerHTML = `<span>${date.getDate()}<br>${date.toLocaleString('default', { month: 'short' })}</span>`;
+                    appointmentDiv.appendChild(dateDiv);
+
+                    const detailsDiv = document.createElement('div');
+                    detailsDiv.className = 'col3 marTop1';
+                    detailsDiv.innerHTML = `<h3 class="padNull"><a href="#!/pageMore" class="_link3">${appointment.specialty}</a></h3>
+                                            <p class="padNull">${appointment.medic.firstName} ${appointment.medic.lastName}</p>`;
+                    appointmentDiv.appendChild(detailsDiv);
+
+                    const timeP = document.createElement('p');
+                    timeP.className = 'textStyle4';
+                    timeP.innerHTML = `<a href="#!/pageMore" class="_link4">${appointment.date} às ${appointment.time}</a>`;
+                    appointmentDiv.appendChild(timeP);
+
+                    pastAppointmentsContainer.appendChild(appointmentDiv);
+                });
+            } else {
+                alert('Failed to load past appointments.');
+            }
+        } else {
+            alert('Failed to load patient information.');
+        }
+    } catch (error) {
+        console.error('Error loading past appointments:', error);
+        alert('An error occurred while loading past appointments. Please try again.');
+    }
+}
+
+// Load appropriate appointments on page load based on URL
+window.onload = function() {
+    checkLogin();
+    loadPastAppointments();
+    loadAppointments();
+};
+
+
+
+
+
+/*functions for static info
+
 function checkLogin() {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     if (isLoggedIn) {
