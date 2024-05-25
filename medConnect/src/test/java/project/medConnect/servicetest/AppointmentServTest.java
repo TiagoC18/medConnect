@@ -21,6 +21,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.times;
@@ -124,4 +125,128 @@ public class AppointmentServTest {
         verify(appointmentRepository, times(1)).findAppointmentsByPatient(patient);
     }
 
+    @Test
+    @DisplayName("Get Appointments Scheduled")
+    public void testGetAppointmentsScheduled() {
+        Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+        Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
+
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled");
+
+        List<Appointment> appointments = Arrays.asList(appointment1);
+
+        when(appointmentRepository.findAppointmentsScheduled()).thenReturn(appointments);
+
+        List<Appointment> appointmentsScheduled = appointmentService.getAppointmentsScheduled();
+
+        assertThat(appointmentsScheduled).isNotNull();
+        assertThat(appointmentsScheduled).hasSize(1);
+        assertThat(appointmentsScheduled).contains(appointment1);
+        verify(appointmentRepository, times(1)).findAppointmentsScheduled();
+    }
+
+    @Test
+    @DisplayName("Get Appointments Waiting")
+    public void testGetAppointmentsWaiting() {
+        Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+        Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
+
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Waiting");
+
+        List<Appointment> appointments = Arrays.asList(appointment2);
+
+        when(appointmentRepository.findAppointmentsWaiting()).thenReturn(appointments);
+
+        List<Appointment> appointmentsWaiting = appointmentService.getAppointmentsWaiting();
+
+        assertThat(appointmentsWaiting).isNotNull();
+        assertThat(appointmentsWaiting).hasSize(1);
+        assertThat(appointmentsWaiting).contains(appointment2);
+        verify(appointmentRepository, times(1)).findAppointmentsWaiting();
+    }
+
+    @Test
+    @DisplayName("Get Appointments Called")
+    public void testGetAppointmentsCalled() {
+        Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+        Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
+
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Called");
+
+        List<Appointment> appointments = Arrays.asList(appointment2);
+
+        when(appointmentRepository.findAppointmentsCalled()).thenReturn(appointments);
+
+        List<Appointment> appointmentsCalled = appointmentService.getAppointmentsCalled();
+
+        assertThat(appointmentsCalled).isNotNull();
+        assertThat(appointmentsCalled).hasSize(1);
+        assertThat(appointmentsCalled).contains(appointment2);
+        verify(appointmentRepository, times(1)).findAppointmentsCalled();
+    }
+
+    @Test
+    @DisplayName("Get Appointments Done")
+    public void testGetAppointmentsDone() {
+        Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+        Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
+
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Done");
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Called");
+
+        List<Appointment> appointments = Arrays.asList(appointment1);
+
+        when(appointmentRepository.findAppointmentsDone()).thenReturn(appointments);
+
+        List<Appointment> appointmentsDone = appointmentService.getAppointmentsDone();
+
+        assertThat(appointmentsDone).isNotNull();
+        assertThat(appointmentsDone).hasSize(1);
+        assertThat(appointmentsDone).contains(appointment1);
+        verify(appointmentRepository, times(1)).findAppointmentsDone();
+    }
+
+    @Test
+    @DisplayName("Update Appointment Status")
+    public void testUpdateAppointmentStatus() {
+        Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+        Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
+
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Done");
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Called");
+
+        when(appointmentRepository.findById(1L)).thenReturn(Optional.of(appointment1));
+        when(appointmentRepository.save(appointment1)).thenReturn(appointment1);
+
+        Appointment updatedAppointment = appointmentService.updateAppointmentStatus(1L, "Done");
+
+        assertThat(updatedAppointment).isNotNull();
+        assertThat(updatedAppointment.getStatus()).isEqualTo("Done");
+        verify(appointmentRepository, times(1)).findById(1L);
+        verify(appointmentRepository, times(1)).save(appointment1);
+    }
+
+    @Test
+    @DisplayName("Delete Appointment")
+    public void testDeleteAppointment() {
+        Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+        Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
+
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Waiting");
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Called");
+        appointment1.setAppointmentId(1L);
+        
+        when(appointmentRepository.existsById(1L)).thenReturn(true);
+        assertThat(appointmentRepository.existsById(1L)).isTrue();
+
+        doNothing().when(appointmentRepository).deleteById(1L);
+        appointmentService.deleteAppointment(1L);
+        verify(appointmentRepository, times(1)).deleteById(1L);
+        
+        when(appointmentRepository.existsById(1L)).thenReturn(false);
+        assertThat(appointmentRepository.existsById(1L)).isFalse();
+    }
 }

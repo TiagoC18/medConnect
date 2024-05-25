@@ -43,5 +43,40 @@ public class AppointmentService {
             return List.of();
         }
     }
+
+    public List<Appointment> getAppointmentsScheduled() {
+        return appointmentRepository.findAppointmentsScheduled();
+    }
+
+    public List<Appointment> getAppointmentsWaiting() {
+        return appointmentRepository.findAppointmentsWaiting();
+    }
+
+    public List<Appointment> getAppointmentsCalled() {
+        return appointmentRepository.findAppointmentsCalled();
+    }
+
+    public List<Appointment> getAppointmentsDone() {
+        return appointmentRepository.findAppointmentsDone();
+    }
+
+    public Appointment updateAppointmentStatus(Long appointmentId, String newStatus) {
+        Optional<Appointment> appointmentOpt = appointmentRepository.findById(appointmentId);
+        if (appointmentOpt.isPresent()) {
+            Appointment appointment = appointmentOpt.get();
+            appointment.setStatus(newStatus);
+            return appointmentRepository.save(appointment);
+        } else {
+            throw new RuntimeException("Appointment not found");
+        }
+    }
+
+    public void deleteAppointment(Long appointmentId) {
+        if (appointmentRepository.existsById(appointmentId)) {
+            appointmentRepository.deleteById(appointmentId);
+        } else {
+            throw new RuntimeException("Appointment not found");
+        }
+    }
 }
 

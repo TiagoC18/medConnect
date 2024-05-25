@@ -19,8 +19,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -149,4 +151,115 @@ public class AppointmentCtrlTest {
 
         verify(appointmentService, times(1)).getAppointmentsByPatient(1L);
     }    
+
+    @Test
+    @DisplayName("Get appointments scheduled")
+    void testGetAppointmentsScheduled() throws Exception {
+        Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+        Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
+    
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled");
+
+        when(appointmentService.getAppointmentsScheduled()).thenReturn(Arrays.asList(appointment1));
+
+        mvc.perform(get("/api/appointment/scheduled")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].status", is("Scheduled")));
+
+        verify(appointmentService, times(1)).getAppointmentsScheduled();
+    }
+
+    @Test
+    @DisplayName("Get appointments waiting")
+    void testGetAppointmentsWaiting() throws Exception {
+        Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+        Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
+    
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Waiting");
+
+        when(appointmentService.getAppointmentsWaiting()).thenReturn(Arrays.asList(appointment2));
+
+        mvc.perform(get("/api/appointment/waiting")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].status", is("Waiting")));
+
+    }
+
+    @Test
+    @DisplayName("Get appointments called")
+    void testGetAppointmentsCalled() throws Exception {
+        Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+        Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
+    
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Called");
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled");
+
+        when(appointmentService.getAppointmentsCalled()).thenReturn(Arrays.asList(appointment1));
+
+        mvc.perform(get("/api/appointment/called")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].status", is("Called")));
+
+    }
+
+    @Test
+    @DisplayName("Get appointments done")
+    void testGetAppointmentsDone() throws Exception {
+        Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+        Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
+    
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Done");
+
+        when(appointmentService.getAppointmentsDone()).thenReturn(Arrays.asList(appointment2));
+
+        mvc.perform(get("/api/appointment/done")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].status", is("Done")));
+
+    }
+
+    @Test
+    @DisplayName("Update appointment status")
+    void testUpdateAppointmentStatus() throws Exception {
+        Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+        Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
+    
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled");
+        
+        when(appointmentService.updateAppointmentStatus(1L, "Done")).thenReturn(appointment1);
+
+        mvc.perform(put("/api/appointment/1/Done")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status", is("Scheduled")));
+    }
+
+    @Test
+    @DisplayName("Delete an appointment")
+    void testDeleteAppointment() throws Exception {
+        Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+        Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
+    
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled");
+
+        mvc.perform(delete("/api/appointment/delete/1")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+        verify(appointmentService, times(1)).deleteAppointment(1L);
+
+    }
 }

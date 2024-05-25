@@ -45,4 +45,34 @@ public class AppointmentController {
     public List<Appointment> getAppointmentsByPatient(@PathVariable Long patientId) {
         return appointmentService.getAppointmentsByPatient(patientId);
     }
+
+    @GetMapping("/scheduled")
+    public List<Appointment> getAppointmentsScheduled() {
+        return appointmentService.getAppointmentsScheduled();
+    }
+
+    @GetMapping("/waiting")
+    public List<Appointment> getAppointmentsWaiting() {
+        return appointmentService.getAppointmentsWaiting();
+    }
+
+    @GetMapping("/called")
+    public List<Appointment> getAppointmentsCalled() {
+        return appointmentService.getAppointmentsCalled();
+    }
+
+    @GetMapping("/done")
+    public List<Appointment> getAppointmentsDone() {
+        return appointmentService.getAppointmentsDone();
+    }
+
+    @PutMapping("/{appointmentId}/{newStatus}")
+    public Appointment updateAppointmentStatus(@PathVariable Long appointmentId, @PathVariable String newStatus) {
+        return appointmentService.updateAppointmentStatus(appointmentId, newStatus);
+    }
+
+    @DeleteMapping("/delete/{appointmentId}")
+    public void deleteAppointment(@PathVariable Long appointmentId) {
+        appointmentService.deleteAppointment(appointmentId);
+    }
 }
