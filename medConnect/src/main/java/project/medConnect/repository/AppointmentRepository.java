@@ -23,5 +23,21 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
                                     
     @Query("SELECT a FROM Appointment a WHERE a.patient = :patient")
     List<Appointment> findAppointmentsByPatient(@Param("patient") Patient patient);
+
+    //find appointments scheduled
+    @Query("SELECT a FROM Appointment a WHERE a.status = 'Scheduled'")
+    List<Appointment> findAppointmentsScheduled();    
+
+    //find appointments waiting
+    @Query("SELECT a FROM Appointment a WHERE a.status = 'Waiting'")
+    List<Appointment> findAppointmentsWaiting();
+
+    //find appointments called
+    @Query("SELECT a FROM Appointment a WHERE a.status = 'Called'")
+    List<Appointment> findAppointmentsCalled();
+
+    //find appointments done
+    @Query("SELECT a FROM Appointment a WHERE a.status = 'Done'")
+    List<Appointment> findAppointmentsDone();
 }
 

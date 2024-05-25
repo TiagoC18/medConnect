@@ -252,4 +252,223 @@ public class AppointmentRepTest {
         assertNotNull(appointments);
         assertEquals(2, appointments.size());
     }
+
+    @Test
+    @DisplayName("Find Appointments Scheduled")
+    public void testFindAppointmentsScheduled() {
+        Medic medic = new Medic();
+        medic.setFirstName("John");
+        medic.setLastName("Doe");
+        medic.setEmail("johndoe@ua.pt");
+        medic.setPhoneNumber("912345678");
+        medic.setSpecialty("Cardiology");
+        medic.setServiceTime(Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+
+        Patient patient = new Patient();
+        patient.setFirstName("David");
+        patient.setLastName("Silva");
+        patient.setDateOfBirth(new Date(1999, 7, 10));
+        patient.setGender("Male");
+        patient.setPhoneNumber("123456789");
+        patient.setEmail("davidsilva@ua.pt");
+
+        Appointment appointment1 = new Appointment();
+        appointment1.setSpecialty("Cardiology");
+        appointment1.setMedic(medic);
+        appointment1.setPatient(patient);
+        appointment1.setAppointmentDay("2024-06-08");
+        appointment1.setAppointmentTime("10h");
+        appointment1.setStatus("Scheduled");
+
+        Appointment appointment2 = new Appointment();
+        appointment2.setSpecialty("Dermatology");
+        appointment2.setMedic(medic);
+        appointment2.setPatient(patient);
+        appointment2.setAppointmentDay("2024-06-08");
+        appointment2.setAppointmentTime("11h");
+        appointment2.setStatus("Done");
+
+        entityManager.persist(medic);
+        entityManager.persist(patient);
+        entityManager.persist(appointment1);
+        entityManager.persist(appointment2);
+        entityManager.flush();
+
+        List<Appointment> appointments = appointmentRepository.findAppointmentsScheduled();
+        assertNotNull(appointments);
+        assertEquals(1, appointments.size());
+
+        Appointment foundAppointment = appointments.get(0);
+        assertEquals(appointment1.getAppointmentId(), foundAppointment.getAppointmentId());
+        assertEquals(appointment1.getSpecialty(), foundAppointment.getSpecialty());
+        assertEquals(appointment1.getMedic(), foundAppointment.getMedic());
+        assertEquals(appointment1.getPatient(), foundAppointment.getPatient());
+        assertEquals(appointment1.getAppointmentTime(), foundAppointment.getAppointmentTime());
+        assertEquals(appointment1.getStatus(), foundAppointment.getStatus());
+    }
+
+
+
+    @Test
+    @DisplayName("Find Appointments Waiting")
+    public void testFindAppointmentsWaiting() {
+        Medic medic = new Medic();
+        medic.setFirstName("John");
+        medic.setLastName("Doe");
+        medic.setEmail("johndoe@ua.pt");
+        medic.setPhoneNumber("912345678");
+        medic.setSpecialty("Cardiology");
+        medic.setServiceTime(Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+
+        Patient patient = new Patient();
+        patient.setFirstName("David");
+        patient.setLastName("Silva");
+        patient.setDateOfBirth(new Date(1999, 7, 10));
+        patient.setGender("Male");
+        patient.setPhoneNumber("123456789");
+        patient.setEmail("davidsilva@ua.pt");
+
+        Appointment appointment1 = new Appointment();
+        appointment1.setSpecialty("Cardiology");
+        appointment1.setMedic(medic);
+        appointment1.setPatient(patient);
+        appointment1.setAppointmentDay("2024-06-08");
+        appointment1.setAppointmentTime("10h");
+        appointment1.setStatus("Scheduled");
+
+        Appointment appointment2 = new Appointment();
+        appointment2.setSpecialty("Dermatology");
+        appointment2.setMedic(medic);
+        appointment2.setPatient(patient);
+        appointment2.setAppointmentDay("2024-06-08");
+        appointment2.setAppointmentTime("11h");
+        appointment2.setStatus("Waiting");
+
+        entityManager.persist(medic);
+        entityManager.persist(patient);
+        entityManager.persist(appointment1);
+        entityManager.persist(appointment2);
+        entityManager.flush();
+
+        List<Appointment> appointments = appointmentRepository.findAppointmentsWaiting();
+        assertNotNull(appointments);
+        assertEquals(1, appointments.size());
+
+        Appointment foundAppointment = appointments.get(0);
+        assertEquals(appointment2.getAppointmentId(), foundAppointment.getAppointmentId());
+        assertEquals(appointment2.getSpecialty(), foundAppointment.getSpecialty());
+        assertEquals(appointment2.getMedic(), foundAppointment.getMedic());
+        assertEquals(appointment2.getPatient(), foundAppointment.getPatient());
+        assertEquals(appointment2.getAppointmentTime(), foundAppointment.getAppointmentTime());
+        assertEquals(appointment2.getStatus(), foundAppointment.getStatus());
+    }
+
+    @Test
+    @DisplayName("Find Appointments Called")
+    public void testFindAppointmentsCalled() {
+        Medic medic = new Medic();
+        medic.setFirstName("John");
+        medic.setLastName("Doe");
+        medic.setEmail("johndoe@ua.pt");
+        medic.setPhoneNumber("912345678");
+        medic.setSpecialty("Cardiology");
+        medic.setServiceTime(Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+
+        Patient patient = new Patient();
+        patient.setFirstName("David");
+        patient.setLastName("Silva");
+        patient.setDateOfBirth(new Date(1999, 7, 10));
+        patient.setGender("Male");
+        patient.setPhoneNumber("123456789");
+        patient.setEmail("davidsilva@ua.pt");
+
+        Appointment appointment1 = new Appointment();
+        appointment1.setSpecialty("Cardiology");
+        appointment1.setMedic(medic);
+        appointment1.setPatient(patient);
+        appointment1.setAppointmentDay("2024-06-08");
+        appointment1.setAppointmentTime("10h");
+        appointment1.setStatus("Called");
+
+        Appointment appointment2 = new Appointment();
+        appointment2.setSpecialty("Dermatology");
+        appointment2.setMedic(medic);
+        appointment2.setPatient(patient);
+        appointment2.setAppointmentDay("2024-06-08");
+        appointment2.setAppointmentTime("11h");
+        appointment2.setStatus("Done");
+
+        entityManager.persist(medic);
+        entityManager.persist(patient);
+        entityManager.persist(appointment1);
+        entityManager.persist(appointment2);
+        entityManager.flush();
+
+        List<Appointment> appointments = appointmentRepository.findAppointmentsCalled();
+        assertNotNull(appointments);
+        assertEquals(1, appointments.size());
+
+        Appointment foundAppointment = appointments.get(0);
+        assertEquals(appointment1.getAppointmentId(), foundAppointment.getAppointmentId());
+        assertEquals(appointment1.getSpecialty(), foundAppointment.getSpecialty());
+        assertEquals(appointment1.getMedic(), foundAppointment.getMedic());
+        assertEquals(appointment1.getPatient(), foundAppointment.getPatient());
+        assertEquals(appointment1.getAppointmentTime(), foundAppointment.getAppointmentTime());
+        assertEquals(appointment1.getStatus(), foundAppointment.getStatus());
+    }
+
+
+    @Test
+    @DisplayName("Find Appointments Done")
+    public void testFindAppointmentsDone() {
+        Medic medic = new Medic();
+        medic.setFirstName("John");
+        medic.setLastName("Doe");
+        medic.setEmail("johndoe@ua.pt");
+        medic.setPhoneNumber("912345678");
+        medic.setSpecialty("Cardiology");
+        medic.setServiceTime(Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+
+        Patient patient = new Patient();
+        patient.setFirstName("David");
+        patient.setLastName("Silva");
+        patient.setDateOfBirth(new Date(1999, 7, 10));
+        patient.setGender("Male");
+        patient.setPhoneNumber("123456789");
+        patient.setEmail("davidsilva@ua.pt");
+
+        Appointment appointment1 = new Appointment();
+        appointment1.setSpecialty("Cardiology");
+        appointment1.setMedic(medic);
+        appointment1.setPatient(patient);
+        appointment1.setAppointmentDay("2024-06-08");
+        appointment1.setAppointmentTime("10h");
+        appointment1.setStatus("Scheduled");
+
+        Appointment appointment2 = new Appointment();
+        appointment2.setSpecialty("Dermatology");
+        appointment2.setMedic(medic);
+        appointment2.setPatient(patient);
+        appointment2.setAppointmentDay("2024-06-08");
+        appointment2.setAppointmentTime("11h");
+        appointment2.setStatus("Done");
+
+        entityManager.persist(medic);
+        entityManager.persist(patient);
+        entityManager.persist(appointment1);
+        entityManager.persist(appointment2);
+        entityManager.flush();
+
+        List<Appointment> appointments = appointmentRepository.findAppointmentsDone();
+        assertNotNull(appointments);
+        assertEquals(1, appointments.size());
+
+        Appointment foundAppointment = appointments.get(0);
+        assertEquals(appointment2.getAppointmentId(), foundAppointment.getAppointmentId());
+        assertEquals(appointment2.getSpecialty(), foundAppointment.getSpecialty());
+        assertEquals(appointment2.getMedic(), foundAppointment.getMedic());
+        assertEquals(appointment2.getPatient(), foundAppointment.getPatient());
+        assertEquals(appointment2.getAppointmentTime(), foundAppointment.getAppointmentTime());
+        assertEquals(appointment2.getStatus(), foundAppointment.getStatus());
+    }
 }    
