@@ -57,8 +57,8 @@ public class AppointmentServTest {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
     
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled");
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled", null);
 
         Mockito.when(appointmentRepository.findAll()).thenReturn(Arrays.asList(appointment1, appointment2));
 
@@ -75,7 +75,7 @@ public class AppointmentServTest {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
 
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
 
         Mockito.when(appointmentRepository.save(appointment1)).thenReturn(appointment1);
 
@@ -91,8 +91,8 @@ public class AppointmentServTest {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
 
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled");
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled", null);
 
         Mockito.when(appointmentRepository.findBookedAppointments(eq("Cardiology"), eq(medic), eq("2024-06-08"))).thenReturn(Arrays.asList(appointment1.getAppointmentTime(), appointment2.getAppointmentTime()));
 
@@ -111,8 +111,8 @@ public class AppointmentServTest {
         Patient patient = new Patient("David", "Silva", new Date(99, 6, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
         patient.setPatientId(1L);
 
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled");
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled", null);
 
         Mockito.when(patientRepository.findById(1L)).thenReturn(Optional.of(patient));
         Mockito.when(appointmentRepository.findAppointmentsByPatient(patient)).thenReturn(Arrays.asList(appointment1, appointment2));
@@ -131,8 +131,8 @@ public class AppointmentServTest {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
 
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled");
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled", null);
 
         List<Appointment> appointments = Arrays.asList(appointment1);
 
@@ -152,8 +152,8 @@ public class AppointmentServTest {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
 
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Waiting");
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Waiting", null);
 
         List<Appointment> appointments = Arrays.asList(appointment2);
 
@@ -173,8 +173,8 @@ public class AppointmentServTest {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
 
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Called");
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Called", null);
 
         List<Appointment> appointments = Arrays.asList(appointment2);
 
@@ -194,8 +194,8 @@ public class AppointmentServTest {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
 
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Done");
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Called");
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Done", null);
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Called", null);
 
         List<Appointment> appointments = Arrays.asList(appointment1);
 
@@ -215,8 +215,8 @@ public class AppointmentServTest {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
 
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Done");
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Called");
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Done", null);
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Called", null);
 
         when(appointmentRepository.findById(1L)).thenReturn(Optional.of(appointment1));
         when(appointmentRepository.save(appointment1)).thenReturn(appointment1);
@@ -235,8 +235,8 @@ public class AppointmentServTest {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
 
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Waiting");
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Called");
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Waiting", null);
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Called", null);
         appointment1.setAppointmentId(1L);
         
         when(appointmentRepository.existsById(1L)).thenReturn(true);
@@ -249,4 +249,25 @@ public class AppointmentServTest {
         when(appointmentRepository.existsById(1L)).thenReturn(false);
         assertThat(appointmentRepository.existsById(1L)).isFalse();
     }
-}
+
+    @Test
+    @DisplayName("Reset all Senha")
+    public void testResetAllSenha() {
+        Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+        Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
+
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Waiting", 2);
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Called", 1);
+        
+        when(appointmentRepository.findMaxSenha()).thenReturn(2);
+        assertThat(appointmentRepository.findMaxSenha()).isEqualTo(2);
+
+        doNothing().when(appointmentRepository).resetAllSenha();
+        appointmentService.resetAllSenha();
+        verify(appointmentRepository, times(1)).resetAllSenha();
+
+        when(appointmentRepository.findMaxSenha()).thenReturn(null);
+        assertThat(appointmentRepository.findMaxSenha()).isNull();
+    }
+
+}   

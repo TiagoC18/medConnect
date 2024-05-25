@@ -73,8 +73,8 @@ public class AppointmentCtrlTest {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
     
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled");
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled", null);
 
         when(appointmentService.getAppointments()).thenReturn(Arrays.asList(appointment1, appointment2));
         mvc.perform(get("/api/appointment")
@@ -95,7 +95,7 @@ public class AppointmentCtrlTest {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "john123");
 
-        Appointment appointment = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
+        Appointment appointment = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
 
         when(appointmentService.addAppointment(Mockito.any(Appointment.class))).thenReturn(appointment);
 
@@ -137,8 +137,8 @@ public class AppointmentCtrlTest {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
     
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled");
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled", null);
 
         when(appointmentService.getAppointmentsByPatient(1L)).thenReturn(Arrays.asList(appointment1, appointment2));
 
@@ -158,8 +158,8 @@ public class AppointmentCtrlTest {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
     
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled");
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled", null);
 
         when(appointmentService.getAppointmentsScheduled()).thenReturn(Arrays.asList(appointment1));
 
@@ -178,8 +178,8 @@ public class AppointmentCtrlTest {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
     
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Waiting");
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Waiting", null);
 
         when(appointmentService.getAppointmentsWaiting()).thenReturn(Arrays.asList(appointment2));
 
@@ -197,8 +197,8 @@ public class AppointmentCtrlTest {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
     
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Called");
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled");
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Called", null);
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled", null);
 
         when(appointmentService.getAppointmentsCalled()).thenReturn(Arrays.asList(appointment1));
 
@@ -216,8 +216,8 @@ public class AppointmentCtrlTest {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
     
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Done");
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Done", null);
 
         when(appointmentService.getAppointmentsDone()).thenReturn(Arrays.asList(appointment2));
 
@@ -235,8 +235,8 @@ public class AppointmentCtrlTest {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
     
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled");
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled", null);
         
         when(appointmentService.updateAppointmentStatus(1L, "Done")).thenReturn(appointment1);
 
@@ -252,8 +252,8 @@ public class AppointmentCtrlTest {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
     
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled");
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled");
+        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
+        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled", null);
 
         mvc.perform(delete("/api/appointment/delete/1")
                 .contentType(MediaType.APPLICATION_JSON))
