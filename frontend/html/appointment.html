@@ -1,44 +1,48 @@
-
-    <div class="box">
-        <div class="_banner1">
-            <div class="content">
-                <div class="col2 mar1">
-                    <p class="textStyle1">HERE YOU CAN</p>
-                </div>
-                <div class="col2 mar2">
-                    <p class="textStyle2"><span class="textStyle3">make an</span><br><span>appointment</span></p>
+<div class="box">
+    <div class="_banner1">
+        <div class="content">
+            <div class="col2 mar1">
+                <p class="textStyle1">HERE YOU CAN</p>
+            </div>
+            <div class="col2 mar2">
+                <p class="textStyle2"><span class="textStyle3">make an</span><br><span>appointment</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="containerContent">
+        <div class="col1">
+            <div>
+                <h2>New <span class="textStyle3">Appointment</span></h2>
+                <label for="appointment-date">Date</label>
+                <input type="date" id="appointment-date" name="appointment-date" min="2024-05-09" max="2024-12-31" required />
+                <br><br>
+                <label for="appointment-time">Time</label>
+                <input type="time" id="appointment-time" name="appointment-time" step="3600" required />
+                <br><br>
+                <label for="specialty">Specialty</label>
+                <select id="specialty" name="specialty" class="input-box" required>
+                    <option value="" disabled selected>Select Specialty</option>
+                    <option value="cardiology">Cardiology</option>
+                    <option value="dermatology">Dermatology</option>
+                    <option value="neurology">Neurology</option>
+                    <option value="pediatrics">Pediatrics</option>
+                    <option value="orthopedics">Orthopedics</option>
+                    <option value="gynecology">Gynecology</option>
+                </select>
+                <br><br>
+                <button onclick="checkAvailability()">Check Availability</button>
+                <br><br>
+                <div id="medics-availability" style="display: none;">
+                    <label for="medic">Available Medics</label>
+                    <select id="medic" name="medic" class="input-box" required>
+                        <!-- Medics will be loaded here -->
+                    </select>
+                    <br><br>
+                    <button onclick="bookAppointment()">Book Appointment</button>
                 </div>
             </div>
         </div>
-        <div class="containerContent">
-              <div class="col1">
-                    <!-- <div class="col2 marRight1"> -->
-                    <div>
-                        <h2>new <span class="textStyle3">appointment</span></h2>
-                        <label for="start">Date</label>
-                        <input type="date" name="trip-start" min="2024-05-09" max="2024-12-31" />
-                        <br><br>
-                        <label for="start">Time</label>
-                        <input type="time" name="trip-start" min="2024-05-09" max="2024-12-31" />
-                        <br><br>
-                        <h3>Nertyase riti masertas leraserad asety kertya aset aplicabo nerafaes kertyusei ersvitae ertyasne</h3>
-                        <p>Nolernatur aut oditau nsequuntur magni msequisciunt, neque porro quisquam eseras<br>qui dolorem ipsum, quia dolor.<br>Sitamet, consectetur, adipisci velitsed quia<br>non numquam eius modimpora inciduntsaeut labore etalore magnam aliquam quaeras voluptat emnim ad minima.</p>
-                        <!-- <a href="#!/pageMore" class="more">learn more</a> -->
-                    </div>
-                    <!-- <div class="col2">
-                        <h2>my <span class="textStyle3">services</span></h2>
-                        <ul class="_list1 padBot1">
-                            <li><a href="#">sit avertas dero</a></li>
-                            <li><a href="#">taserto yaendala miaseay</a></li>
-                            <li><a href="#">mertase deles neory kastreas</a></li>
-                            <li><a href="#">verode fase laisuase</a></li>
-                            <li><a href="#">avertelero ferose</a></li>
-                            <li><a href="#">taser miaser lasytras</a></li>
-                            <li><a href="#">mertaneory lkauisyase</a></li>
-                            <li><a href="#">verode fertase</a></li>
-                        </ul>
-                        <a href="#!/pageMore" class="more">view more</a>
-                    </div> -->
-              </div>
-        </div>
     </div>
+</div>
+
+<script src="js/appointment.js"></script>

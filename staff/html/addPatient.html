@@ -1,0 +1,34 @@
+<div class="box">
+    <div class="_banner1">
+        <div class="content">
+            <div class="col2 mar1">
+                <p class="textStyle1">Add Patient</p>
+            </div>
+            <div class="col2 mar2">
+                <p class="textStyle2"><span class="textStyle3">to the</span><br><span>waiting list</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="containerContent">
+        <div class="col1">
+            <div>
+                <h2>Add <span class="textStyle3">Patient</span></h2>
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" class="input-box" required>
+                <br><br>
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" class="input-box" required>
+                <br><br>
+                <label for="ccNumber">CC Number</label>
+                <input type="text" id="ccNumber" name="ccNumber" class="input-box" required>
+                <br><br>
+                <button onclick="addPatient()">Add Patient</button>
+                <br><br>
+                <div id="appointments" style="display: none;">
+                    <h3>Appointments</h3>
+                    <div id="appointments-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
