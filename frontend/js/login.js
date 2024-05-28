@@ -10,18 +10,21 @@ async function checkLogin() {
         document.getElementById('logoutButton').style.display = 'none';
     }
 }
-
 async function login() {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
+    const params = new URLSearchParams();
+    params.append('email', email);
+    params.append('password', password);
+
     try {
-        const response = await fetch('/api/patient/checkPassword', {
+        const response = await fetch('http://localhost:8080/api/patient/checkPassword', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: JSON.stringify({ email, password })
+            body: params.toString()
         });
 
         if (response.ok) {
@@ -43,6 +46,7 @@ async function login() {
         alert('An error occurred during login. Please try again.');
     }
 }
+
 
 async function register() {
     const newEmail = document.getElementById('new_email').value;
