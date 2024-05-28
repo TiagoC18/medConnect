@@ -7,9 +7,9 @@ import project.medConnect.repository.AppointmentRepository;
 import project.medConnect.repository.PatientRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,6 +64,14 @@ public class AppointmentService {
         Optional<Appointment> appointmentOpt = appointmentRepository.findById(appointmentId);
         if (appointmentOpt.isPresent()) {
             Appointment appointment = appointmentOpt.get();
+            String currentStatus = appointment.getStatus();
+
+            if (currentStatus.equals("Scheduled") && newStatus.equals("Waiting")) {
+                Integer lastSenha = appointmentRepository.findMaxSenha();
+                int nextSenha = (lastSenha != null) ? lastSenha + 1 : 1;
+                appointment.setSenha(nextSenha);
+            }
+
             appointment.setStatus(newStatus);
             return appointmentRepository.save(appointment);
         } else {
@@ -77,6 +85,11 @@ public class AppointmentService {
         } else {
             throw new RuntimeException("Appointment not found");
         }
+    }
+
+    @Scheduled(cron = "0 0 0 * * *")
+    public void resetAllSenha() {
+        appointmentRepository.resetAllSenha();
     }
 }
 

@@ -2,6 +2,7 @@ package project.medConnect.repositorytest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -471,4 +472,117 @@ public class AppointmentRepTest {
         assertEquals(appointment2.getAppointmentTime(), foundAppointment.getAppointmentTime());
         assertEquals(appointment2.getStatus(), foundAppointment.getStatus());
     }
+
+    @Test
+    @DisplayName("Find Max Senha")
+    public void testFindMaxSenha() {
+        Medic medic = new Medic();
+        medic.setFirstName("John");
+        medic.setLastName("Doe");
+        medic.setEmail("johndoe@ua.pt");
+        medic.setPhoneNumber("912345678");
+        medic.setSpecialty("Cardiology");
+        medic.setServiceTime(Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+
+        Patient patient = new Patient();
+        patient.setFirstName("David");
+        patient.setLastName("Silva");
+        patient.setDateOfBirth(new Date(1999, 7, 10));
+        patient.setGender("Male");
+        patient.setPhoneNumber("123456789");
+        patient.setEmail("davidsilva@ua.pt");
+
+        Appointment appointment1 = new Appointment();
+        appointment1.setSpecialty("Cardiology");
+        appointment1.setMedic(medic);
+        appointment1.setPatient(patient);
+        appointment1.setAppointmentDay("2024-06-08");
+        appointment1.setAppointmentTime("10h");
+        appointment1.setStatus("Scheduled");
+        appointment1.setSenha(1);
+
+        Appointment appointment2 = new Appointment();
+        appointment2.setSpecialty("Dermatology");
+        appointment2.setMedic(medic);
+        appointment2.setPatient(patient);
+        appointment2.setAppointmentDay("2024-06-08");
+        appointment2.setAppointmentTime("11h");
+        appointment2.setStatus("Done");
+        appointment2.setSenha(2);
+
+
+        entityManager.persist(medic);
+        entityManager.persist(patient);
+        entityManager.persist(appointment1);
+        entityManager.persist(appointment2);
+        entityManager.flush();
+
+        Integer maxSenha = appointmentRepository.findMaxSenha();
+        assertNotNull(maxSenha);
+        assertEquals(2, maxSenha);
+
+    }
+
+    @Test
+    @DisplayName("Reset All Senha")
+    public void testResetAllSenha() {
+        Medic medic = new Medic();
+        medic.setFirstName("John");
+        medic.setLastName("Doe");
+        medic.setEmail("johndoe@ua.pt");
+        medic.setPhoneNumber("912345678");
+        medic.setSpecialty("Cardiology");
+        medic.setServiceTime(Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
+
+        Patient patient = new Patient();
+        patient.setFirstName("David");
+        patient.setLastName("Silva");
+        patient.setDateOfBirth(new Date(1999, 7, 10));
+        patient.setGender("Male");
+        patient.setPhoneNumber("123456789");
+        patient.setEmail("davidsilva@ua.pt");
+
+        Appointment appointment1 = new Appointment();
+        appointment1.setSpecialty("Cardiology");
+        appointment1.setMedic(medic);
+        appointment1.setPatient(patient);
+        appointment1.setAppointmentDay("2024-06-08");
+        appointment1.setAppointmentTime("10h");
+        appointment1.setStatus("Scheduled");
+        appointment1.setSenha(1);
+
+        Appointment appointment2 = new Appointment();
+        appointment2.setSpecialty("Dermatology");
+        appointment2.setMedic(medic);
+        appointment2.setPatient(patient);
+        appointment2.setAppointmentDay("2024-06-08");
+        appointment2.setAppointmentTime("11h");
+        appointment2.setStatus("Done");
+        appointment2.setSenha(2);
+
+        entityManager.persist(medic);
+        entityManager.persist(patient);
+        entityManager.persist(appointment1);
+        entityManager.persist(appointment2);
+        entityManager.flush();
+
+        appointmentRepository.resetAllSenha();
+        entityManager.clear();
+
+        List<Appointment> appointments = appointmentRepository.findAll();
+        assertNotNull(appointments);
+        assertEquals(2, appointments.size());
+
+        Appointment foundAppointment1 = appointments.get(0);
+        assertEquals(appointment1.getAppointmentId(), foundAppointment1.getAppointmentId());
+        assertEquals(appointment1.getSpecialty(), foundAppointment1.getSpecialty());
+        assertEquals(appointment1.getMedic().getFirstName(), foundAppointment1.getMedic().getFirstName());
+        assertEquals(appointment1.getMedic().getLastName(), foundAppointment1.getMedic().getLastName());
+        assertEquals(appointment1.getPatient().getFirstName(), foundAppointment1.getPatient().getFirstName());
+        assertEquals(appointment1.getPatient().getLastName(), foundAppointment1.getPatient().getLastName());
+        assertEquals(appointment1.getAppointmentTime(), foundAppointment1.getAppointmentTime());
+        assertEquals(appointment1.getStatus(), foundAppointment1.getStatus());
+        assertNull(foundAppointment1.getSenha());
+    }
+
 }    

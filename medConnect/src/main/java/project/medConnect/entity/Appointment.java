@@ -35,16 +35,19 @@ public class Appointment {
     @NotNull(message = "Status is required")
     private String status;
 
+    private Integer senha;
+
     public Appointment() {
     }
 
-    public Appointment(Patient patient, String specialty, Medic medic, String appointmentDate, String appointmentTime, String status) {
+    public Appointment(Patient patient, String specialty, Medic medic, String appointmentDate, String appointmentTime, String status, Integer senha) {
         this.patient = patient;
         this.specialty = specialty;
         this.medic = medic;
         this.appointmentDay = appointmentDate;
         this.appointmentTime = appointmentTime;
         this.status = status;
+        this.senha = senha;
     }
 
     public Long getAppointmentId() {
@@ -101,6 +104,14 @@ public class Appointment {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Integer getSenha() {
+        return senha;
+    }
+
+    public void setSenha(Integer nextSenha) {
+        this.senha = nextSenha;
     }
 
 

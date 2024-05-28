@@ -22,7 +22,7 @@ public class AppointmentTest {
         medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
     
-        appointment = new Appointment(patient, "Specialty", medic, "2024-06-08", "10h", "Scheduled");
+        appointment = new Appointment(patient, "Specialty", medic, "2024-06-08", "10h", "Scheduled", null);
     }
 
     @AfterEach
@@ -98,5 +98,16 @@ public class AppointmentTest {
     public void testSetStatus() {
         appointment.setStatus("Cancelled");
         assertEquals("Cancelled", appointment.getStatus());
+    }
+
+    @Test
+    public void testGetSenha() {
+        assertNull(appointment.getSenha());
+    }
+
+    @Test
+    public void testSetSenha() {
+        appointment.setSenha(1);
+        assertEquals(1, appointment.getSenha());
     }
 }
