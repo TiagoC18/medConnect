@@ -29,6 +29,6 @@
 - [Static Analysis Dashboard](https://your-sonarqube-dashboard-link.com) - Quality dashboard for code analysis results (**To Be Implemented**).
 
 ### Continuous Integration and Deployment
-- [CI/CD Environment Dashboard](https://your-ci-cd-dashboard-link.com) - View the latest builds and deployment statuses (**Planned Feature**).
+- [CI/CD Environment Dashboard](https://sonarcloud.io/project/overview?id=TiagoC18_medConnect) - View the latest builds and deployment statuses (**Planned Feature**).
 
 Please refer to these links for detailed information and resources related to the **medConnect** project. For any additional inquiries or support, please contact the project team members.
