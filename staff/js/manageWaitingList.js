@@ -1,3 +1,59 @@
+function loadWaitingList() {
+    const waitingListContainer = document.getElementById('waiting-list-container');
+    waitingListContainer.innerHTML = '';
+
+    fetch('http://localhost:8080/api/appointment/waiting')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(appointment => {
+                const patient = appointment.patient;
+                const patientDiv = document.createElement('div');
+                patientDiv.className = 'waiting-list-item';
+                patientDiv.innerHTML = `
+                    <p>Name: ${patient.firstName} ${patient.lastName}</p>
+                    <p>Date of Birth: ${patient.dateOfBirth}</p>
+                    <p>Gender: ${patient.gender}</p>
+                    <p>CC Number: ${patient.ccNumber}</p>
+                    <p>Phone Number: ${patient.phoneNumber}</p>
+                    <p>Email: ${patient.email}</p>
+                    <button onclick="callPatient(${appointment.id})">Call</button>
+                    <button onclick="markAsDone(${appointment.id})">Done</button>
+                `;
+                waitingListContainer.appendChild(patientDiv);
+            });
+        })
+        .catch(error => console.error('Error loading waiting list:', error));
+}
+
+function callPatient(appointmentId) {
+    fetch(`http://localhost:8080/api/appointment/${appointmentId}/Waiting`, {
+        method: 'PUT'
+    })
+    .then(response => response.json())
+    .then(() => {
+        alert('Patient called successfully.');
+        loadWaitingList();
+    })
+    .catch(error => console.error('Error calling patient:', error));
+}
+
+function markAsDone(appointmentId) {
+    fetch(`http://localhost:8080/api/appointment/${appointmentId}/Done`, {
+        method: 'PUT'
+    })
+    .then(response => response.json())
+    .then(() => {
+        alert('Appointment marked as done.');
+        loadWaitingList();
+    })
+    .catch(error => console.error('Error marking appointment as done:', error));
+}
+
+window.onload = function() {
+    loadWaitingList();
+};
+
+/*
 function addPatient() {
     const firstName = document.getElementById('firstName').value;
     const lastName = document.getElementById('lastName').value;
@@ -106,4 +162,4 @@ function getWaitingList() {
 window.onload = function() {
     checkLogin();
     loadWaitingList();
-};
+};*/
