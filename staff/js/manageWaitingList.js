@@ -1,28 +1,55 @@
-function loadWaitingList() {
+/*let currentPage = 1;
+const itemsPerPage = 4;
+let totalItems = 0;
+
+function loadWaitingList(page = 1) {
     const waitingListContainer = document.getElementById('waiting-list-container');
     waitingListContainer.innerHTML = '';
 
     fetch('http://localhost:8080/api/appointment/waiting')
         .then(response => response.json())
         .then(data => {
-            data.forEach(appointment => {
+            totalItems = data.length;
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const itemsToShow = data.slice(start, end);
+
+            itemsToShow.forEach(appointment => {
                 const patient = appointment.patient;
                 const patientDiv = document.createElement('div');
                 patientDiv.className = 'waiting-list-item';
                 patientDiv.innerHTML = `
                     <p>Name: ${patient.firstName} ${patient.lastName}</p>
-                    <p>Date of Birth: ${patient.dateOfBirth}</p>
+                    <p>DOB: ${patient.dateOfBirth}</p>
                     <p>Gender: ${patient.gender}</p>
-                    <p>CC Number: ${patient.ccNumber}</p>
-                    <p>Phone Number: ${patient.phoneNumber}</p>
-                    <p>Email: ${patient.email}</p>
+                    <p>CC: ${patient.ccNumber}</p>
                     <button onclick="callPatient(${appointment.id})">Call</button>
                     <button onclick="markAsDone(${appointment.id})">Done</button>
                 `;
                 waitingListContainer.appendChild(patientDiv);
             });
+
+            updatePagination();
         })
         .catch(error => console.error('Error loading waiting list:', error));
+}
+
+function updatePagination() {
+    const pageIndicator = document.getElementById('pageIndicator');
+    const prevPageButton = document.getElementById('prevPage');
+    const nextPageButton = document.getElementById('nextPage');
+
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    pageIndicator.textContent = `Page ${currentPage} of ${totalPages}`;
+
+    prevPageButton.disabled = currentPage === 1;
+    nextPageButton.disabled = currentPage === totalPages;
+}
+
+function changePage(direction) {
+    currentPage += direction;
+    loadWaitingList(currentPage);
 }
 
 function callPatient(appointmentId) {
@@ -32,7 +59,7 @@ function callPatient(appointmentId) {
     .then(response => response.json())
     .then(() => {
         alert('Patient called successfully.');
-        loadWaitingList();
+        loadWaitingList(currentPage);
     })
     .catch(error => console.error('Error calling patient:', error));
 }
@@ -44,16 +71,20 @@ function markAsDone(appointmentId) {
     .then(response => response.json())
     .then(() => {
         alert('Appointment marked as done.');
-        loadWaitingList();
+        loadWaitingList(currentPage);
     })
     .catch(error => console.error('Error marking appointment as done:', error));
 }
 
 window.onload = function() {
     loadWaitingList();
-};
+};*/
+let currentPage = 1;
+const itemsPerPage = 4;
+let waitingList = [];
+let calledList = [];
+let currentList = 'waiting'; // To keep track of which list is being displayed
 
-/*
 function addPatient() {
     const firstName = document.getElementById('firstName').value;
     const lastName = document.getElementById('lastName').value;
@@ -62,104 +93,150 @@ function addPatient() {
     const patient = {
         firstName,
         lastName,
-        ccNumber
+        ccNumber,
+        dateOfBirth: '1990-01-01', // Simulated data
+        gender: 'Unknown',         // Simulated data
+        phoneNumber: '0000000000', // Simulated data
+        email: 'unknown@example.com', // Simulated data
+        status: 'Waiting'          // Initial status
     };
 
-    // For now, we will just log the data to the console
-    // You will need to send this data to the backend using an AJAX request or fetch API
-    console.log(patient);
+    waitingList.push(patient); // Add patient to the local waiting list
+    alert('Patient added to waiting list!');
+    loadCurrentList(); // Reload the current list
 
-    // Example of sending data to the backend and then fetching appointments
-    fetch('YOUR_BACKEND_ENDPOINT/patients', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(patient)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('Patient added to waiting list!');
-            fetchAppointments(ccNumber);
-        } else {
-            alert('Failed to add patient: ' + data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Failed to add patient. Please try again.');
-    });
+    // Clear form fields
+    document.getElementById('firstName').value = '';
+    document.getElementById('lastName').value = '';
+    document.getElementById('ccNumber').value = '';
 }
 
-function fetchAppointments(ccNumber) {
-    // Simulate fetching appointments for the patient
-    // Replace with real API call
-    const appointments = getAppointments(ccNumber);
-
-    const appointmentsContainer = document.getElementById('appointments');
-    const appointmentsList = document.getElementById('appointments-list');
-
-    appointmentsList.innerHTML = ''; // Clear previous appointments
-
-    appointments.forEach(appointment => {
-        const appointmentDiv = document.createElement('div');
-        appointmentDiv.className = 'appointment-item';
-        appointmentDiv.innerHTML = `
-            <p>Date: ${appointment.date}</p>
-            <p>Time: ${appointment.time}</p>
-            <p>Specialty: ${appointment.specialty}</p>
-            <p>Doctor: ${appointment.doctor}</p>
-        `;
-        appointmentsList.appendChild(appointmentDiv);
-    });
-
-    appointmentsContainer.style.display = 'block';
+function loadCurrentList() {
+    if (currentList === 'waiting') {
+        loadWaitingList(currentPage);
+    } else {
+        loadCalledList(currentPage);
+    }
 }
 
-function getAppointments(ccNumber) {
-    // Simulate fetching appointments from a database or API
-    // This is just sample data
-    return [
-        { date: '2024-08-13', time: '14:00', specialty: 'Neurology', doctor: 'Dr. Asdrubal' },
-        { date: '2024-08-14', time: '15:00', specialty: 'Cardiology', doctor: 'Dr. John Doe' },
-        { date: '2024-08-15', time: '16:00', specialty: 'Dermatology', doctor: 'Dr. Jane Smith' }
-    ];
-}
-
-function loadWaitingList() {
+function loadWaitingList(page = 1) {
     const waitingListContainer = document.getElementById('waiting-list-container');
     waitingListContainer.innerHTML = '';
+    document.getElementById('list-title').textContent = 'Waiting List';
 
-    // Simulate fetching waiting list from a backend
-    const waitingList = getWaitingList();
+    const start = (page - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const itemsToShow = waitingList.slice(start, end);
 
-    waitingList.forEach(patient => {
+    itemsToShow.forEach((patient, index) => {
         const patientDiv = document.createElement('div');
         patientDiv.className = 'waiting-list-item';
         patientDiv.innerHTML = `
             <p>Name: ${patient.firstName} ${patient.lastName}</p>
-            <p>Date of Birth: ${patient.dateOfBirth}</p>
+            <p>DOB: ${patient.dateOfBirth}</p>
             <p>Gender: ${patient.gender}</p>
-            <p>CC Number: ${patient.ccNumber}</p>
-            <p>Phone Number: ${patient.phoneNumber}</p>
+            <p>CC: ${patient.ccNumber}</p>
+            <p>Phone: ${patient.phoneNumber}</p>
             <p>Email: ${patient.email}</p>
+            <button onclick="callPatient(${start + index})">Call</button>
         `;
         waitingListContainer.appendChild(patientDiv);
     });
+
+    updatePagination(waitingList);
+}
+
+function loadCalledList(page = 1) {
+    const calledListContainer = document.getElementById('called-list-container');
+    calledListContainer.innerHTML = '';
+    document.getElementById('list-title').textContent = 'Called List';
+
+    const start = (page - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const itemsToShow = calledList.slice(start, end);
+
+    itemsToShow.forEach((patient, index) => {
+        const patientDiv = document.createElement('div');
+        patientDiv.className = 'called-list-item';
+        patientDiv.innerHTML = `
+            <p>Name: ${patient.firstName} ${patient.lastName}</p>
+            <p>DOB: ${patient.dateOfBirth}</p>
+            <p>Gender: ${patient.gender}</p>
+            <p>CC: ${patient.ccNumber}</p>
+            <p>Phone: ${patient.phoneNumber}</p>
+            <p>Email: ${patient.email}</p>
+            <button onclick="markAsDone(${start + index})">Done</button>
+        `;
+        calledListContainer.appendChild(patientDiv);
+    });
+
+    updatePagination(calledList);
+}
+
+function updatePagination(list) {
+    const pageIndicator = document.getElementById('pageIndicator');
+    const prevPageButton = document.getElementById('prevPage');
+    const nextPageButton = document.getElementById('nextPage');
+
+    const totalPages = Math.ceil(list.length / itemsPerPage);
+
+    pageIndicator.textContent = `Page ${currentPage} of ${totalPages}`;
+
+    prevPageButton.disabled = currentPage === 1;
+    nextPageButton.disabled = currentPage === totalPages;
+}
+
+function changePage(direction) {
+    currentPage += direction;
+    loadCurrentList();
+}
+
+function toggleList() {
+    currentPage = 1; // Reset to first page
+    if (currentList === 'waiting') {
+        currentList = 'called';
+        document.getElementById('waiting-list-container').style.display = 'none';
+        document.getElementById('called-list-container').style.display = 'block';
+        document.querySelector('.toggle-button').textContent = 'Switch to Waiting List';
+    } else {
+        currentList = 'waiting';
+        document.getElementById('waiting-list-container').style.display = 'block';
+        document.getElementById('called-list-container').style.display = 'none';
+        document.querySelector('.toggle-button').textContent = 'Switch to Called List';
+    }
+    loadCurrentList();
+}
+
+function callPatient(index) {
+    const patient = waitingList[index];
+    patient.status = 'Called';
+    calledList.push(patient);
+    waitingList.splice(index, 1);
+    alert('Patient called successfully.');
+    loadCurrentList();
+}
+
+function markAsDone(index) {
+    calledList.splice(index, 1);
+    alert('Appointment marked as done.');
+    loadCurrentList();
 }
 
 function getWaitingList() {
     // Simulate fetching waiting list from a database or API
-    // This is just sample data
     return [
-        { firstName: 'John', lastName: 'Doe', dateOfBirth: '1990-01-01', gender: 'Male', ccNumber: '123456', phoneNumber: '123456789', email: 'john.doe@example.com' },
-        { firstName: 'Jane', lastName: 'Doe', dateOfBirth: '1992-02-02', gender: 'Female', ccNumber: '654321', phoneNumber: '987654321', email: 'jane.doe@example.com' }
+        { firstName: 'John', lastName: 'Doe', dateOfBirth: '1990-01-01', gender: 'Male', ccNumber: '123456', phoneNumber: '123456789', email: 'john.doe@example.com', status: 'Waiting' },
+        { firstName: 'Jane', lastName: 'Doe', dateOfBirth: '1992-02-02', gender: 'Female', ccNumber: '654321', phoneNumber: '987654321', email: 'jane.doe@example.com', status: 'Waiting' },
+        { firstName: 'Alice', lastName: 'Smith', dateOfBirth: '1985-03-03', gender: 'Female', ccNumber: '111222', phoneNumber: '555666777', email: 'alice.smith@example.com', status: 'Waiting' },
+        { firstName: 'Bob', lastName: 'Johnson', dateOfBirth: '1988-04-04', gender: 'Male', ccNumber: '333444', phoneNumber: '888999000', email: 'bob.johnson@example.com', status: 'Waiting' },
+        { firstName: 'Charlie', lastName: 'Brown', dateOfBirth: '1977-05-05', gender: 'Male', ccNumber: '555666', phoneNumber: '123123123', email: 'charlie.brown@example.com', status: 'Waiting' },
+        { firstName: 'Dana', lastName: 'White', dateOfBirth: '1991-06-06', gender: 'Female', ccNumber: '777888', phoneNumber: '321321321', email: 'dana.white@example.com', status: 'Waiting' },
     ];
 }
 
-// Load waiting list on page load
 window.onload = function() {
     checkLogin();
-    loadWaitingList();
-};*/
+    waitingList = getWaitingList(); // Initialize the waiting list
+    document.getElementById('waiting-list-container').style.display = 'block';
+    loadCurrentList();
+};

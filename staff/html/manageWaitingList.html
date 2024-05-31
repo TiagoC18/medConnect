@@ -22,10 +22,19 @@
         <div class="containerContent">
             <div class="col1">
                 <div>
-                    <h2>Waiting <span class="textStyle3">List</span></h2>
-                    <div id="waiting-list-container">
+                    <h2 id="list-title">Waiting <span class="textStyle3">List</span></h2>
+                    <div id="waiting-list-container" class="list-container">
                         <!-- Waiting list will be dynamically loaded here -->
                     </div>
+                    <div id="called-list-container" class="list-container" style="display: none;">
+                        <!-- Called list will be dynamically loaded here -->
+                    </div>
+                    <div class="pagination">
+                        <button id="prevPage" onclick="changePage(-1)">Previous</button>
+                        <span id="pageIndicator"></span>
+                        <button id="nextPage" onclick="changePage(1)">Next</button>
+                    </div>
+                    <button onclick="toggleList()" class="toggle-button">Switch to Called List</button>
                 </div>
             </div>
         </div>
