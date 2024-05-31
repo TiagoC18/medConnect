@@ -49,17 +49,22 @@ async function login() {
 
 
 async function register() {
-    const newEmail = document.getElementById('new_email').value;
-    const newPassword = document.getElementById('new_password').value;
+    const email = document.getElementById('newEmail').value;
+    const password = document.getElementById('new_password').value;
     const confirmPassword = document.getElementById('confirm_password').value;
-    const firstName = document.getElementById('first_name').value;
-    const lastName = document.getElementById('last_name').value;
-    const dateOfBirth = document.getElementById('date_of_birth').value;
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const dateOfBirth = document.getElementById('dateOfBirth').value;
     const gender = document.getElementById('gender').value;
-    const ccNumber = document.getElementById('cc_number').value;
-    const phoneNumber = document.getElementById('phone_number').value;
+    const ccNumber = document.getElementById('ccNumber').value;
+    const phoneNumber = document.getElementById('phoneNumber').value;
 
-    if (newPassword !== confirmPassword) {
+    if (!email || !password || !confirmPassword || !firstName || !lastName || !dateOfBirth || !gender || !ccNumber || !phoneNumber) {
+        alert('Please fill in all required fields.');
+        return;
+    }
+
+    if (password !== confirmPassword) {
         alert('Passwords do not match. Please try again.');
         return;
     }
@@ -71,12 +76,12 @@ async function register() {
         gender,
         ccNumber,
         phoneNumber,
-        email: newEmail,
-        password: newPassword
+        email,
+        password
     };
 
     try {
-        const response = await fetch('/api/patient', {
+        const response = await fetch('http://localhost:8080/api/patient', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
