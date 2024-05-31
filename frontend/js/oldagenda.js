@@ -48,13 +48,13 @@ async function loadPastAppointments() {
 
                     const detailsDiv = document.createElement('div');
                     detailsDiv.className = 'col3 marTop1';
-                    detailsDiv.innerHTML = `<h3 class="padNull"><a href="" class="_link3">${appointment.specialty}</a></h3>
+                    detailsDiv.innerHTML = `<h3 class="padNull"><a class="_link3">${appointment.specialty}</a></h3>
                                             <p class="padNull">${appointment.medic.firstName} ${appointment.medic.lastName}</p>`;
                     appointmentDiv.appendChild(detailsDiv);
 
                     const timeP = document.createElement('p');
                     timeP.className = 'textStyle4';
-                    timeP.innerHTML = `<a href="" class="_link4">${appointment.appointmentDay} às ${appointment.appointmentTime}</a>`;
+                    timeP.innerHTML = `<a class="_link4">${appointment.appointmentDay} às ${appointment.appointmentTime}</a>`;
                     appointmentDiv.appendChild(timeP);
 
                     pastAppointmentsContainer.appendChild(appointmentDiv);
