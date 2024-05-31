@@ -16,30 +16,34 @@
                 <label for="appointment-date">Date</label>
                 <input type="date" id="appointment-date" name="appointment-date" min="2024-05-09" max="2024-12-31" required />
                 <br><br>
-                <label for="appointment-time">Time</label>
-                <input type="time" id="appointment-time" name="appointment-time" step="3600" required />
-                <br><br>
                 <label for="specialty">Specialty</label>
                 <select id="specialty" name="specialty" class="input-box" required>
                     <option value="" disabled selected>Select Specialty</option>
-                    <option value="cardiology">Cardiology</option>
-                    <option value="dermatology">Dermatology</option>
-                    <option value="neurology">Neurology</option>
-                    <option value="pediatrics">Pediatrics</option>
-                    <option value="orthopedics">Orthopedics</option>
-                    <option value="gynecology">Gynecology</option>
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Dermatology">Dermatology</option>
+                    <option value="Neurology">Neurology</option>
+                    <option value="Pediatrics">Pediatrics</option>
+                    <option value="Orthopedics">Orthopedics</option>
+                    <option value="Gynecology">Gynecology</option>
                 </select>
-                <br><br>
-                <button onclick="checkAvailability()">Check Availability</button>
-                <br><br>
-                <div id="medics-availability" style="display: none;">
+                <div id="medics-availability" style="display: none;">            
+                    <br><br>                  
                     <label for="medic">Available Medics</label>
                     <select id="medic" name="medic" class="input-box" required>
                         <!-- Medics will be loaded here -->
                     </select>
-                    <br><br>
-                    <button onclick="bookAppointment()">Book Appointment</button>
                 </div>
+                <div id="time-available" style="display: none;">            
+                    <br><br>                  
+                    <label for="time">Available Hours</label>
+                    <select id="time" name="time" class="input-box" required>
+                        <!-- Time will be loaded here -->
+                    </select>
+                </div>
+                <br><br>
+                <button id="checkMedics" onclick="checkMedic()">Check Medics</button>
+                <button id="checkHours" style="display: none;" onclick="checkHours()">Check Hours</button>
+                <button id="bookAppointment" style="display: none;" onclick="bookAppointment()">Book Appointment</button>
             </div>
         </div>
     </div>
