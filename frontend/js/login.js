@@ -97,11 +97,11 @@ async function register() {
 }
 
 function logout() {
-    localStorage.setItem('isLoggedIn', 'false');
-    checkLogin();
-    alert('Logged out successfully.');
-    window.location.href = '#!/pageHome';
+    localStorage.clear(); // Limpa todos os itens armazenados no localStorage
+    window.location.href = '#!/pageHome'; // Redireciona para a página inicial
+    location.reload(true); // Força a recarga completa da página
 }
+
 
 // Check login status on page load
 window.onload = checkLogin;

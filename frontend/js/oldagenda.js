@@ -4,6 +4,7 @@ async function checkLogin() {
         document.getElementById('menuAgenda').style.display = 'block';
         document.getElementById('loginButton').style.display = 'none';
         document.getElementById('logoutButton').style.display = 'block';
+        loadPastAppointments();
     } else {
         document.getElementById('menuAgenda').style.display = 'none';
         document.getElementById('loginButton').style.display = 'block';
@@ -73,4 +74,3 @@ async function loadPastAppointments() {
 
 
 checkLogin();
-loadPastAppointments();

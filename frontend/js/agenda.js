@@ -4,6 +4,7 @@ async function checkLogin() {
         document.getElementById('menuAgenda').style.display = 'block';
         document.getElementById('loginButton').style.display = 'none';
         document.getElementById('logoutButton').style.display = 'block';
+        loadAppointments();
     } else {
         document.getElementById('menuAgenda').style.display = 'none';
         document.getElementById('loginButton').style.display = 'block';
@@ -140,5 +141,9 @@ async function deleteAppointment(appointmentId) {
     }
 }
 
+function shouldLoadAppointments() {
+    return window.location.href.includes('pageAgenda');
+}
+
+// Verifica o login
 checkLogin();
-loadAppointments();
