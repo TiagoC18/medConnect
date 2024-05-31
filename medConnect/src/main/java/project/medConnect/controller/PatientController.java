@@ -30,6 +30,12 @@ public class PatientController {
             
     }
 
+    @PostMapping("")
+    public ResponseEntity<Object> addPatient(@RequestBody Patient patient) {
+        patientService.addPatient(patient);
+        return new ResponseEntity<>(patient, HttpStatus.CREATED);
+    }
+
     @GetMapping("/{patientId}")
     public ResponseEntity<Object> getPatientById(@PathVariable Long patientId) {
 

@@ -21,6 +21,10 @@ public class PatientService {
         return patients;
     }
 
+    public void addPatient(Patient patient) {
+        patientRepository.save(patient);
+    }
+
     public Patient getPatientById(Long patientId) {
         Optional<Patient> patient = patientRepository.findById(patientId);
         if (patient.isPresent()) {

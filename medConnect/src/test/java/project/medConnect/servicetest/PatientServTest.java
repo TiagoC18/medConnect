@@ -90,4 +90,14 @@ public class PatientServTest {
         Mockito.verify(patientRepository, Mockito.times(1)).checkPassword("davidsilva@ua.pt","password");
          
     }
+
+    @Test
+    @DisplayName("Test Add Patient")
+    void testAddPatient() {
+        Patient patient1 = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
+        
+        patientService.addPatient(patient1);
+
+        Mockito.verify(patientRepository, Mockito.times(1)).save(patient1);
+    }
 }
