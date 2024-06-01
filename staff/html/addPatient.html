@@ -1,34 +1,125 @@
-<div class="box">
-    <div class="_banner1">
-        <div class="content">
-            <div class="col2 mar1">
-                <p class="textStyle1">Add Patient</p>
-            </div>
-            <div class="col2 mar2">
-                <p class="textStyle2"><span class="textStyle3">to the</span><br><span>waiting list</span></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add Patient</title>
+    <meta charset="utf-8">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/icon.png" type="image/x-icon">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/addPatient.js"></script>
+    <style>
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .appointments-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .appointment-item {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            width: 200px; /* Adjust the width as needed */
+            box-sizing: border-box;
+        }
+
+        .appointment-item button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+
+        .appointment-item button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="_banner1">
+            <div class="content">
+                <div class="col2 mar1">
+                    <p class="textStyle1">Add Patient</p>
+                </div>
+                <div class="col2 mar2">
+                    <p class="textStyle2"><span class="textStyle3">to the</span><br><span>waiting list</span></p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="containerContent">
-        <div class="col1">
-            <div>
-                <h2>Add <span class="textStyle3">Patient</span></h2>
-                <label for="firstName">First Name</label>
-                <input type="text" id="firstName" name="firstName" class="input-box" required>
-                <br><br>
-                <label for="lastName">Last Name</label>
-                <input type="text" id="lastName" name="lastName" class="input-box" required>
-                <br><br>
-                <label for="ccNumber">CC Number</label>
-                <input type="text" id="ccNumber" name="ccNumber" class="input-box" required>
-                <br><br>
-                <button onclick="addPatient()">Add Patient</button>
-                <br><br>
-                <div id="appointments" style="display: none;">
-                    <h3>Appointments</h3>
-                    <div id="appointments-list"></div>
+        <div class="containerContent">
+            <div class="col1">
+                <div>
+                    <h2>Add <span class="textStyle3">Patient</span></h2>
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" class="input-box" required>
+                    <br><br>
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" class="input-box" required>
+                    <br><br>
+                    <label for="ccNumber">CC Number</label>
+                    <input type="text" id="ccNumber" name="ccNumber" class="input-box" required>
+                    <br><br>
+                    <label for="emailStaff">Email</label>
+                    <input type="email" id="emailStaff" name="emailStaff" class="input-box" required>
+                    <br><br>
+                    <button onclick="fetchPatientAppointments()">Find Appointments</button>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <!-- The Modal -->
+    <div id="appointmentsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>Appointments</h3>
+            <div id="appointments-list" class="appointments-list"></div>
+        </div>
+    </div>
+
+    <script src="js/addPatient.js"></script>
+</body>
+</html>
