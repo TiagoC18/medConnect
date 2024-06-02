@@ -3,6 +3,7 @@ package project.medConnect.service;
 import project.medConnect.entity.Appointment;
 import project.medConnect.entity.Medic;
 import project.medConnect.entity.Patient;
+import project.medConnect.exception.AppointmentNotFoundException;
 import project.medConnect.repository.AppointmentRepository;
 import project.medConnect.repository.PatientRepository;
 
@@ -16,11 +17,14 @@ import java.util.Optional;
 @Service
 public class AppointmentService {
 
-    @Autowired
-    private AppointmentRepository appointmentRepository;
+    private final AppointmentRepository appointmentRepository;
+    private final PatientRepository patientRepository;
 
     @Autowired
-    private PatientRepository patientRepository;
+    public AppointmentService(AppointmentRepository appointmentRepository, PatientRepository patientRepository) {
+        this.appointmentRepository = appointmentRepository;
+        this.patientRepository = patientRepository;
+    }
 
     public List<Appointment> getAppointments() {
         return appointmentRepository.findAll();
@@ -75,7 +79,7 @@ public class AppointmentService {
             appointment.setStatus(newStatus);
             return appointmentRepository.save(appointment);
         } else {
-            throw new RuntimeException("Appointment not found");
+            throw new AppointmentNotFoundException("Appointment not found");
         }
     }
 
@@ -83,7 +87,7 @@ public class AppointmentService {
         if (appointmentRepository.existsById(appointmentId)) {
             appointmentRepository.deleteById(appointmentId);
         } else {
-            throw new RuntimeException("Appointment not found");
+            throw new AppointmentNotFoundException("Appointment not found");
         }
     }
 
@@ -92,4 +96,3 @@ public class AppointmentService {
         appointmentRepository.resetAllSenha();
     }
 }
-

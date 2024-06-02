@@ -14,12 +14,15 @@ import java.util.List;
 @RequestMapping("/api/medic")
 public class MedicController {
 
+    private final MedicService medicService;
+
     @Autowired
-    private MedicService medicService;
+    public MedicController(MedicService medicService) {
+        this.medicService = medicService;
+    }
 
     @GetMapping("")
     public ResponseEntity<Object> getAllMedics() {
-            
         List<Medic> medics = medicService.getAllMedics();
 
         if (medics.isEmpty()) {
@@ -27,12 +30,10 @@ public class MedicController {
         } else {
             return new ResponseEntity<>(medics, HttpStatus.OK);
         }
-            
     }
 
     @GetMapping("/{medicId}")
     public ResponseEntity<Object> getMedicById(@PathVariable Long medicId) {
-
         Medic medic = medicService.getMedicById(medicId);
 
         if (medic == null) {
@@ -44,7 +45,6 @@ public class MedicController {
 
     @GetMapping("/specialty/{specialty}")
     public ResponseEntity<Object> getMedicBySpecialty(@PathVariable String specialty) {
-
         List<Medic> medics = medicService.getMedicBySpecialty(specialty);
 
         if (medics.isEmpty()) {
@@ -53,10 +53,9 @@ public class MedicController {
             return new ResponseEntity<>(medics, HttpStatus.OK);
         }
     }
-    
+
     @GetMapping("/{medicId}/serviceTime")
     public ResponseEntity<Object> getServiceTime(@PathVariable Long medicId) {
-
         Medic medic = medicService.getServiceTime(medicId);
 
         if (medic == null) {
@@ -68,7 +67,6 @@ public class MedicController {
 
     @GetMapping("/name/{firstName}/{lastName}")
     public ResponseEntity<Object> findMedicByName(@PathVariable String firstName, @PathVariable String lastName) {
-
         Medic medic = medicService.findMedicByName(firstName, lastName);
 
         if (medic == null) {

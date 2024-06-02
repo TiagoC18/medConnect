@@ -18,13 +18,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
 
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import project.medConnect.controller.PatientController; 
 import project.medConnect.entity.Patient;
@@ -32,7 +30,7 @@ import project.medConnect.service.PatientService;
 
 @Deprecated
 @WebMvcTest(PatientController.class)
-public class PatientCtrlTest {
+class PatientCtrlTest {
     
     @Autowired
     private MockMvc mvc;
@@ -41,34 +39,32 @@ public class PatientCtrlTest {
     private PatientService patientService; 
 
     @BeforeEach
-    public void setUp() {
-
+    void setUp() {
+        // No setup required as of now
     }
 
     @Test
     @DisplayName("Get all patients")
     void testGetAllPatients() throws Exception {
-        Patient patient1 = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
-        Patient patient2 = new Patient("John", "Doe", new Date(1999, 03, 27) , "Male", "123456789", "123456789", "johndoe@ua.pt","jonh123");
+        Patient patient1 = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
+        Patient patient2 = new Patient("John", "Doe", new Date(1999, 3, 27), "Male", "123456789", "123456789", "johndoe@ua.pt","jonh123");
 
         when(patientService.getAllPatients()).thenReturn(Arrays.asList(patient1, patient2));
 
         mvc.perform(get("/api/patient")
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
-            .andExpect(status().isOk()) 
             .andExpect(jsonPath("$", hasSize(2)))
             .andExpect(jsonPath("$[0].firstName", is("David"))) 
             .andExpect(jsonPath("$[1].email", is("johndoe@ua.pt")));
 
         verify(patientService, times(1)).getAllPatients();
-
     }
 
     @Test
     @DisplayName("Get patient by id")
     void testGetPatientById() throws Exception {
-        Patient patient1 = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
+        Patient patient1 = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
         when(patientService.getPatientById(1L)).thenReturn(patient1);
 
         mvc.perform(get("/api/patient/1")
@@ -77,13 +73,12 @@ public class PatientCtrlTest {
             .andExpect(jsonPath("$.firstName", is("David")));
 
         verify(patientService, times(1)).getPatientById(1L);
-
     }
 
     @Test
     @DisplayName("Get patient by email")
     void testGetPatientByEmail() throws Exception {
-        Patient patient1 = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
+        Patient patient1 = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
         when(patientService.getPatientByEmail("davidsilva@ua.pt")).thenReturn(patient1);
 
         mvc.perform(get("/api/patient/byEmail/davidsilva@ua.pt")
@@ -105,6 +100,5 @@ public class PatientCtrlTest {
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$", is(true)));
-
     }
 }

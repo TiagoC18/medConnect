@@ -16,11 +16,14 @@ import java.util.List;
 @RequestMapping("/api/appointment")
 public class AppointmentController {
 
-    @Autowired
-    private AppointmentService appointmentService;
+    private final AppointmentService appointmentService;
+    private final MedicService medicService;
 
     @Autowired
-    private MedicService MedicService;
+    public AppointmentController(AppointmentService appointmentService, MedicService medicService) {
+        this.appointmentService = appointmentService;
+        this.medicService = medicService;
+    }
 
     @GetMapping("")
     public List<Appointment> getAppointments() {
@@ -36,7 +39,7 @@ public class AppointmentController {
     @GetMapping("/booked/{specialty}/{firstName}/{lastName}/{date}")
     public List<String> getBookedAppointments(@PathVariable String specialty, @PathVariable String firstName, @PathVariable String lastName, @PathVariable String date) {
 
-        Medic medic = MedicService.findMedicByName(firstName, lastName);
+        Medic medic = medicService.findMedicByName(firstName, lastName);
 
         return appointmentService.getBookedAppointments(specialty, medic, date);
     }

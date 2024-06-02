@@ -16,12 +16,10 @@ import project.medConnect.entity.Patient;
 import project.medConnect.repository.PatientRepository;
 
 @DataJpaTest
-@SuppressWarnings("deprecation")
-public class PatientRepTest {
+class PatientRepTest {
 
     @Autowired
     private TestEntityManager entityManager;
-
 
     @Autowired
     private PatientRepository patientRepository;
@@ -32,7 +30,7 @@ public class PatientRepTest {
         Patient patient1 = new Patient();
         patient1.setFirstName("John");
         patient1.setLastName("Doe");
-        patient1.setDateOfBirth( new Date(1999, 12, 12));
+        patient1.setDateOfBirth(new Date(1999, 12, 12));
         patient1.setGender("Male");
         patient1.setCcNumber("123456787");
         patient1.setPhoneNumber("912345678");
@@ -42,7 +40,7 @@ public class PatientRepTest {
         Patient patient2 = new Patient();
         patient2.setFirstName("Jane");
         patient2.setLastName("Smith");
-        patient2.setDateOfBirth( new Date(2002, 1, 1));
+        patient2.setDateOfBirth(new Date(2002, 1, 1));
         patient2.setGender("Female");
         patient2.setCcNumber("123456787");
         patient2.setPhoneNumber("912345678");
@@ -65,7 +63,7 @@ public class PatientRepTest {
         Patient patient = new Patient();
         patient.setFirstName("John");
         patient.setLastName("Doe");
-        patient.setDateOfBirth( new Date(1999, 12, 12));
+        patient.setDateOfBirth(new Date(1999, 12, 12));
         patient.setGender("Male");
         patient.setCcNumber("123456787");
         patient.setPhoneNumber("912345678");
@@ -95,7 +93,7 @@ public class PatientRepTest {
         Patient patient = new Patient();
         patient.setFirstName("John");
         patient.setLastName("Doe");
-        patient.setDateOfBirth( new Date(1999, 12, 12));
+        patient.setDateOfBirth(new Date(1999, 12, 12));
         patient.setGender("Male");
         patient.setCcNumber("123456787");
         patient.setPhoneNumber("912345678");
@@ -125,7 +123,7 @@ public class PatientRepTest {
         Patient patient = new Patient();
         patient.setFirstName("John");
         patient.setLastName("Doe");
-        patient.setDateOfBirth( new Date(1999, 12, 12));
+        patient.setDateOfBirth(new Date(1999, 12, 12));
         patient.setGender("Male");
         patient.setCcNumber("123456787");
         patient.setPhoneNumber("912345678");

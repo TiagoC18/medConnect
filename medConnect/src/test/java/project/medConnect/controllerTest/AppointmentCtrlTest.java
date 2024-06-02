@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.mockito.Mock;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -26,19 +25,15 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
 
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 
-import project.medConnect.controller.PatientController;
 import project.medConnect.entity.Patient;
 import project.medConnect.service.PatientService;
 
-import project.medConnect.controller.MedicController;
 import project.medConnect.entity.Medic;
 import project.medConnect.service.MedicService;
 
@@ -46,9 +41,8 @@ import project.medConnect.controller.AppointmentController;
 import project.medConnect.entity.Appointment;
 import project.medConnect.service.AppointmentService;
 
-
 @WebMvcTest(AppointmentController.class)
-public class AppointmentCtrlTest {
+class AppointmentCtrlTest {
     
     @Autowired
     private MockMvc mvc;
@@ -71,7 +65,7 @@ public class AppointmentCtrlTest {
     @DisplayName("Get all appointments")
     void testGetAllAppointments() throws Exception {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
-        Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
+        Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
     
         Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
         Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled", null);
@@ -79,7 +73,6 @@ public class AppointmentCtrlTest {
         when(appointmentService.getAppointments()).thenReturn(Arrays.asList(appointment1, appointment2));
         mvc.perform(get("/api/appointment")
             .contentType(MediaType.APPLICATION_JSON))
-            .andExpect(status().isOk())
             .andExpect(status().isOk()) 
             .andExpect(jsonPath("$", hasSize(2)))
             .andExpect(jsonPath("$[0].status", is("Scheduled"))) 
@@ -88,12 +81,11 @@ public class AppointmentCtrlTest {
         verify(appointmentService, times(1)).getAppointments();
     }
 
-
     @Test
     @DisplayName("Add an appointment")
     void testAddAppointment() throws Exception {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
-        Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "john123");
+        Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "john123");
 
         Appointment appointment = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
 
@@ -135,7 +127,7 @@ public class AppointmentCtrlTest {
     @DisplayName("Get appointments by patient")
     void testGetAppointmentsByPatient() throws Exception {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
-        Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
+        Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
     
         Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
         Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled", null);
@@ -156,10 +148,9 @@ public class AppointmentCtrlTest {
     @DisplayName("Get appointments scheduled")
     void testGetAppointmentsScheduled() throws Exception {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
-        Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
+        Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
     
         Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled", null);
 
         when(appointmentService.getAppointmentsScheduled()).thenReturn(Arrays.asList(appointment1));
 
@@ -176,9 +167,8 @@ public class AppointmentCtrlTest {
     @DisplayName("Get appointments waiting")
     void testGetAppointmentsWaiting() throws Exception {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
-        Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
+        Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
     
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
         Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Waiting", null);
 
         when(appointmentService.getAppointmentsWaiting()).thenReturn(Arrays.asList(appointment2));
@@ -189,16 +179,16 @@ public class AppointmentCtrlTest {
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].status", is("Waiting")));
 
+        verify(appointmentService, times(1)).getAppointmentsWaiting();
     }
 
     @Test
     @DisplayName("Get appointments called")
     void testGetAppointmentsCalled() throws Exception {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
-        Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
+        Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
     
         Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Called", null);
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled", null);
 
         when(appointmentService.getAppointmentsCalled()).thenReturn(Arrays.asList(appointment1));
 
@@ -208,15 +198,15 @@ public class AppointmentCtrlTest {
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].status", is("Called")));
 
+        verify(appointmentService, times(1)).getAppointmentsCalled();
     }
 
     @Test
     @DisplayName("Get appointments done")
     void testGetAppointmentsDone() throws Exception {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
-        Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
+        Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
     
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
         Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Done", null);
 
         when(appointmentService.getAppointmentsDone()).thenReturn(Arrays.asList(appointment2));
@@ -227,16 +217,16 @@ public class AppointmentCtrlTest {
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].status", is("Done")));
 
+        verify(appointmentService, times(1)).getAppointmentsDone();
     }
 
     @Test
     @DisplayName("Update appointment status")
     void testUpdateAppointmentStatus() throws Exception {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
-        Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
+        Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
     
         Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled", null);
         
         when(appointmentService.updateAppointmentStatus(1L, "Done")).thenReturn(appointment1);
 
@@ -249,17 +239,10 @@ public class AppointmentCtrlTest {
     @Test
     @DisplayName("Delete an appointment")
     void testDeleteAppointment() throws Exception {
-        Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
-        Patient patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "david123");
-    
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled", null);
-
         mvc.perform(delete("/api/appointment/delete/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         verify(appointmentService, times(1)).deleteAppointment(1L);
-
     }
 }

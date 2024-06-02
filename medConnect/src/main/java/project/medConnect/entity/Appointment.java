@@ -1,7 +1,5 @@
 package project.medConnect.entity;
 
-import java.util.Date;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
@@ -40,7 +38,8 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(Patient patient, String specialty, Medic medic, String appointmentDate, String appointmentTime, String status, Integer senha) {
+    public Appointment(Patient patient, String specialty, Medic medic, String appointmentDate, String appointmentTime,
+            String status, Integer senha) {
         this.patient = patient;
         this.specialty = specialty;
         this.medic = medic;
@@ -113,6 +112,5 @@ public class Appointment {
     public void setSenha(Integer nextSenha) {
         this.senha = nextSenha;
     }
-
 
 }

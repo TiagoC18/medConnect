@@ -14,12 +14,15 @@ import java.util.List;
 @RequestMapping("/api/patient")
 public class PatientController {
 
+    private final PatientService patientService;
+
     @Autowired
-    private PatientService patientService;
+    public PatientController(PatientService patientService) {
+        this.patientService = patientService;
+    }
 
     @GetMapping("")
     public ResponseEntity<Object> getAllPatients() {
-            
         List<Patient> patients = patientService.getAllPatients();
 
         if (patients.isEmpty()) {
@@ -27,12 +30,10 @@ public class PatientController {
         } else {
             return new ResponseEntity<>(patients, HttpStatus.OK);
         }
-            
     }
 
     @GetMapping("/{patientId}")
     public ResponseEntity<Object> getPatientById(@PathVariable Long patientId) {
-
         Patient patient = patientService.getPatientById(patientId);
 
         if (patient == null) {
@@ -51,15 +52,11 @@ public class PatientController {
         } else {
             return new ResponseEntity<>(patient, HttpStatus.OK);
         }
-
     }
- 
+
     @PostMapping("/checkPassword")
     public ResponseEntity<Boolean> checkPassword(@RequestParam String email, @RequestParam String password) {
         boolean result = patientService.checkPassword(email, password);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-
-
-
 }

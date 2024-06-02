@@ -8,106 +8,104 @@ import org.junit.jupiter.api.*;
 
 import project.medConnect.entity.Patient;
 
-@SuppressWarnings("deprecation")
-public class PatientTest {
+class PatientTest {
     private Patient patient;
 
     @BeforeEach
-    public void setUp() {
-        patient = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
+    void setUp() {
+        patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
     }
 
     @AfterEach
-    public void tearDown() {
+    void tearDown() {
         patient = null;
     }
     
     @Test
-    public void testGetFirstName() {
+    void testGetFirstName() {
         assertEquals("David", patient.getFirstName());
     }
 
     @Test
-    public void testSetFirstName() {
+    void testSetFirstName() {
         patient.setFirstName("John");
         assertEquals("John", patient.getFirstName());
     }
 
     @Test
-    public void testGetLastName() {
+    void testGetLastName() {
         assertEquals("Silva", patient.getLastName());
     }
 
     @Test
-    public void testSetLastName() {
+    void testSetLastName() {
         patient.setLastName("Doe");
         assertEquals("Doe", patient.getLastName());
     }
 
     @Test
-    public void testGetDateOfBirth() {
-        assertEquals(new Date(1999, 07, 10), patient.getDateOfBirth());
+    void testGetDateOfBirth() {
+        assertEquals(new Date(1999, 7, 10), patient.getDateOfBirth());
     }
 
     @Test
-    public void testSetDateOfBirth() {
-        patient.setDateOfBirth(new Date(1999, 07, 11));
-        assertEquals(new Date(1999, 07, 11), patient.getDateOfBirth());
+    void testSetDateOfBirth() {
+        patient.setDateOfBirth(new Date(1999, 7, 11));
+        assertEquals(new Date(1999, 7, 11), patient.getDateOfBirth());
     }
 
     @Test
-    public void testGetGender() {
+    void testGetGender() {
         assertEquals("Male", patient.getGender());
     }
 
     @Test
-    public void testSetGender() {
+    void testSetGender() {
         patient.setGender("Female");
         assertEquals("Female", patient.getGender());
     }
 
     @Test
-    public void testGetCcNumber() {
+    void testGetCcNumber() {
         assertEquals("123456789", patient.getCcNumber());
     }
 
     @Test
-    public void testSetCcNumber() {
+    void testSetCcNumber() {
         patient.setCcNumber("987654321");
         assertEquals("987654321", patient.getCcNumber());
     }
 
     @Test
-    public void testGetPhoneNumber() {
+    void testGetPhoneNumber() {
         assertEquals("123456789", patient.getPhoneNumber());
     }
 
     @Test
-    public void testSetPhoneNumber() {
+    void testSetPhoneNumber() {
         patient.setPhoneNumber("987654321");
         assertEquals("987654321", patient.getPhoneNumber());
     }
 
     @Test
-    public void testGetEmail() {
+    void testGetEmail() {
         assertEquals("davidsilva@ua.pt", patient.getEmail());
     }
 
     @Test
-    public void testSetEmail() {
+    void testSetEmail() {
         patient.setEmail("johndoe@ua.pt");
         assertEquals("johndoe@ua.pt", patient.getEmail());
     }
 
     @Test
-    public void testGetPassword() {
+    void testGetPassword() {
         assertEquals("password", patient.getPassword());
     }
 
     @Test
-    public void testSetPassword() {
+    void testSetPassword() {
         patient.setPassword("john123");
         assertEquals("john123", patient.getPassword());
     }
-
 }

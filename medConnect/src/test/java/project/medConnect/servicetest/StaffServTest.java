@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
 @Deprecated
-public class StaffServTest {
+class StaffServTest {
     @Mock
     private StaffRepository staffRepository;
 
@@ -26,7 +26,7 @@ public class StaffServTest {
     private StaffService staffService;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         reset(staffRepository);
     }
 
@@ -40,7 +40,7 @@ public class StaffServTest {
 
         java.util.List<Staff> staffs = staffService.getAllStaff();
 
-        assertThat(staffs.size()).isEqualTo(2);
+        assertThat(staffs).hasSize(2);
         Mockito.verify(staffRepository, Mockito.times(1)).findAll();
     }
 
@@ -51,7 +51,7 @@ public class StaffServTest {
 
         Boolean check = staffService.checkPassword("mariadolores@ua.pt", "mdolores123");
 
-        assertThat(check).isEqualTo(Boolean.TRUE);
+        assertThat(check).isTrue();
         Mockito.verify(staffRepository, Mockito.times(1)).checkPassword("mariadolores@ua.pt", "mdolores123");
     }
 }

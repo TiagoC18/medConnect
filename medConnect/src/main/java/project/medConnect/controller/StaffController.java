@@ -14,12 +14,15 @@ import java.util.List;
 @RequestMapping("/api/staff")
 public class StaffController {
 
+    private final StaffService staffService;
+
     @Autowired
-    private StaffService staffService;
+    public StaffController(StaffService staffService) {
+        this.staffService = staffService;
+    }
 
     @GetMapping("")
     public ResponseEntity<Object> getAllStaff() {
-            
         List<Staff> staff = staffService.getAllStaff();
 
         if (staff.isEmpty()) {
@@ -27,12 +30,10 @@ public class StaffController {
         } else {
             return new ResponseEntity<>(staff, HttpStatus.OK);
         }
-            
     }
 
     @GetMapping("/{staffId}")
     public ResponseEntity<Object> getStaffById(@PathVariable Long staffId) {
-
         Staff staff = staffService.getStaffById(staffId);
 
         if (staff == null) {
@@ -47,5 +48,4 @@ public class StaffController {
         boolean result = staffService.checkPassword(email, password);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-    
 }

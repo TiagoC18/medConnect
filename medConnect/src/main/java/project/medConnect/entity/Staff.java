@@ -10,7 +10,7 @@ import jakarta.validation.constraints.NotNull;
 public class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long StaffId;
+    private Long staffId;
 
     @NotNull(message = "First name is required")
     private String firstName;
@@ -35,11 +35,11 @@ public class Staff {
     }
 
     public Long getStaffId() {
-        return StaffId;
+        return staffId;
     }
 
     public void setStaffId(Long staffId) {
-        StaffId = staffId;
+        this.staffId = staffId;
     }
 
     public String getFirstName() {

@@ -20,8 +20,7 @@ import project.medConnect.entity.Patient;
 import project.medConnect.repository.AppointmentRepository;
 
 @DataJpaTest
-@SuppressWarnings("deprecation")
-public class AppointmentRepTest {
+class AppointmentRepTest {
 
     @Autowired
     private TestEntityManager entityManager;
@@ -31,7 +30,7 @@ public class AppointmentRepTest {
 
     @Test
     @DisplayName("Find All Appointments")
-    public void testFindAllAppointments() {
+    void testFindAllAppointments() {
         Medic medic = new Medic();
         medic.setFirstName("John");
         medic.setLastName("Doe");
@@ -78,7 +77,7 @@ public class AppointmentRepTest {
 
     @Test
     @DisplayName("Post Appointment")
-    public void testPostAppointment() {
+    void testPostAppointment() {
         Medic medic = new Medic();
         medic.setFirstName("John");
         medic.setLastName("Doe");
@@ -114,7 +113,7 @@ public class AppointmentRepTest {
 
     @Test
     @DisplayName("Find Appointment by Id")
-    public void testFindAppointmentById() {
+    void testFindAppointmentById() {
         Medic medic = new Medic();
         medic.setFirstName("John");
         medic.setLastName("Doe");
@@ -160,11 +159,11 @@ public class AppointmentRepTest {
         assertEquals(appointment1.getPatient(), foundAppointment.getPatient());
         assertEquals(appointment1.getAppointmentTime(), foundAppointment.getAppointmentTime());
         assertEquals(appointment1.getStatus(), foundAppointment.getStatus());
-    }    
+    }
 
     @Test
     @DisplayName("Booked Appointments")
-    public void testFindBookedAppointments() {
+    void testFindBookedAppointments() {
         Medic medic = new Medic();
         medic.setFirstName("John");
         medic.setLastName("Doe");
@@ -210,7 +209,7 @@ public class AppointmentRepTest {
 
     @Test
     @DisplayName("Find Appointments by Patient")
-    public void testFindAppointmentsByPatient() {
+    void testFindAppointmentsByPatient() {
         Medic medic = new Medic();
         medic.setFirstName("John");
         medic.setLastName("Doe");
@@ -256,7 +255,7 @@ public class AppointmentRepTest {
 
     @Test
     @DisplayName("Find Appointments Scheduled")
-    public void testFindAppointmentsScheduled() {
+    void testFindAppointmentsScheduled() {
         Medic medic = new Medic();
         medic.setFirstName("John");
         medic.setLastName("Doe");
@@ -308,11 +307,9 @@ public class AppointmentRepTest {
         assertEquals(appointment1.getStatus(), foundAppointment.getStatus());
     }
 
-
-
     @Test
     @DisplayName("Find Appointments Waiting")
-    public void testFindAppointmentsWaiting() {
+    void testFindAppointmentsWaiting() {
         Medic medic = new Medic();
         medic.setFirstName("John");
         medic.setLastName("Doe");
@@ -366,7 +363,7 @@ public class AppointmentRepTest {
 
     @Test
     @DisplayName("Find Appointments Called")
-    public void testFindAppointmentsCalled() {
+    void testFindAppointmentsCalled() {
         Medic medic = new Medic();
         medic.setFirstName("John");
         medic.setLastName("Doe");
@@ -418,10 +415,9 @@ public class AppointmentRepTest {
         assertEquals(appointment1.getStatus(), foundAppointment.getStatus());
     }
 
-
     @Test
     @DisplayName("Find Appointments Done")
-    public void testFindAppointmentsDone() {
+    void testFindAppointmentsDone() {
         Medic medic = new Medic();
         medic.setFirstName("John");
         medic.setLastName("Doe");
@@ -475,7 +471,7 @@ public class AppointmentRepTest {
 
     @Test
     @DisplayName("Find Max Senha")
-    public void testFindMaxSenha() {
+    void testFindMaxSenha() {
         Medic medic = new Medic();
         medic.setFirstName("John");
         medic.setLastName("Doe");
@@ -510,7 +506,6 @@ public class AppointmentRepTest {
         appointment2.setStatus("Done");
         appointment2.setSenha(2);
 
-
         entityManager.persist(medic);
         entityManager.persist(patient);
         entityManager.persist(appointment1);
@@ -520,12 +515,11 @@ public class AppointmentRepTest {
         Integer maxSenha = appointmentRepository.findMaxSenha();
         assertNotNull(maxSenha);
         assertEquals(2, maxSenha);
-
     }
 
     @Test
     @DisplayName("Reset All Senha")
-    public void testResetAllSenha() {
+    void testResetAllSenha() {
         Medic medic = new Medic();
         medic.setFirstName("John");
         medic.setLastName("Doe");
@@ -585,4 +579,4 @@ public class AppointmentRepTest {
         assertNull(foundAppointment1.getSenha());
     }
 
-}    
+}

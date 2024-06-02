@@ -16,7 +16,7 @@ import project.medConnect.entity.Medic;
 import project.medConnect.repository.MedicRepository;
 
 @DataJpaTest
-public class MedicRepTest {
+class MedicRepTest {
 
     @Autowired
     private TestEntityManager entityManager;
@@ -26,7 +26,7 @@ public class MedicRepTest {
 
     @Test
     @DisplayName("Find All Medics")
-    public void testFindAllMedics() {
+    void testFindAllMedics() {
         Medic medic1 = new Medic();
         medic1.setFirstName("John");
         medic1.setLastName("Doe");
@@ -55,7 +55,7 @@ public class MedicRepTest {
 
     @Test
     @DisplayName("Find Medic by Id")
-    public void testFindMedicById() {
+    void testFindMedicById() {
         Medic medic = new Medic();
         medic.setFirstName("John");
         medic.setLastName("Doe");
@@ -81,7 +81,7 @@ public class MedicRepTest {
 
     @Test
     @DisplayName("Find Medic by Specialty")
-    public void testFindMedicBySpecialty() {
+    void testFindMedicBySpecialty() {
         Medic medic1 = new Medic();
         medic1.setFirstName("John");
         medic1.setLastName("Doe");
@@ -110,7 +110,7 @@ public class MedicRepTest {
 
     @Test
     @DisplayName("Find Medic by Name")
-    public void testFindMedicByName() {
+    void testFindMedicByName() {
         Medic medic1 = new Medic();
         medic1.setFirstName("John");
         medic1.setLastName("Doe");

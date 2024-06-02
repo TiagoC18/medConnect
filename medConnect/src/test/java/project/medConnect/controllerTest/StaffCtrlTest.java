@@ -18,7 +18,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
 
@@ -28,7 +27,7 @@ import project.medConnect.service.StaffService;
 
 @Deprecated
 @WebMvcTest(StaffController.class)
-public class StaffCtrlTest {
+class StaffCtrlTest {
         
     @Autowired
     private MockMvc mvc;
@@ -37,8 +36,8 @@ public class StaffCtrlTest {
     private StaffService staffService; 
 
     @BeforeEach
-    public void setUp() {
-
+    void setUp() {
+        // No setup required as of now
     }
     
     @Test
@@ -52,7 +51,6 @@ public class StaffCtrlTest {
         mvc.perform(get("/api/staff")
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
-            .andExpect(status().isOk()) 
             .andExpect(jsonPath("$", hasSize(2)))
             .andExpect(jsonPath("$[0].firstName", is(staff1.getFirstName())))
             .andExpect(jsonPath("$[1].firstName", is(staff2.getFirstName())));
@@ -66,12 +64,10 @@ public class StaffCtrlTest {
         when(staffService.checkPassword("mariadolores@ua.pt", "mdolores123")).thenReturn(Boolean.TRUE);
 
         mvc.perform(post("/api/staff/checkPassword")
-        .param("email", "mariadolores@ua.pt")
-        .param("password", "mdolores123")
-        .contentType(MediaType.APPLICATION_JSON))
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$", is(true)));
-
+            .param("email", "mariadolores@ua.pt")
+            .param("password", "mdolores123")
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$", is(true)));
     }
-
 }

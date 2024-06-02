@@ -8,30 +8,27 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class StaffService {
 
+    private final StaffRepository staffRepository;
+
     @Autowired
-    private StaffRepository staffRepository;
+    public StaffService(StaffRepository staffRepository) {
+        this.staffRepository = staffRepository;
+    }
 
     public List<Staff> getAllStaff() {
-        List<Staff> staff = staffRepository.findAll();
-        return staff;
+        return staffRepository.findAll();
     }
 
     public Staff getStaffById(Long staffId) {
-        Optional<Staff> staff = staffRepository.findById(staffId);
-        if (staff.isPresent()) {
-            return staff.get();
-        } else {
-            throw new NoSuchElementException("Staff with id " + staffId + " not found");
-        }
+        return staffRepository.findById(staffId)
+                .orElseThrow(() -> new NoSuchElementException("Staff with id " + staffId + " not found"));
     }
-    
+
     public boolean checkPassword(String email, String password) {
         return staffRepository.checkPassword(email, password);
     }
-    
 }

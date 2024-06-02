@@ -13,34 +13,28 @@ import java.util.Optional;
 @Service
 public class PatientService {
 
+    private final PatientRepository patientRepository;
+
     @Autowired
-    private PatientRepository patientRepository;
+    public PatientService(PatientRepository patientRepository) {
+        this.patientRepository = patientRepository;
+    }
 
     public List<Patient> getAllPatients() {
-        List<Patient> patients = patientRepository.findAll();
-        return patients;
+        return patientRepository.findAll();
     }
 
     public Patient getPatientById(Long patientId) {
-        Optional<Patient> patient = patientRepository.findById(patientId);
-        if (patient.isPresent()) {
-            return patient.get();
-        } else {
-            throw new NoSuchElementException("Patient with id " + patientId + " not found");
-        }
+        return patientRepository.findById(patientId)
+                .orElseThrow(() -> new NoSuchElementException("Patient with id " + patientId + " not found"));
     }
 
     public Patient getPatientByEmail(String email) {
-        Patient patient = patientRepository.findPatientByEmail(email);
-        if (patient != null) {
-            return patient;
-        } else {
-            throw new NoSuchElementException("Patient with username " + email + " not found");
-        }
+        return Optional.ofNullable(patientRepository.findPatientByEmail(email))
+                .orElseThrow(() -> new NoSuchElementException("Patient with email " + email + " not found"));
     }
 
     public boolean checkPassword(String email, String password) {
         return patientRepository.checkPassword(email, password);
     }
-
 }

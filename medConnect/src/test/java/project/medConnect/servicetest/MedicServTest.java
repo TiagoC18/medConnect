@@ -20,7 +20,7 @@ import org.junit.jupiter.api.DisplayName;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-public class MedicServTest {
+class MedicServTest {
     @Mock
     private MedicRepository medicRepository;
 
@@ -28,13 +28,13 @@ public class MedicServTest {
     private MedicService medicService;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         reset(medicRepository);
     }
 
     @Test
     @DisplayName("Test Find All Medics")
-    public void testFindAllMedics() {
+    void testFindAllMedics() {
         Medic medic1 = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         Medic medic2 = new Medic( "Jane", "Smith", "janesmith@ua.pt", "912345678", "Dermatology", Arrays.asList("10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h", "18h"));
         Medic medic3 = new Medic("David", "Silva", "davidsilva@ua.pt", "912345678", "Dermatology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
@@ -43,13 +43,13 @@ public class MedicServTest {
 
         List<Medic> medics = medicService.getAllMedics();
 
-        assertThat(medics.size()).isEqualTo(3);
+        assertThat(medics).hasSize(3);
         Mockito.verify(medicRepository, Mockito.times(1)).findAll();
     }
 
     @Test
     @DisplayName("Test Find Medic By Id")
-    public void testFindMedicById() {
+    void testFindMedicById() {
         Medic medic1 = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         medic1.setMedicId(1L);
 
@@ -63,20 +63,20 @@ public class MedicServTest {
 
     @Test
     @DisplayName("Test Find Medic By Specialty")
-    public void testFindMedicBySpecialty() {
+    void testFindMedicBySpecialty() {
         Medic medic1 = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         
         Mockito.when(medicRepository.findMedicBySpecialty("Cardiology")).thenReturn(Arrays.asList(medic1));
 
         List<Medic> medics = medicService.getMedicBySpecialty("Cardiology");
 
-        assertThat(medics.size()).isEqualTo(1);
+        assertThat(medics).hasSize(1);
         Mockito.verify(medicRepository, Mockito.times(1)).findMedicBySpecialty("Cardiology");
     }
 
     @Test
     @DisplayName("Test Find Service Time")
-    public void testFindServiceTime() {
+    void testFindServiceTime() {
         Medic medic1 = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         
         Mockito.when(medicRepository.findById(1L)).thenReturn(java.util.Optional.of(medic1));
@@ -89,7 +89,7 @@ public class MedicServTest {
 
     @Test
     @DisplayName("Test Find Medic By Name")
-    public void testFindMedicByName() {
+    void testFindMedicByName() {
         Medic medic1 = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         
         Mockito.when(medicRepository.findMedicByName("John", "Doe")).thenReturn(medic1);
@@ -99,5 +99,4 @@ public class MedicServTest {
         assertThat(medic).isEqualTo(medic1);
         Mockito.verify(medicRepository, Mockito.times(1)).findMedicByName("John", "Doe");
     }
-    
 }
