@@ -1,19 +1,34 @@
 version: '3.8'
 
 services:
-  sql:
-    image: mysql
-    container_name: database
+  db:
+    image: mysql/mysql-server:5.7
+    container_name: medConnect-db
     environment:
       MYSQL_ROOT_PASSWORD: medConnect
       MYSQL_DATABASE: medConnect
       MYSQL_USER: meduser
       MYSQL_PASSWORD: medConnect
     ports:
-      - "9906:3306"
-    restart: unless-stopped
+      - "3306:3306"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - db_data:/var/lib/mysql
+
+  app:
+    build:
+      context: ./medConnect
+    container_name: medConnect-app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/medConnect
+      SPRING_DATASOURCE_USERNAME: meduser
+      SPRING_DATASOURCE_PASSWORD: medConnect
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQLDialect
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
 
 volumes:
-  mysql_data:
+  db_data:
