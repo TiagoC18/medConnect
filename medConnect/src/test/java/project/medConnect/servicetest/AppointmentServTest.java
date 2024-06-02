@@ -131,7 +131,6 @@ class AppointmentServTest {
         Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
 
         Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Cancelled", null);
 
         List<Appointment> appointments = Arrays.asList(appointment1);
 
@@ -152,7 +151,6 @@ class AppointmentServTest {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
 
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
         Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Waiting", null);
 
         List<Appointment> appointments = Arrays.asList(appointment2);
@@ -174,7 +172,6 @@ class AppointmentServTest {
         Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
         Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
 
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Scheduled", null);
         Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Called", null);
 
         List<Appointment> appointments = Arrays.asList(appointment2);
@@ -197,7 +194,6 @@ class AppointmentServTest {
         Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
 
         Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Done", null);
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Called", null);
 
         List<Appointment> appointments = Arrays.asList(appointment1);
 
@@ -219,7 +215,6 @@ class AppointmentServTest {
         Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
 
         Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Done", null);
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Called", null);
 
         when(appointmentRepository.findById(1L)).thenReturn(Optional.of(appointment1));
         when(appointmentRepository.save(appointment1)).thenReturn(appointment1);
@@ -241,7 +236,6 @@ class AppointmentServTest {
         Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
 
         Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Waiting", null);
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Called", null);
         appointment1.setAppointmentId(1L);
         
         when(appointmentRepository.existsById(1L)).thenReturn(true);
@@ -258,11 +252,6 @@ class AppointmentServTest {
     @Test
     @DisplayName("Reset all Senha")
     void testResetAllSenha() {
-        Medic medic = new Medic("John", "Doe", "johndoe@ua.pt", "912345678", "Cardiology", Arrays.asList("9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h"));
-        Patient patient = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
-
-        Appointment appointment1 = new Appointment(patient, "Cardiology", medic, "2024-06-08", "10h", "Waiting", 2);
-        Appointment appointment2 = new Appointment(patient, "Cardiology", medic, "2024-07-08", "11h", "Called", 1);
         
         when(appointmentRepository.findMaxSenha()).thenReturn(2);
         assertThat(appointmentRepository.findMaxSenha()).isEqualTo(2);
