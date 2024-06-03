@@ -1,0 +1,51 @@
+<div class="box">
+    <div class="_banner1">
+        <div class="content">
+            <div class="col2 mar1">
+                <p class="textStyle1">HERE YOU CAN</p>
+            </div>
+            <div class="col2 mar2">
+                <p class="textStyle2"><span class="textStyle3">make an</span><br><span>appointment</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="containerContent">
+        <div class="col1">
+            <div>
+                <h2>New <span class="textStyle3">Appointment</span></h2>
+                <label for="appointment-date">Date</label>
+                <input type="date" id="appointment-date" name="appointment-date" min="2024-05-09" max="2024-12-31" required />
+                <br><br>
+                <label for="specialty">Specialty</label>
+                <select id="specialty" name="specialty" class="input-box" required>
+                    <option value="" disabled selected>Select Specialty</option>
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Dermatology">Dermatology</option>
+                    <option value="Neurology">Neurology</option>
+                    <option value="Pediatrics">Pediatrics</option>
+                    <option value="Orthopedics">Orthopedics</option>
+                    <option value="Gynecology">Gynecology</option>
+                </select>
+                <div id="medics-availability" style="display: none;">            
+                    <br><br>                  
+                    <label for="medic">Available Medics</label>
+                    <select id="medic" name="medic" class="input-box" required>
+                        <!-- Medics will be loaded here -->
+                    </select>
+                </div>
+                <div id="time-available" style="display: none;">            
+                    <br><br>                  
+                    <label for="time">Available Hours</label>
+                    <select id="time" name="time" class="input-box" required>
+                        <!-- Time will be loaded here -->
+                    </select>
+                </div>
+                <button id="checkMedics" onclick="checkMedic()">Check Medics</button>
+                <button id="checkHours" style="display: none;" onclick="checkHours()">Check Hours</button>
+                <button id="bookAppointment" style="display: none;" onclick="bookAppointment()">Book Appointment</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../js/appointment.js"></script>

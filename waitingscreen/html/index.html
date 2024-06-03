@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Waiting Screen | MedConnect</title>
+  <meta charset="utf-8">
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="../images/icon.png" type="image/x-icon">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body style="background-color: #dddddd; margin: 0;">
+    <div class="header" style="background-color: #2b2b2e;">
+        <div class="header_content">
+            <div class="logoHolder">
+                <h1><a class="hide_text" id="logo"></a></h1>
+                <div class="extra1"></div>
+            </div>
+        </div>
+    </div>
+    
+  <div class="main-content">
+    <div class="column" id="last-calls">
+      <h2>LAST CALLED</h2>
+      <div class="last-calls" id="last-appointments">
+        <!-- As senhas chamadas serão adicionadas aqui -->
+      </div>
+    </div>
+    <div class="column" id="waiting-calls">
+      <h2>WAITING</h2>
+      <div class="waiting-calls" id="waiting-appointments">
+        <!-- As senhas waiting serão adicionadas aqui -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function formatsenha(senha) {
+      return senha < 10 ? '00' + senha : senha < 100 ? '0' + senha : senha;
+    }
+
+    function fetchLastCalledAppointments() {
+      fetch('http://localhost:8080/api/appointment/called')
+        .then(response => response.json())
+        .then(data => {
+          const lastCalledDiv = document.getElementById('last-appointments');
+          lastCalledDiv.innerHTML = '';
+
+          const appointmentsToShow = data.slice(0, 4); 
+
+          appointmentsToShow.forEach(appointment => {
+            const senhaItem = document.createElement('div');
+            senhaItem.classList.add('senha-item');
+            const formattedId = formatsenha(appointment.senha);
+            senhaItem.textContent = formattedId;
+            lastCalledDiv.appendChild(senhaItem);
+          }); 
+
+          if (appointmentsToShow.length < 4) {
+            const emptySlots = 4 - appointmentsToShow.length;
+            for (let i = 0; i < emptySlots; i++) {
+              const senhaItem = document.createElement('div');
+              senhaItem.classList.add('senha-item');
+              senhaItem.textContent = '- - -'; 
+              lastCalledDiv.appendChild(senhaItem);
+            }
+          }
+        })
+        .catch(error => console.error('Erro ao buscar agendamentos chamados:', error));
+    }
+
+    function fetchWaitingAppointments() {
+      fetch('http://localhost:8080/api/appointment/waiting')
+        .then(response => response.json())
+        .then(data => {
+          const waitingAppointmentsDiv = document.getElementById('waiting-appointments');
+          waitingAppointmentsDiv.innerHTML = ''; 
+
+          const appointmentsToShow = data.slice(0, 12); 
+
+          appointmentsToShow.forEach(appointment => {
+            const senhaItem = document.createElement('div');
+            senhaItem.classList.add('senha-item2');
+            const formattedId = formatsenha(appointment.senha);
+            senhaItem.textContent = formattedId;
+            waitingAppointmentsDiv.appendChild(senhaItem);
+          });
+
+          if (appointmentsToShow.length < 12) {
+            const emptySlots = 12 - appointmentsToShow.length;
+            for (let i = 0; i < emptySlots; i++) {
+              const senhaItem = document.createElement('div');
+              senhaItem.classList.add('senha-item2');
+              senhaItem.textContent = ''; 
+              waitingAppointmentsDiv.appendChild(senhaItem);
+            }
+          }
+        })
+        .catch(error => console.error('Erro ao buscar agendamentos:', error));
+    }
+
+    // Chamar as funções para carregar os dados inicialmente
+    fetchLastCalledAppointments();
+    fetchWaitingAppointments();
+
+    // Atualizar os dados a cada 10 segundos
+    setInterval(() => {
+      fetchLastCalledAppointments();
+      fetchWaitingAppointments();
+    }, 1000); // Intervalo em milissegundos (10 segundos)
+  </script>
+</body>
+</html>

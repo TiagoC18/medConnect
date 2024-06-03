@@ -1,0 +1,25 @@
+
+<div class="col6">
+    <h2 class="textStyle5">Save your<br><span class="textStyle3">time</span></h2>
+    <h2 class="textStyle6">save our<br><span class="textStyle3">time</span></h2>
+    <span class="extra2"></span>
+</div>
+<div class="_contacts">
+    <h2 class="textStyle8">make your<br><span class="textStyle7">appointment</span><br><span class="textStyle7">now</span></h2>
+</div>
+
+<script>
+    async function checkLogin() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    if (isLoggedIn) {
+        document.getElementById('menuAgenda').style.display = 'block';
+        document.getElementById('loginButton').style.display = 'none';
+        document.getElementById('logoutButton').style.display = 'block';
+        loadAppointments();
+    } else {
+        document.getElementById('menuAgenda').style.display = 'none';
+        document.getElementById('loginButton').style.display = 'block';
+        document.getElementById('logoutButton').style.display = 'none';
+    }
+}
+</script>
