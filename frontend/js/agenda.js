@@ -17,10 +17,6 @@ async function loadAppointments() {
     appointmentsContainer.innerHTML = ''
 
     const email = localStorage.getItem('email');
-    if (!email) {
-        alert('You need to be logged in to view your appointments.');
-        return;
-    }
 
     try {
         const patientResponse = await fetch(`http://localhost:8080/api/patient/byEmail/${email}`);
@@ -140,7 +136,15 @@ async function deleteAppointment(appointmentId) {
         alert('An error occurred while deleting the appointment. Please try again.');
     }
 }
+function handlePageChange() {
+    if (window.location.hash.includes('pageAgenda')) {
+        loadAppointments();
+    }
+}
 
-// Verifica o login
+// Adicionar listener para o evento 'hashchange'
+window.addEventListener('hashchange', handlePageChange);
+
+// Executar a função uma vez na carga inicial
 checkLogin();
 
