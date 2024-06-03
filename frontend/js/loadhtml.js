@@ -1,8 +1,8 @@
 $(function(){
-    $('#home').load('/frontend/html/home.html');
-    $('#appointment').load('/frontend/html/appointment.html');
-    $('#agenda').load('/frontend/html/agenda.html');
-    $('#oldagenda').load('/frontend/html/oldagenda.html');
-    $('#login').load('/frontend/html/login.html');
-    $('#register').load('/frontend/html/register.html');
+    $('#home').load('home.html');
+    $('#appointment').load('appointment.html');
+    $('#agenda').load('agenda.html');
+    $('#oldagenda').load('oldagenda.html');
+    $('#login').load('login.html');
+    $('#register').load('register.html');
 });

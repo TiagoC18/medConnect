@@ -4,6 +4,7 @@ services:
   db:
     image: mysql/mysql-server:5.7
     container_name: medConnect-db
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: medConnect
       MYSQL_DATABASE: medConnect
@@ -11,12 +12,17 @@ services:
       MYSQL_PASSWORD: medConnect
     ports:
       - "3306:3306"
-    volumes:
-      - db_data:/var/lib/mysql
+    networks:
+      - medConnect-network
 
   app:
+    depends_on:
+      - db
     build:
       context: ./medConnect
+    restart: always
+    ports:
+      - "8080:8080"
     container_name: medConnect-app
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/medConnect
@@ -25,10 +31,38 @@ services:
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
       SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQLDialect
-    ports:
-      - "8080:8080"
-    depends_on:
-      - db
+    networks:
+      - medConnect-network
 
-volumes:
-  db_data:
+  waitingscreen:
+    depends_on:
+      - app
+    build: ./waitingscreen
+    ports:
+      - "3001:80"
+    networks:
+      - medConnect-network
+
+  staff:
+    depends_on:
+      - app
+    build: ./staff
+    ports:
+      - "3002:80"
+    networks:
+      - medConnect-network
+  
+  frontend:
+    depends_on:
+      - app
+    build: ./frontend
+    ports:
+      - "3003:80"
+    networks:
+      - medConnect-network
+
+
+
+networks:
+  medConnect-network:
+    driver: bridge
