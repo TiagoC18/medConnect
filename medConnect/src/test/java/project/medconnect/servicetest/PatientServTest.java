@@ -51,6 +51,16 @@ class PatientServTest {
     }
 
     @Test
+    @DisplayName("Test Add Patient")
+    void testAddPatient() {
+        Patient patient1 = new Patient("David", "Silva", new Date(1999, 07, 10) , "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");
+
+        patientService.addPatient(patient1);
+
+        Mockito.verify(patientRepository, Mockito.times(1)).save(patient1);
+    }
+
+    @Test
     @DisplayName("Test Find Patient By Id")
     void testFindPatientById() {
         Patient patient1 = new Patient("David", "Silva", new Date(1999, 7, 10), "Male", "123456789", "123456789", "davidsilva@ua.pt", "password");

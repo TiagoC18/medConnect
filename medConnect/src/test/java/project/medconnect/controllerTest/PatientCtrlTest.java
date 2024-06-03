@@ -1,5 +1,7 @@
 package project.medconnect.controllerTest;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -60,6 +62,29 @@ class PatientCtrlTest {
             .andExpect(jsonPath("$[1].email", is("johndoe@ua.pt")));
 
         verify(patientService, times(1)).getAllPatients();
+    }
+
+
+    @Test
+    @DisplayName("Add patient")
+    void testAddPatient() throws Exception {
+        doNothing().when(patientService).addPatient(any(Patient.class));
+
+        mvc.perform(post("/api/patient")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content("{\n" +
+                "    \"firstName\": \"David\",\n" +
+                "    \"lastName\": \"Silva\",\n" +
+                "    \"dateOfBirth\": \"1999-07-10\",\n" +
+                "    \"gender\": \"Male\",\n" +
+                "    \"phoneNumber\": \"123456789\",\n" +
+                "    \"nif\": \"123456789\",\n" +
+                "    \"email\": \"davidsilva@ua.pt\",\n" +
+                "    \"password\": \"password\"\n" +
+                "}"))
+        .andExpect(status().isCreated());
+
+        verify(patientService, times(1)).addPatient(any(Patient.class));
     }
 
     @Test

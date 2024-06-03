@@ -24,6 +24,10 @@ public class PatientService {
         return patientRepository.findAll();
     }
 
+    public void addPatient(Patient patient) {
+        patientRepository.save(patient);
+    }
+
     public Patient getPatientById(Long patientId) {
         return patientRepository.findById(patientId)
                 .orElseThrow(() -> new NoSuchElementException("Patient with id " + patientId + " not found"));

@@ -407,6 +407,47 @@ header {
     height: 100%;
 }
 
+.delete-button {
+    font-size: 10px;
+    color: #ff0000; /* Cor vermelha */
+    cursor: pointer; /* Altera o cursor para uma mão quando passar sobre */
+    margin-left: 340px;
+    margin-top: 8px; 
+    position: fixed;/* Adiciona um pequeno espaço à esquerda do botão */
+}
+
+.modal {
+    z-index: 999999 ;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ddd; /* Cor de fundo cinza claro quando passar o mouse */
+}
+
 .more {
     font-size: 12px;
     color: #1e1e1e;

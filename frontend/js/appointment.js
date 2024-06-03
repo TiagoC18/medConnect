@@ -1,37 +1,128 @@
-async function checkAvailability() {
+async function checkMedic() {
     const date = document.getElementById('appointment-date').value;
-    const time = document.getElementById('appointment-time').value;
     const specialty = document.getElementById('specialty').value;
 
-    if (date && time && specialty) {
+    if (date && specialty) {
         try {
-            const response = await fetch(`/api/medic/specialty/${specialty}`);
+            const response = await fetch(`http://localhost:8080/api/medic/specialty/${specialty}`);
             if (response.ok) {
-                const availableMedics = await response.json();
+                const specialtyMedic = await response.json();
+                console.log(specialtyMedic);
                 const medicSelect = document.getElementById('medic');
 
-                // Clear previous options
                 medicSelect.innerHTML = '';
 
-                availableMedics.forEach(medic => {
-                    const option = document.createElement('option');
-                    option.value = medic.id;
-                    option.textContent = medic.firstName + ' ' + medic.lastName;
-                    medicSelect.appendChild(option);
-                });
+                if (specialtyMedic.length > 0) {
+                    specialtyMedic.forEach(medic => {
+                        const option = document.createElement('option');
+                        option.value = `${medic.firstName} ${medic.lastName}`; // Define o valor como nome completo
+                        option.textContent = medic.firstName + ' ' + medic.lastName;
+                        medicSelect.appendChild(option);
+                    });
 
-                document.getElementById('medics-availability').style.display = 'block';
+                    document.getElementById('appointment-date').disabled = true;
+                    document.getElementById('specialty').disabled = true;
+                    document.getElementById('checkMedics').style.display = 'none';
+                    document.getElementById('medics-availability').style.display = 'block';
+                    document.getElementById('checkHours').style.display = 'block';
+                } else {
+                    alert('No medics available for the selected specialty.');
+                    document.getElementById('medics-availability').style.display = 'none';
+                    document.getElementById('checkHours').style.display = 'none';
+                }
             } else {
                 alert('No medics available for the selected specialty.');
+                document.getElementById('medics-availability').style.display = 'none';
+                document.getElementById('checkHours').style.display = 'none';
             }
         } catch (error) {
             console.error('Error fetching available medics:', error);
             alert('An error occurred while fetching available medics. Please try again.');
+            document.getElementById('medics-availability').style.display = 'none';
+            document.getElementById('checkHours').style.display = 'none';
         }
     } else {
         alert('Please fill in all fields.');
     }
 }
+
+async function checkHours() {
+    const date = document.getElementById('appointment-date').value;
+    const specialty = document.getElementById('specialty').value;
+    const medic = document.getElementById('medic').value;
+    const timeAvailable = document.getElementById('time-available');
+    const timeSelect = document.getElementById('time');
+
+    if (date && specialty && medic) {
+        try {
+            // Dividir o nome completo apenas no último espaço
+            const lastSpaceIndex = medic.lastIndexOf(' ');
+            const firstName = medic.substring(0, lastSpaceIndex).trim();
+            const lastName = medic.substring(lastSpaceIndex + 1).trim();
+
+            // Buscar o médico pelo nome
+            const medicResponse = await fetch(`http://localhost:8080/api/medic/name/${encodeURIComponent(firstName)}/${encodeURIComponent(lastName)}`);
+            if (medicResponse.ok) {
+                const medicData = await medicResponse.json();
+
+                // Usar o ID do médico para buscar os horários de atendimento
+                const serviceTimeResponse = await fetch(`http://localhost:8080/api/medic/${medicData.medicId}/serviceTime`);
+                if (serviceTimeResponse.ok) {
+                    const serviceTimes = await serviceTimeResponse.json();
+
+                    // Buscar horários já reservados
+                    const bookedResponse = await fetch(`http://localhost:8080/api/appointment/booked/${encodeURIComponent(specialty)}/${encodeURIComponent(firstName)}/${encodeURIComponent(lastName)}/${encodeURIComponent(date)}`);
+                    if (bookedResponse.ok) {
+                        const bookedTimes = await bookedResponse.json();
+
+                        // Limpar a lista de horários anteriores
+                        timeSelect.innerHTML = '';
+
+                        // Verificar se há horários disponíveis excluindo os horários já reservados
+                        const availableTimes = serviceTimes.filter(time => !bookedTimes.includes(time));
+
+                        if (availableTimes.length > 0) {
+                            // Mostrar os horários disponíveis
+                            availableTimes.forEach(time => {
+                                const option = document.createElement('option');
+                                option.value = time;
+                                option.textContent = time;
+                                timeSelect.appendChild(option);
+                            });
+
+                            // Exibir o seletor de horários
+
+                            document.getElementById('medic').disabled = true;
+                            document.getElementById('checkHours').style.display = 'none';
+                            document.getElementById('bookAppointment').style.display = 'block';
+                            timeAvailable.style.display = 'block';
+                        } else {
+                            alert('No available service times for the selected medic.');
+                            timeAvailable.style.display = 'none';
+                        }
+                    } else {
+                        alert('Error fetching booked appointments.');
+                        timeAvailable.style.display = 'none';
+                    }
+                } else {
+                    alert('No available service times for the selected medic.');
+                    timeAvailable.style.display = 'none';
+                }
+            } else {
+                alert('Medic not found.');
+                timeAvailable.style.display = 'none';
+            }
+        } catch (error) {
+            console.error('Error fetching medic details or service times:', error);
+            alert('An error occurred while fetching medic details or service times. Please try again.');
+            timeAvailable.style.display = 'none';
+        }
+    } else {
+        alert('Please fill in all fields.');
+    }
+}
+
+
 
 async function bookAppointment() {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
@@ -43,24 +134,36 @@ async function bookAppointment() {
     }
 
     const date = document.getElementById('appointment-date').value;
-    const time = document.getElementById('appointment-time').value;
-    const medicId = document.getElementById('medic').value;
+    const time = document.getElementById('time').value;
+    const medic = document.getElementById('medic').value;
+    const specialty = document.getElementById('specialty').value;
     const email = localStorage.getItem('email'); // Assuming email is stored in localStorage after login
 
-    if (date && time && medicId && email) {
+    if (date && time && medic && email && specialty) {
         try {
-            const patientResponse = await fetch(`/api/patient/byEmail/${email}`);
+            // Dividir o nome completo apenas no último espaço
+            const lastSpaceIndex = medic.lastIndexOf(' ');
+            const firstName = medic.substring(0, lastSpaceIndex).trim();
+            const lastName = medic.substring(lastSpaceIndex + 1).trim();
+
+            // Buscar o médico pelo nome
+            const medicResponse = await fetch(`http://localhost:8080/api/medic/name/${encodeURIComponent(firstName)}/${encodeURIComponent(lastName)}`);
+            const medicData = await medicResponse.json();
+
+            const patientResponse = await fetch(`http://localhost:8080/api/patient/byEmail/${email}`);
             if (patientResponse.ok) {
                 const patient = await patientResponse.json();
 
                 const appointment = {
-                    date,
-                    time,
-                    medicId,
-                    patientId: patient.patientId
+                    appointmentDay: date,
+                    appointmentTime: time,
+                    medic: { medicId: medicData.medicId }, // Assume que o objeto medic precisa do campo medicId
+                    patient: { patientId: patient.patientId }, // Assume que o objeto patient precisa do campo patientId
+                    specialty: specialty, // Incluindo a especialidade
+                    status: 'Scheduled' // Status padrão da consulta
                 };
 
-                const response = await fetch('/api/appointment', {
+                const response = await fetch('http://localhost:8080/api/appointment', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -69,6 +172,8 @@ async function bookAppointment() {
                 });
 
                 if (response.ok) {
+                    window.location.href = '#!/pageAgenda';
+                    window.location.reload();
                     alert('Appointment booked successfully!');
                 } else {
                     alert('Failed to book appointment.');
@@ -84,6 +189,7 @@ async function bookAppointment() {
         alert('Please fill in all fields.');
     }
 }
+
 
 // Check login status on page load
 window.onload = checkLogin;
