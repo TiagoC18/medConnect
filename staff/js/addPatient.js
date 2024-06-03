@@ -25,11 +25,11 @@ function fetchAppointments(patientId) {
                 const appointmentDiv = document.createElement('div');
                 appointmentDiv.className = 'appointment-item';
                 appointmentDiv.innerHTML = `
-                    <p>Date: ${appointment.date}</p>
-                    <p>Time: ${appointment.time}</p>
+                    <p>Date: ${appointment.appointmentDay}</p>
+                    <p>Time: ${appointment.appointmentTime}</p>
                     <p>Specialty: ${appointment.specialty}</p>
                     <p>Doctor: ${appointment.medic.firstName} ${appointment.medic.lastName}</p>
-                    <button onclick="markAsWaiting(${appointment.id})">Mark as Waiting</button>
+                    <button onclick="markAsWaiting(${appointment.appointmentId})">Mark as Waiting</button>
                 `;
                 appointmentsList.appendChild(appointmentDiv);
             });
@@ -49,7 +49,8 @@ function markAsWaiting(appointmentId) {
     .then(() => {
         alert('Appointment status updated to Waiting.');
         // Redirect to manageWaitingList page
-        window.location.href = 'manageWaitingList.html';
+        window.location.href = '#!/pageManageWaitingList';
+        window.location.reload();
     })
     .catch(error => console.error('Error updating appointment status:', error));
 }
@@ -71,3 +72,24 @@ window.onclick = function(event) {
 window.onload = function() {
     // Any initial setup if needed
 };
+
+
+function checkLogin() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    if (isLoggedIn) {
+        document.getElementById('loginButton').style.display = 'none';
+        document.getElementById('logoutButton').style.display = 'block';
+        document.getElementById('menuAddPatient').style.display = 'block';
+        document.getElementById('menuManageWaitingList').style.display = 'block';
+        window.location.href = '#!/pageAddPatient';
+    } else {
+        document.getElementById('loginButton').style.display = 'block';
+        document.getElementById('logoutButton').style.display = 'none';
+        document.getElementById('menuAddPatient').style.display = 'none';
+        document.getElementById('menuManageWaitingList').style.display = 'none';
+        window.location.href = '#!/login';
+    }
+}
+
+// Check login status on page load
+window.onload = checkLogin;

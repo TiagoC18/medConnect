@@ -13,6 +13,8 @@ import project.medconnect.entity.Patient;
 import project.medconnect.repository.AppointmentRepository;
 import project.medconnect.repository.MedicRepository;
 import project.medconnect.repository.PatientRepository;
+import project.medconnect.repository.StaffRepository;
+import project.medconnect.entity.Staff;
 
 @Deprecated
 @Component
@@ -21,13 +23,15 @@ public class DataInitializer implements CommandLineRunner {
     private final MedicRepository medicRepository;
     private final PatientRepository patientRepository;
     private final AppointmentRepository appointmentRepository;
+    private final StaffRepository staffRepository;
 
     @Autowired
     public DataInitializer(MedicRepository medicRepository, PatientRepository patientRepository,
-            AppointmentRepository appointmentRepository) {
+            AppointmentRepository appointmentRepository, StaffRepository staffRepository) {
         this.medicRepository = medicRepository;
         this.patientRepository = patientRepository;
         this.appointmentRepository = appointmentRepository;
+        this.staffRepository = staffRepository;
     }
 
     @Override
@@ -71,10 +75,10 @@ public class DataInitializer implements CommandLineRunner {
         patientRepository.save(patient6);
 
         // Criação de consultas
-        Appointment appointment1 = new Appointment(patient1, cardiology, medic1, "2024-06-15", "10h", "Done", 6);
+        Appointment appointment1 = new Appointment(patient1, cardiology, medic1, "2024-06-15", "10h", "Scheduled", null);
         appointmentRepository.save(appointment1);
 
-        Appointment appointment2 = new Appointment(patient2, pediatrician, medic2, "2024-06-16", "11h", "Called", 1);
+        Appointment appointment2 = new Appointment(patient2, pediatrician, medic2, "2024-06-16", "11h", "Scheduled", null);
         appointmentRepository.save(appointment2);
 
         Appointment appointment3 = new Appointment(patient3, cardiology, medic1, "2024-06-17", "9h", "Waiting", 2);
@@ -89,5 +93,7 @@ public class DataInitializer implements CommandLineRunner {
         Appointment appointment6 = new Appointment(patient6, pediatrician, medic2, "2024-06-20", "9h", "Done", null);
         appointmentRepository.save(appointment6);
 
+        Staff staff1 = new Staff("Staff", "Teste", "staff@ua.pt", "staff");
+        staffRepository.save(staff1);
     }
 }
