@@ -790,7 +790,6 @@ footer {
 }
 
 /* ============================= forms ============================= */
-
 .input-box {
     width: 100%;
     padding: 10px;
@@ -824,37 +823,41 @@ button:hover {
     background-color: #0056b3;
 }
 
-.waiting-list-item, .called-list-item {
+.list-scroll-container {
+    max-height: 400px; /* Ajuste conforme necessário */
+    overflow-y: auto;
+}
+
+.waiting-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 10px;
-    margin-bottom: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    width: 400px;
+    height: 20px;
 }
 
-.waiting-list-item p, .called-list-item p {
-    margin: 0 10px 0 0;
+.waiting-list-item p {
+    margin: 0;
     flex: 1;
+    text-align: center;
 }
 
-.pagination {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
+.waiting-list-item p:first-child {
+    font-size: 24px;
+    font-weight: bold;
+    flex: 0 0 100px;
+    text-align: left;
 }
 
-.pagination button {
-    padding: 5px 10px;
-}
-
-.toggle-button {
-    margin-top: 20px;
+.waiting-list-item button {
+    flex: 0 0 100px;
+    margin-left: 16px;
 }
 
 .list-container {
-    display: none;
+    display: block;
 }
