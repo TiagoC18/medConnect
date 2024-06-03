@@ -102,8 +102,8 @@ async function register() {
 }
 
 function logout() {
-    localStorage.clear(); // Limpa todos os itens armazenados no localStorage
     window.location.href = '#!/pageHome'; // Redireciona para a página inicial
+    localStorage.clear();
     location.reload(true); // Força a recarga completa da página
 }
 
