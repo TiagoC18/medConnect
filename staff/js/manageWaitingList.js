@@ -60,6 +60,7 @@ function checkLogin() {
         document.getElementById('logoutButton').style.display = 'block';
         document.getElementById('menuAddPatient').style.display = 'block';
         document.getElementById('menuManageWaitingList').style.display = 'block';
+        loadWaitingList();
     } else {
         document.getElementById('loginButton').style.display = 'block';
         document.getElementById('logoutButton').style.display = 'none';
@@ -69,8 +70,11 @@ function checkLogin() {
     }
 }
 
-// Combined window.onload
-window.onload = function() {
-    checkLogin();
-    loadWaitingList();
-};
+function handlePageChange() {
+    if (window.location.hash.includes('pageManageWaitingList')) {
+        loadWaitingList();
+    }
+}
+checkLogin();
+
+window.addEventListener('hashchange', handlePageChange);
