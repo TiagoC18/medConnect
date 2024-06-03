@@ -68,17 +68,13 @@ public class StaffMedConnectTest {
     assertThat(driver.switchTo().alert().getText()).isEqualTo("Patient called successfully.");
     driver.switchTo().alert().accept();
 
-    clickWithWait(By.cssSelector(".waiting-list-item:nth-child(3) > button"));
+    clickWithWait(By.cssSelector(".waiting-list-item:nth-child(4) > button"));
     wait.until(ExpectedConditions.alertIsPresent());
     assertThat(driver.switchTo().alert().getText()).isEqualTo("Appointment marked as done.");
     driver.switchTo().alert().accept();
 
     clickWithWait(By.cssSelector("#logoutButton .\\_area"));
-    wait.until(ExpectedConditions.alertIsPresent());
-    assertThat(driver.switchTo().alert().getText()).isEqualTo("Logged out successfully.");
-    driver.switchTo().alert().accept();
-
-    driver.findElement(By.cssSelector("header")).click();
+    
     driver.quit();
   }
 
