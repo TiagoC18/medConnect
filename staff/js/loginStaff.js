@@ -2,15 +2,31 @@ function login() {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    // Example login validation (replace with real authentication logic)
-    if (email === 'staff@example.com' && password === 'password') {
-        localStorage.setItem('isLoggedIn', 'true');
-        alert('Login successful!');
-        checkLogin();
-        window.location.href = '#!/pageAddPatient';
-    } else {
-        alert('Invalid credentials. Please try again.');
-    }
+    fetch('http://localhost:8080/api/staff/checkPassword', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+            email: email,
+            password: password
+        })
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result) {
+            localStorage.setItem('isLoggedIn', 'true');
+            alert('Login successful!');
+            checkLogin();
+            window.location.href = '#!/pageAddPatient';
+        } else {
+            alert('Invalid credentials. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error during login:', error);
+        alert('An error occurred. Please try again.');
+    });
 }
 
 function logout() {

@@ -824,9 +824,37 @@ button:hover {
     background-color: #0056b3;
 }
 
-.waiting-list-item {
+.waiting-list-item, .called-list-item {
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 10px;
     margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.waiting-list-item p, .called-list-item p {
+    margin: 0 10px 0 0;
+    flex: 1;
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 5px 10px;
+}
+
+.toggle-button {
+    margin-top: 20px;
+}
+
+.list-container {
+    display: none;
 }
