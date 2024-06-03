@@ -1,81 +1,81 @@
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:33033/api/patient/7
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Patient]
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:33033/api/patient/byEmail/davidsilva@ua.pt
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Patient]
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:33033/api/patient
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Patient[]]
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - HTTP POST http://localhost:33033/api/patient/checkPassword?email=davidsilva@ua.pt&password=david123
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - Reading to [java.lang.Boolean]
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:33033/api/medic/name/John/Doe
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Medic]
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:33033/api/medic/specialty/Cardiology
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
-2024-06-03 15:01:33 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Medic[]]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:33033/api/medic/9
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Medic]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:33033/api/medic
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Medic[]]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:33033/api/medic/15/serviceTime
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Reading to [java.util.List<java.lang.String>]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - HTTP POST http://localhost:33033/api/appointment
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Writing [project.medconnect.entity.Appointment@633573f8] with org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Response 201 CREATED
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Appointment]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:33033/api/appointment/done
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Appointment[]]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:33033/api/appointment/waiting
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Appointment[]]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:33033/api/appointment
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Appointment[]]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - HTTP PUT http://localhost:33033/api/appointment/14/Waiting
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:33033/api/appointment/called
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Appointment[]]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - HTTP DELETE http://localhost:33033/api/appointment/delete/17
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:33033/api/appointment/scheduled
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Appointment[]]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:33033/api/appointment/patient/23
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Appointment[]]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:33033/api/appointment/booked/Cardiology/John/Doe/2024-06-08
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Reading to [java.util.List<java.lang.String>]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:33033/api/staff
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Staff[]]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - HTTP POST http://localhost:33033/api/staff/checkPassword?email=mariadolores@ua.pt&password=mdolores123
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
-2024-06-03 15:01:34 [main] DEBUG o.s.web.client.RestTemplate - Reading to [java.lang.Boolean]
+2024-06-03 19:30:18 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:34295/api/patient/7
+2024-06-03 19:30:18 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
+2024-06-03 19:30:18 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
+2024-06-03 19:30:18 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Patient]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:34295/api/patient/byEmail/davidsilva@ua.pt
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Patient]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:34295/api/patient
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Patient[]]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - HTTP POST http://localhost:34295/api/patient/checkPassword?email=davidsilva@ua.pt&password=david123
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Reading to [java.lang.Boolean]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:34295/api/medic/name/John/Doe
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Medic]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:34295/api/medic/specialty/Cardiology
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Medic[]]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:34295/api/medic/9
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Medic]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:34295/api/medic
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Medic[]]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:34295/api/medic/15/serviceTime
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Reading to [java.util.List<java.lang.String>]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - HTTP POST http://localhost:34295/api/appointment
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Writing [project.medconnect.entity.Appointment@756f13d1] with org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Response 201 CREATED
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Appointment]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:34295/api/appointment/done
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Appointment[]]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:34295/api/appointment/waiting
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Appointment[]]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:34295/api/appointment
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Appointment[]]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - HTTP PUT http://localhost:34295/api/appointment/14/Waiting
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:34295/api/appointment/called
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Appointment[]]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - HTTP DELETE http://localhost:34295/api/appointment/delete/17
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:34295/api/appointment/scheduled
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Appointment[]]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:34295/api/appointment/patient/23
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Appointment[]]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:34295/api/appointment/booked/Cardiology/John/Doe/2024-06-08
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Reading to [java.util.List<java.lang.String>]
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - HTTP GET http://localhost:34295/api/staff
+2024-06-03 19:30:19 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
+2024-06-03 19:30:20 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
+2024-06-03 19:30:20 [main] DEBUG o.s.web.client.RestTemplate - Reading to [project.medconnect.entity.Staff[]]
+2024-06-03 19:30:20 [main] DEBUG o.s.web.client.RestTemplate - HTTP POST http://localhost:34295/api/staff/checkPassword?email=mariadolores@ua.pt&password=mdolores123
+2024-06-03 19:30:20 [main] DEBUG o.s.web.client.RestTemplate - Accept=[application/json, application/*+json]
+2024-06-03 19:30:20 [main] DEBUG o.s.web.client.RestTemplate - Response 200 OK
+2024-06-03 19:30:20 [main] DEBUG o.s.web.client.RestTemplate - Reading to [java.lang.Boolean]
