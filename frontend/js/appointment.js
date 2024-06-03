@@ -173,7 +173,6 @@ async function bookAppointment() {
 
                 if (response.ok) {
                     window.location.href = '#!/pageAgenda';
-                    window.location.reload();
                     alert('Appointment booked successfully!');
                 } else {
                     alert('Failed to book appointment.');
