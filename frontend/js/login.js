@@ -10,18 +10,21 @@ async function checkLogin() {
         document.getElementById('logoutButton').style.display = 'none';
     }
 }
-
 async function login() {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
+    const params = new URLSearchParams();
+    params.append('email', email);
+    params.append('password', password);
+
     try {
-        const response = await fetch('/api/patient/checkPassword', {
+        const response = await fetch('http://localhost:8080/api/patient/checkPassword', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: JSON.stringify({ email, password })
+            body: params.toString()
         });
 
         if (response.ok) {
@@ -44,18 +47,24 @@ async function login() {
     }
 }
 
-async function register() {
-    const newEmail = document.getElementById('new_email').value;
-    const newPassword = document.getElementById('new_password').value;
-    const confirmPassword = document.getElementById('confirm_password').value;
-    const firstName = document.getElementById('first_name').value;
-    const lastName = document.getElementById('last_name').value;
-    const dateOfBirth = document.getElementById('date_of_birth').value;
-    const gender = document.getElementById('gender').value;
-    const ccNumber = document.getElementById('cc_number').value;
-    const phoneNumber = document.getElementById('phone_number').value;
 
-    if (newPassword !== confirmPassword) {
+async function register() {
+    const email = document.getElementById('newEmail').value;
+    const password = document.getElementById('new_password').value;
+    const confirmPassword = document.getElementById('confirm_password').value;
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const dateOfBirth = document.getElementById('dateOfBirth').value;
+    const gender = document.getElementById('gender').value;
+    const ccNumber = document.getElementById('ccNumber').value;
+    const phoneNumber = document.getElementById('phoneNumber').value;
+
+    if (!email || !password || !confirmPassword || !firstName || !lastName || !dateOfBirth || !gender || !ccNumber || !phoneNumber) {
+        alert('Please fill in all required fields.');
+        return;
+    }
+
+    if (password !== confirmPassword) {
         alert('Passwords do not match. Please try again.');
         return;
     }
@@ -67,12 +76,12 @@ async function register() {
         gender,
         ccNumber,
         phoneNumber,
-        email: newEmail,
-        password: newPassword
+        email,
+        password
     };
 
     try {
-        const response = await fetch('/api/patient', {
+        const response = await fetch('http://localhost:8080/api/patient', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -93,11 +102,11 @@ async function register() {
 }
 
 function logout() {
-    localStorage.setItem('isLoggedIn', 'false');
-    checkLogin();
-    alert('Logged out successfully.');
-    window.location.href = '#!/pageHome';
+    localStorage.clear(); // Limpa todos os itens armazenados no localStorage
+    window.location.href = '#!/pageHome'; // Redireciona para a página inicial
+    location.reload(true); // Força a recarga completa da página
 }
+
 
 // Check login status on page load
 window.onload = checkLogin;
