@@ -49,14 +49,3 @@
 - **Medic Details and Specialties**: Fetch detailed information about medics and their specialties using endpoints such as `GET /api/medic`, `GET /api/medic/{medicId}`, `GET /api/medic/specialty/{specialty}`, and `GET /api/medic/name/{firstName}/{lastName}`.
 - **Service Time**: Retrieve the service time for specific medics using `GET /api/medic/{medicId}/serviceTime`.
 
-
-
-
--------
-
-### (future implementation)
-### Documentation and Reports
-- [API Documentation](https://your-api-documentation-link.com) - Comprehensive guide and reference to the project's APIs (**Coming Soon**).
-- [Static Analysis Dashboard](https://your-sonarqube-dashboard-link.com) - Quality dashboard for code analysis results (**To Be Implemented**).
-
-Please refer to these links for detailed information and resources related to the **medConnect** project. For any additional inquiries or support, please contact the project team members.
