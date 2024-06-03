@@ -26,7 +26,7 @@ public class PatientMedConnectTest {
   private ChromeDriver driver;
 
   @Test
-  public void backend() throws InterruptedException {
+  public void patientMedConnect() throws InterruptedException {
 
     WebDriverManager.chromedriver().setup();
     ChromeOptions options = new ChromeOptions();  
