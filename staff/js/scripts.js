@@ -1,12 +1,12 @@
-include('js/jquery.easing.1.3.js');
-include('js/jquery.color.js');
-include('js/mathUtils.js');
-include('js/superfish.js');
-include('js/switcher.js');
-include('js/jquery.mousewheel.js');
-include('js/hoverSprite.js');
-include('js/spin.js');
-include('js/googleMap.js');
+include('../js/jquery.easing.1.3.js');
+include('../js/jquery.color.js');
+include('../js/mathUtils.js');
+include('../js/superfish.js');
+include('../js/switcher.js');
+include('../js/jquery.mousewheel.js');
+include('../js/hoverSprite.js');
+include('../js/spin.js');
+include('../js/googleMap.js');
 //----Include-Function----
 function include(url){ 
   document.write('<script src="'+ url + '" type="text/javascript"></script>'); 
