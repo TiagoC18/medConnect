@@ -30,10 +30,9 @@ function login() {
 }
 
 function logout() {
-    localStorage.setItem('isLoggedIn', 'false');
-    checkLogin();
-    alert('Logged out successfully.');
-    window.location.reload();
+    window.location.href = '#!/pageHome'; // Redireciona para a página inicial
+    localStorage.clear();
+    location.reload(true);
 }
 
 function checkLogin() {
@@ -43,13 +42,11 @@ function checkLogin() {
         document.getElementById('logoutButton').style.display = 'block';
         document.getElementById('menuAddPatient').style.display = 'block';
         document.getElementById('menuManageWaitingList').style.display = 'block';
-        window.location.href = '#!/pageAddPatient';
     } else {
         document.getElementById('loginButton').style.display = 'block';
         document.getElementById('logoutButton').style.display = 'none';
         document.getElementById('menuAddPatient').style.display = 'none';
         document.getElementById('menuManageWaitingList').style.display = 'none';
-        window.location.href = '#!/pageHome';
     }
 }
 

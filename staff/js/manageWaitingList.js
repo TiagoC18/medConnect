@@ -65,12 +65,15 @@ function checkLogin() {
         document.getElementById('logoutButton').style.display = 'none';
         document.getElementById('menuAddPatient').style.display = 'none';
         document.getElementById('menuManageWaitingList').style.display = 'none';
-        window.location.href = '#!/pageHome';
     }
 }
 
-// Combined window.onload
-window.onload = function() {
-    checkLogin();
-    loadWaitingList();
-};
+function handlePageChange() {
+    if (window.location.hash.includes('pageManageWaitingList')) {
+        checkLogin();
+        loadWaitingList();
+    }
+}
+
+// Adicionar listener para o evento 'hashchange'
+window.addEventListener('hashchange', handlePageChange);
