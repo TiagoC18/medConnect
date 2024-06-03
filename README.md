@@ -1,7 +1,7 @@
 # medConnect
 
 ## Project Abstract
-**MedConnect** is an integrated IT solution designed to streamline patient appointments and admissions for the New Private Health Initiative (newPhi). This project, developed as part of the Total Quality Software course, focuses on enhancing the efficiency and accessibility of healthcare services through digital solutions that manage pre-appointment scheduling, reception services, and post-encounter processes.
+**MedConnect** is an integrated IT solution designed to streamline patient appointments and admissions for the New Private Health Initiative (newPhi). This project, developed as part of the TQS course, focuses on enhancing the efficiency and accessibility of healthcare services through digital solutions that manage pre-appointment scheduling, reception services, and post-encounter processes.
 
 
 
