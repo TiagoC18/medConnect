@@ -87,7 +87,7 @@ function checkLogin() {
         document.getElementById('logoutButton').style.display = 'none';
         document.getElementById('menuAddPatient').style.display = 'none';
         document.getElementById('menuManageWaitingList').style.display = 'none';
-        window.location.href = '#!/login';
+        window.location.href = '#!/pageHome';
     }
 }
 
