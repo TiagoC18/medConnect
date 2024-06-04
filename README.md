@@ -49,3 +49,23 @@
 - **Medic Details and Specialties**: Fetch detailed information about medics and their specialties using endpoints such as `GET /api/medic`, `GET /api/medic/{medicId}`, `GET /api/medic/specialty/{specialty}`, and `GET /api/medic/name/{firstName}/{lastName}`.
 - **Service Time**: Retrieve the service time for specific medics using `GET /api/medic/{medicId}/serviceTime`.
 
+
+## How to access
+### Staff
+- **Staff Login**: Access the staff login page at [http://deti-tqs-14.ua.pt:3002](http://deti-tqs-14.ua.pt:3002).
+
+- **Staff Credentials**
+    - **Username**: `staff1@ua.pt`
+    - **Password**: `staff1`
+
+### Patient
+- **Patient Login**: Access the patient login page at [http://deti-tqs-14.ua.pt:3003](http://deti-tqs-14.ua.pt:3003).
+
+- **Patient Credentials**
+    - **Username**: `bob@example.com`
+    - **Password**: `senha456`
+
+- Alternatively you can register as a new patient
+
+### Waiting List
+- **Waiting List**: View the waiting list at [http://deti-tqs-14.ua.pt:3001](http://deti-tqs-14.ua.pt:3001).
