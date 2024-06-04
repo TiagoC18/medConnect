@@ -1,7 +1,7 @@
 function fetchPatientAppointments() {
     const emailStaff = document.getElementById('emailStaff').value;
 
-    fetch(`http://localhost:8080/api/patient/byEmail/${emailStaff}`)
+    fetch(`http://deti-tqs-14.ua.pt:8080/api/patient/byEmail/${emailStaff}`)
         .then(response => response.json())
         .then(patient => {
             if (patient) {
@@ -14,7 +14,7 @@ function fetchPatientAppointments() {
 }
 
 function fetchAppointments(patientId) {
-    fetch(`http://localhost:8080/api/appointment/patient/${patientId}`)
+    fetch(`http://deti-tqs-14.ua.pt:8080/api/appointment/patient/${patientId}`)
         .then(response => response.json())
         .then(appointments => {
             const appointmentsList = document.getElementById('appointments-list');
@@ -42,7 +42,7 @@ function fetchAppointments(patientId) {
 }
 
 function markAsWaiting(appointmentId) {
-    fetch(`http://localhost:8080/api/appointment/${appointmentId}/Waiting`, {
+    fetch(`http://deti-tqs-14.ua.pt:8080/api/appointment/${appointmentId}/Waiting`, {
         method: 'PUT'
     })
     .then(response => response.json())

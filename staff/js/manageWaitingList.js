@@ -2,8 +2,8 @@ function loadWaitingList() {
     const waitingListContainer = document.getElementById('waiting-list-container');
     waitingListContainer.innerHTML = '';
 
-    const fetchWaiting = fetch('http://localhost:8080/api/appointment/waiting').then(response => response.json());
-    const fetchCalled = fetch('http://localhost:8080/api/appointment/called').then(response => response.json());
+    const fetchWaiting = fetch('http://deti-tqs-14.ua.pt:8080/api/appointment/waiting').then(response => response.json());
+    const fetchCalled = fetch('http://deti-tqs-14.ua.pt:8080/api/appointment/called').then(response => response.json());
 
     Promise.all([fetchWaiting, fetchCalled])
         .then(data => {
@@ -30,7 +30,7 @@ function loadWaitingList() {
 }
 
 function callPatient(appointmentId) {
-    fetch(`http://localhost:8080/api/appointment/${appointmentId}/Called`, {
+    fetch(`http://deti-tqs-14.ua.pt:8080/api/appointment/${appointmentId}/Called`, {
         method: 'PUT'
     })
     .then(response => response.json())
@@ -42,7 +42,7 @@ function callPatient(appointmentId) {
 }
 
 function markAsDone(appointmentId) {
-    fetch(`http://localhost:8080/api/appointment/${appointmentId}/Done`, {
+    fetch(`http://deti-tqs-14.ua.pt:8080/api/appointment/${appointmentId}/Done`, {
         method: 'PUT'
     })
     .then(response => response.json())

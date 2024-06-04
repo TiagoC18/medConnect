@@ -41,7 +41,7 @@
     }
 
     function fetchLastCalledAppointments() {
-      fetch('http://localhost:8080/api/appointment/called')
+      fetch('http://deti-tqs-14.ua.pt:8080/api/appointment/called')
         .then(response => response.json())
         .then(data => {
           const lastCalledDiv = document.getElementById('last-appointments');
@@ -71,7 +71,7 @@
     }
 
     function fetchWaitingAppointments() {
-      fetch('http://localhost:8080/api/appointment/waiting')
+      fetch('http://deti-tqs-14.ua.pt:8080/api/appointment/waiting')
         .then(response => response.json())
         .then(data => {
           const waitingAppointmentsDiv = document.getElementById('waiting-appointments');

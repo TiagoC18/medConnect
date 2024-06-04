@@ -4,7 +4,7 @@ async function checkMedic() {
 
     if (date && specialty) {
         try {
-            const response = await fetch(`http://localhost:8080/api/medic/specialty/${specialty}`);
+            const response = await fetch(`http://deti-tqs-14.ua.pt:8080/api/medic/specialty/${specialty}`);
             if (response.ok) {
                 const specialtyMedic = await response.json();
                 console.log(specialtyMedic);
@@ -61,17 +61,17 @@ async function checkHours() {
             const lastName = medic.substring(lastSpaceIndex + 1).trim();
 
             // Buscar o médico pelo nome
-            const medicResponse = await fetch(`http://localhost:8080/api/medic/name/${encodeURIComponent(firstName)}/${encodeURIComponent(lastName)}`);
+            const medicResponse = await fetch(`http://deti-tqs-14.ua.pt:8080/api/medic/name/${encodeURIComponent(firstName)}/${encodeURIComponent(lastName)}`);
             if (medicResponse.ok) {
                 const medicData = await medicResponse.json();
 
                 // Usar o ID do médico para buscar os horários de atendimento
-                const serviceTimeResponse = await fetch(`http://localhost:8080/api/medic/${medicData.medicId}/serviceTime`);
+                const serviceTimeResponse = await fetch(`http://deti-tqs-14.ua.pt:8080/api/medic/${medicData.medicId}/serviceTime`);
                 if (serviceTimeResponse.ok) {
                     const serviceTimes = await serviceTimeResponse.json();
 
                     // Buscar horários já reservados
-                    const bookedResponse = await fetch(`http://localhost:8080/api/appointment/booked/${encodeURIComponent(specialty)}/${encodeURIComponent(firstName)}/${encodeURIComponent(lastName)}/${encodeURIComponent(date)}`);
+                    const bookedResponse = await fetch(`http://deti-tqs-14.ua.pt:8080/api/appointment/booked/${encodeURIComponent(specialty)}/${encodeURIComponent(firstName)}/${encodeURIComponent(lastName)}/${encodeURIComponent(date)}`);
                     if (bookedResponse.ok) {
                         const bookedTimes = await bookedResponse.json();
 
@@ -147,10 +147,10 @@ async function bookAppointment() {
             const lastName = medic.substring(lastSpaceIndex + 1).trim();
 
             // Buscar o médico pelo nome
-            const medicResponse = await fetch(`http://localhost:8080/api/medic/name/${encodeURIComponent(firstName)}/${encodeURIComponent(lastName)}`);
+            const medicResponse = await fetch(`http://deti-tqs-14.ua.pt:8080/api/medic/name/${encodeURIComponent(firstName)}/${encodeURIComponent(lastName)}`);
             const medicData = await medicResponse.json();
 
-            const patientResponse = await fetch(`http://localhost:8080/api/patient/byEmail/${email}`);
+            const patientResponse = await fetch(`http://deti-tqs-14.ua.pt:8080/api/patient/byEmail/${email}`);
             if (patientResponse.ok) {
                 const patient = await patientResponse.json();
 
@@ -163,7 +163,7 @@ async function bookAppointment() {
                     status: 'Scheduled' // Status padrão da consulta
                 };
 
-                const response = await fetch('http://localhost:8080/api/appointment', {
+                const response = await fetch('http://deti-tqs-14.ua.pt:8080/api/appointment', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

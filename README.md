@@ -26,7 +26,7 @@
 
 
 ### Documentation and Reports
-- [API Documentation](http://localhost:8080/swagger-ui/index.html) - Comprehensive guide and reference to the project's APIs.
+- [API Documentation](http://deti-tqs-14.ua.pt:8080/swagger-ui/index.html) - Comprehensive guide and reference to the project's APIs.
 
 #### Appointment Management
 - **Create, Update, and Delete Appointments**: Developers can create new appointments, update the status of existing ones, and delete appointments using endpoints such as `POST /api/appointment`, `PUT /api/appointment/{appointmentId}/{newStatus}`, and `DELETE /api/appointment/delete/{appointmentId}`.

@@ -19,11 +19,11 @@ async function loadAppointments() {
     const email = localStorage.getItem('email');
 
     try {
-        const patientResponse = await fetch(`http://localhost:8080/api/patient/byEmail/${email}`);
+        const patientResponse = await fetch(`http://deti-tqs-14.ua.pt:8080/api/patient/byEmail/${email}`);
         console.log(patientResponse)
         if (patientResponse.ok) {
             const patient = await patientResponse.json();
-            const response = await fetch(`http://localhost:8080/api/appointment/patient/${patient.patientId}`);
+            const response = await fetch(`http://deti-tqs-14.ua.pt:8080/api/appointment/patient/${patient.patientId}`);
             if (response.ok) {
                 const appointment = await response.json();
                 console.log(appointment)
@@ -122,7 +122,7 @@ function closeModal(modal) {
 
 async function deleteAppointment(appointmentId) {
     try {
-        const response = await fetch(`http://localhost:8080/api/appointment/delete/${appointmentId}`, {
+        const response = await fetch(`http://deti-tqs-14.ua.pt:8080/api/appointment/delete/${appointmentId}`, {
             method: 'DELETE'
         });
         if (response.ok) {

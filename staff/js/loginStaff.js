@@ -2,7 +2,7 @@ function login() {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    fetch('http://localhost:8080/api/staff/checkPassword', {
+    fetch('http://deti-tqs-14.ua.pt:8080/api/staff/checkPassword', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'

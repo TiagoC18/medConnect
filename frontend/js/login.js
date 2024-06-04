@@ -19,7 +19,7 @@ async function login() {
     params.append('password', password);
 
     try {
-        const response = await fetch('http://localhost:8080/api/patient/checkPassword', {
+        const response = await fetch('http://deti-tqs-14.ua.pt:8080/api/patient/checkPassword', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -81,7 +81,7 @@ async function register() {
     };
 
     try {
-        const response = await fetch('http://localhost:8080/api/patient', {
+        const response = await fetch('http://deti-tqs-14.ua.pt:8080/api/patient', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
